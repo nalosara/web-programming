@@ -13,6 +13,9 @@ class Config {
     public static function DB_SCHEMA(){
         return 'web_project';
     }
+    public static function DB_PORT(){
+        return '3307';
+    }
 }
 
 ?>

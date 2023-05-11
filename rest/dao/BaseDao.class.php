@@ -13,7 +13,8 @@ class BaseDao {
             $username = Config::DB_USERNAME();
             $password = Config::DB_PASSWORD();
             $schema = Config::DB_SCHEMA();
-            $this->connection = new PDO("mysql:host=$servername;port=3307;dbname=$schema",$username,$password);
+            $port = Config::DB_PORT();
+            $this->connection = new PDO("mysql:host=$servername;port=$port;dbname=$schema",$username,$password);
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             //echo "Connected successfully";
         } catch(PDOException $e) {
