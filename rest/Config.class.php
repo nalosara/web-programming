@@ -11,7 +11,7 @@ class Config {
         return 'password';
     }
     public static function DB_SCHEMA(){
-        return 'lab3_db';
+        return 'web_project';
     }
 }
 
