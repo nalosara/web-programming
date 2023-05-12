@@ -12,10 +12,12 @@
     <link rel="stylesheet" href="bootstrap/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="bootstrap/assets/css/templatemo.css">
     <link rel="stylesheet" href="bootstrap/assets/css/custom.css">
+    <script src="bootstrap/assets/js/jquery-3.6.0.min.js"></script>
 
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="bootstrap/assets/css/fontawesome.min.css">
+    
 
 </head>
 
@@ -34,7 +36,7 @@
                     <a class="text-light" href="https://fb.com/templatemo" target="_blank" rel="sponsored"><i class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
                     <a class="text-light" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram fa-sm fa-fw me-2"></i></a>
                     <a class="text-light" href="https://twitter.com/" target="_blank"><i class="fab fa-twitter fa-sm fa-fw me-2"></i></a>
-                    <a class="text-light" href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin fa-sm fa-fw"></i></a>
+                    <a class="text-light" href="https://www.linkedin.com/company/bemytech/" target="_blank"><i class="fab fa-linkedin fa-sm fa-fw"></i></a>
                 </div>
             </div>
         </div>
@@ -62,10 +64,11 @@
                             <a class="nav-link" href="index.html">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="bootstrap/assets/about.html">About</a>
+                            <a class="nav-link" href="#" onclick="ProductService.getProducts();">Shop</a>
                         </li>
+                        
                         <li class="nav-item">
-                            <a class="nav-link" href="bootstrap/assets/shop.html">Shop</a>
+                            <a class="nav-link" href="bootstrap/assets/shop.html">About</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="bootstrap/assets/contact.html">Contact</a>
@@ -98,4 +101,10 @@
         </div>
     </nav>
     <!-- Close Header -->
+    <div id="productContainer" style="display:block">
+    </div>
+</body>
+
+<script src="bootstrap/assets/js/ProductService.js"></script>
+
 </html>
