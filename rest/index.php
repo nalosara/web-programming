@@ -1,10 +1,10 @@
 <?php
 require_once '../vendor/autoload.php';
-require_once "services/UserServices.php";
-require_once "services/ProductServices.php";
-require_once "services/CategoryServices.php";
-require_once "services/OrderServices.php";
-require_once "services/SupplierServices.php";
+require_once "services/UserService.php";
+require_once "services/ProductService.php";
+require_once "services/CategoryService.php";
+require_once "services/OrderService.php";
+require_once "services/SupplierService.php";
 
 Flight::register('user_service', "UserService");
 Flight::register('product_service', "ProductService");
