@@ -33,7 +33,7 @@ class BaseDao {
     public function get_by_id($id) {
         $stmt = $this->connection->prepare("SELECT * FROM " .  $this->tableName . " WHERE id=:id");
         $stmt->execute(['id' => $id]);
-        return $result = $stmt->fetchAll();
+        return $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     //Method used to add entity to db

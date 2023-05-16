@@ -162,6 +162,12 @@ body, ul, li, p, a, label, input, div {
 .product-wap .h3, .product-wap li, .product-wap i, .product-wap p {
   font-size: 12px !important;
 }
+
+.custom-img-size {
+  width: 480px;
+  height: 350px;
+}
+
 .product-wap .product-color-dot {
   width: 6px;
   height: 6px;
