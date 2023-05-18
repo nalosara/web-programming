@@ -1,4 +1,39 @@
 var ProductService = {
+
+
+    editProduct: function() {
+        $("#editProductForm").validate({
+            submitHandler: function (form, validator) {
+                data = {
+                name: $("#edit_name").val(),
+                description: $("#edit_description").val(),
+                price: $("#edit_price").val(),
+                category_id: $("#edit_category").val(),
+                supplier_id: $("#edit_supplier").val(),
+                quantity_in_stock: $("#edit_quantity_in_stock").val(),
+                image: $("#edit_image").val(),
+                };
+                console.log(data);
+                $.ajax({
+                url: "rest/products/" + $("#edit_product_id").val(),
+                type: "PUT",
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                dataType: "json",
+                success: function (result) {
+                    toastr.success("Product has been updated successfully");
+                    $("#editProductModal").modal("toggle");
+                    ChangeTab.goToShopPage();
+                    ProductService.getProducts();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    toastr.error("Error! Product has not been updated.");
+                },
+                });
+            },
+        });
+    },
+
     getProducts: function () {
         //make an ajax request to get the products
         $.ajax({
@@ -16,7 +51,8 @@ var ProductService = {
                                     <img class="card-img rounded-0 img-fluid custom-img-size" src=` + data[i].image + `>
                                     <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                         <ul class="list-unstyled">
-                                             <li><a class="btn btn-success text-white mt-2" onclick="ChangeTab.goToProductPage(` + data[i].id + `);"><i class="far fa-eye"></i></a></li>
+                                            <li><a class="btn btn-success text-white mt-2" onclick="showEditDialog(` + data[i].id + `);"><i class="far fa-eye"></i></a></li>
+                                             <li><a class="btn btn-success text-white mt-2" onclick="ChangeTab.goToProductPage(` + data[i].id + `);"><i class="fas fa-cart-plus"></i></a></li>
                                         </ul>
                                     </div>
                                     <div class="card-body text-center">
@@ -37,6 +73,8 @@ var ProductService = {
         });
     
     },
+
+   
     
 
     
@@ -120,7 +158,11 @@ var ProductService = {
                 console.log("We have an error");
             }
         });
-    }
+    },
+
+
+    
+    
     
 
 

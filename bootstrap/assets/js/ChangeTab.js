@@ -6,8 +6,9 @@ var ChangeTab = {
         $("#AboutDiv").css({ "display": "none" });
         $("#ContactDiv").css({ "display": "none" });
         $("#ProductDiv").css({ "display": "none" });
-
+        
     },
+    
     goToHomePage: function () {
         $("#ShopDiv").css({ "display": "none" });
         $("#HomeDiv").css({ "display": "block" });

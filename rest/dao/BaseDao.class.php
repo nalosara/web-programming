@@ -62,18 +62,13 @@ class BaseDao {
             $query.= $column . "=:" . $column . ", ";
         }
         $query = substr($query, 0, -2);
-        $query.= " WHERE ${$id_column} = :id";
-        foreach($entity as $column => $value){
-            $query.= ":" . $column . ", ";
-        }
-        $query = substr($query, 0, -2);
-        $query.= ")";
-
+        $query.= " WHERE {$id_column} = :id";
         $entity['id'] = $id;
         $stmt = $this->connection->prepare($query);
         $stmt->execute($entity);
         return $entity;
     }
+
 
     //Method used to delete entities from db
     public function delete($id) {
