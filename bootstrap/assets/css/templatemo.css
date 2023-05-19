@@ -52,7 +52,7 @@ body, ul, li, p, a, label, input, div {
 .logo { font-weight: 500 !important;}
 .text-warning {  color: #ede861 !important;}
 .text-muted { color: #bcbcbc !important;}
-.text-success { color: #59ab6e !important;}
+.text-success { color: #6a86a0b5 !important;}
 .text-light { color: #cfd6e1 !important;}
 .bg-dark { background-color: #212934 !important;}
 .bg-light { background-color: #e9eef5 !important;}
@@ -60,20 +60,23 @@ body, ul, li, p, a, label, input, div {
 .bg-success { background-color: #3c679090 !important;}
 .bg-success-second { background-color: #fff !important;}
 .btn-success {
-  background-color: #59ab6e !important;
-  border-color: #56ae6c !important;
+  background-color: #6a86a0b5 !important;
+  border-color: #6a86a0b5 !important;
 }
+
+
 .pagination .page-link:hover {color: #000;}
 .pagination .page-link:hover, .pagination .page-link.active {
-  background-color: #69bb7e;
+  background-color: #6a86a0b5;
   color: #fff;
 }
 /* Nav */
 #templatemo_nav_top { min-height: 40px;}
 #templatemo_nav_top * { font-size: .9em !important;}
 #templatemo_main_nav a { color: #212934;}
-#templatemo_main_nav a:hover { color: #69bb7e;}
+#templatemo_main_nav a:hover { color: #6a86a0b5;}
 #templatemo_main_nav .navbar .nav-icon { margin-right: 20px;}
+
 
 /* Hero Carousel */
 #template-mo-zay-hero-carousel { background: #efefef !important;}
@@ -87,7 +90,7 @@ body, ul, li, p, a, label, input, div {
 .row-container div { margin: 0;}
 .text-container {flex-direction: row; }
 /* Shop */
-.shop-top-menu a:hover { color: #69bb7e !important;}
+.shop-top-menu a:hover { color: #6a86a0b5 !important;}
 /* Product */
 .product-wap { box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.10);}
 .product-wap .product-color-dot.color-dot-red { background:#f71515;}
@@ -124,11 +127,11 @@ body, ul, li, p, a, label, input, div {
 /* Carousel Hero */
 #template-mo-zay-hero-carousel .carousel-indicators li {
   margin-top: -50px;
-  background-color: #59ab6e;
+  background-color: #6a86a0b5;
 }
 #template-mo-zay-hero-carousel .carousel-control-next i,
 #template-mo-zay-hero-carousel .carousel-control-prev i {
-  color: #59ab6e !important;
+  color: #6a86a0b5 !important;
   font-size: 2.8em !important;
 }
 /* Carousel Brand */
@@ -139,13 +142,13 @@ body, ul, li, p, a, label, input, div {
 /* Services */
 .services-icon-wap {transition: .3s;}
 .services-icon-wap:hover, .services-icon-wap:hover i {color: #fff;}
-.services-icon-wap:hover {background: #69bb7e;}
+.services-icon-wap:hover {background: #6a86a0b5;}
 /* Contact map */
 .leaflet-control a, .leaflet-control { font-size: 10px !important;}
 .form-control { border: 1px solid #e8e8e8;}
 /* Footer */
 #tempaltemo_footer a { color: #dcdde1;}
-#tempaltemo_footer a:hover { color: #68bb7d;}
+#tempaltemo_footer a:hover { color: #6a86a0b5;}
 #tempaltemo_footer ul.footer-link-list li { padding-top: 10px;}
 #tempaltemo_footer ul.footer-icons li {
   width: 2.6em;
@@ -179,6 +182,7 @@ body, ul, li, p, a, label, input, div {
   width: 6px;
   height: 6px;
 }
+
 
 @media (min-width: 576px) {
   .tempaltemo-carousel .h1 { font-size: 1em !important;}
