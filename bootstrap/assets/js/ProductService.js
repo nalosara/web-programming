@@ -1,6 +1,4 @@
 var ProductService = {
-
-
     editProduct: function() {
         $("#editProductForm").validate({
             submitHandler: function (form, validator) {
@@ -73,10 +71,6 @@ var ProductService = {
         });
     
     },
-
-   
-    
-
     
     showProduct: function (productid) {
         //make an ajax request to get the products
@@ -159,11 +153,4 @@ var ProductService = {
             }
         });
     },
-
-
-    
-    
-    
-
-
 }
