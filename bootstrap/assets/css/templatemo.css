@@ -164,6 +164,7 @@ body, ul, li, p, a, label, input, div {
 .services-icon-wap:hover, .services-icon-wap:hover i {color: #fff;}
 .services-icon-wap:hover {background: #6a86a0b5;}
 /* Contact map */
+.container-fluid { background-color: #6a86a0b5 !important }
 .leaflet-control a, .leaflet-control { font-size: 10px !important;}
 .form-control { border: 1px solid #e8e8e8;}
 /* Footer */

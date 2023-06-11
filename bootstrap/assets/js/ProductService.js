@@ -137,7 +137,6 @@ var ProductService = {
                                                     </div>
                                                 </div>
                                             </form>
-    
                                         </div>
                                     </div>
                                 </div>

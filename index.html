@@ -59,7 +59,7 @@
 
             <a class="navbar-brand text-success logo h1 align-self-center" href="#home"
                 onclick="ChangeTab.goToHomePage();">
-                <img src="bootstrap/assets/img/Be_My_TECH-removebg-cropped.png" width="180" height="100">
+                <img src="bootstrap/assets/img/Be_My_TECH-removebg-cropped.png" width="130" height="60">
             </a>
 
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
@@ -72,12 +72,30 @@
                 id="templatemo_main_nav">
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto" id="tabs">
-
                     </ul>
                 </div>
-
+                <div class="navbar align-self-center d-flex">
+                    <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
+                            <div class="input-group-text">
+                                <i class="fa fa-fw fa-search"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
+                        <i class="fa fa-fw fa-search text-dark mr-2"></i>
+                    </a>
+                    <a class="nav-icon position-relative text-decoration-none" href="#">
+                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+                    </a>
+                    <a class="nav-icon position-relative text-decoration-none" href="#">
+                        <i class="fa fa-fw fa-user text-dark mr-3"></i>
+                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+                    </a>
+                </div>
             </div>
-
         </div>
     </nav>
 
@@ -88,11 +106,70 @@
     <!-- Close Header -->
 
     <div id="ShopDiv" style="display:none">
-        <div id="productContainer">
+        <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-3">
+                <h5 class="h5 pb-4">FLITER</h5>
+                <ul class="list-unstyled templatemo-accordion">
+                    <li class="pb-3">
+                        <a class="collapsed d-flex justify-content-between h5 text-decoration-none" href="#">
+                            Categories
+                            <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
+                        </a>
+                        <ul class="collapse show list-unstyled pl-3">
+                            <li><a class="text-decoration-none" href="#">Apps</a></li>
+                            <li><a class="text-decoration-none" href="#">Appliances</a></li>
+                        </ul>
+                    </li>
+                    <li class="pb-3">
+                        <a class="collapsed d-flex justify-content-between h5 text-decoration-none" href="#">
+                            Suppliers
+                            <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
+                        </a>
+                        <ul id="collapseTwo" class="collapse list-unstyled pl-3">
+                            <li><a class="text-decoration-none" href="#">Apps</a></li>
+                            <li><a class="text-decoration-none" href="#">Appliances</a></li>
+                        </ul>
+                    </li>
+                    
+                </ul>
+            </div>
+            <div id="productContainer"></div>
+            <div div="row">
+                <ul class="pagination pagination-lg justify-content-end">
+                    <li class="page-item disabled">
+                        <a class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="#" tabindex="-1">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="#">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link rounded-0 shadow-sm border-top-0 border-left-0 text-dark" href="#">3</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
+    <!-- Start Footer -->
+    <footer class="bg-dark" id="tempaltemo_footer">
+        <div class="w-100 bg-black py-3">
+            <div class="container">
+                <div class="row pt-2">
+                    <div class="col-12">
+                        <p class="text-left text-light">
+                            Copyright &copy; 2023 BeMyTECH 
+                            | Designed by <a rel="sponsored" href="https://templatemo.com" target="_blank">BeMyTECH</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <div id="HomeDiv" style="display:none">
+    </footer>
+    <!-- End Footer -->
+    </div>
+
+    <div id="HomeDiv">
         <section class="bg-success py-5">
             <div class="container">
                 <div class="row align-items-center py-5">
@@ -162,6 +239,25 @@
             </div>
         </section>
 
+        <!-- Start Footer -->
+        <footer class="bg-dark" id="tempaltemo_footer">
+
+            <div class="w-100 bg-black py-3">
+                <div class="container">
+                    <div class="row pt-2">
+                        <div class="col-12">
+                            <p class="text-left text-light">
+                                Copyright &copy; 2023 BeMyTECH 
+                                | Designed by <a rel="sponsored" href="https://templatemo.com" target="_blank">BeMyTECH</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+        <!-- End Footer -->
+
     </div>
 
     <div id="AboutDiv" style="display:none">
@@ -184,7 +280,7 @@
             </div>
         </section>
 
-        <div class="team py-5">
+        <div class="team align-items-center py-5">
             <div class="container">
                 <h1 style="text-align: center;">Our team</h1>
                 
@@ -193,7 +289,7 @@
 
             <!--Team info-->
 
-            <div class="row">
+            <div class="row align-items-center py-5">
 
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
                   <div class="member">
@@ -253,17 +349,112 @@
       
               </div>
         </div>
+        <!-- Start Footer -->
+        <footer class="bg-dark" id="tempaltemo_footer">
+
+            <div class="w-100 bg-black py-3">
+                <div class="container">
+                    <div class="row pt-2">
+                        <div class="col-12">
+                            <p class="text-left text-light">
+                                Copyright &copy; 2023 BeMyTECH 
+                                | Designed by <a rel="sponsored" href="https://templatemo.com" target="_blank">BeMyTECH</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+        <!-- End Footer -->
 
     </div>
 
     <div id="ContactDiv" style="display:none">
-        <p>
-            This is Contact Div
-        </p>
-    </div>
+        <!-- Modal -->
+        <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="w-100 pt-1 mb-5 text-right">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="" method="get" class="modal-content modal-body border-0 p-0">
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
+                        <button type="submit" class="input-group-text bg-success text-light">
+                            <i class="fa fa-fw fa-search text-white"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
+
+        <!-- Start Content Page -->
+        <div class="container-fluid py-5" style="background-color:#3c679090">
+            <div class="col-md-6 m-auto text-center">
+                <h2 class="h2 text-white"><b>Contact Us</b></h2>
+                <p style="color: white;">
+                    For any question, you can always leave us a message down bellow
+                </p>
+            </div>
+        </div>
+
+
+    <!-- Start Contact -->
+    <div class="container py-5">
+        <div class="row py-5">
+            <form class="col-md-9 m-auto" method="post" role="form">
+                <div class="row">
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="inputname">Name</label>
+                        <input type="text" class="form-control mt-1" id="name" name="name" placeholder="Name">
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="inputemail">Email</label>
+                        <input type="email" class="form-control mt-1" id="email" name="email" placeholder="Email">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="inputsubject">Subject</label>
+                    <input type="text" class="form-control mt-1" id="subject" name="subject" placeholder="Subject">
+                </div>
+                <div class="mb-3">
+                    <label for="inputmessage">Message</label>
+                    <textarea class="form-control mt-1" id="message" name="message" placeholder="Message" rows="8"></textarea>
+                </div>
+                <div class="row">
+                    <div class="col text-end mt-2">
+                        <button type="submit" class="btn btn-success btn-lg px-3">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- End Contact -->
+
+
+    <!-- Start Footer -->
+    <footer class="bg-dark" id="tempaltemo_footer">
+
+        <div class="w-100 bg-black py-3">
+            <div class="container">
+                <div class="row pt-2">
+                    <div class="col-12">
+                        <p class="text-left text-light">
+                            Copyright &copy; 2023 BeMyTECH 
+                            | Designed by <a rel="sponsored" href="https://templatemo.com" target="_blank">BeMyTECH</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    <!-- End Footer -->
+    </div>
     <div id="ProductDiv" style="display:none">
         <br /><br /><br /><br />
+        
         <div id="singleProductContainer">
         </div>
     </div>
@@ -385,8 +576,8 @@
     var main =
         '<section id="shop"></section>' +
         '<section id="about"></section>' +
-        '<section id="home"></section>' +
-        '<section id="contact">Contact</section>';
+        '<section id="contact"></section>' +
+        '<section id="home"></section>';
     $("#spapp").html(main);
 
 </script>
