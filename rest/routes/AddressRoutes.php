@@ -25,6 +25,10 @@ Flight::route("DELETE /addresses/@id", function($id){
     Flight::address_service()->delete($id);
     Flight::json(['message' => "address deleted successfully"]);
 });
+
+Flight::route("GET /addresses_by_user_id/@user_id", function($user_id){
+    Flight::json(Flight::address_service()->get_address_by_user_id($user_id));
+});
 /*
 Flight::route("GET /addresses/@name/@status", function($name, $status){
     echo "Hello from /addresses route with name = " . $name . " and status = " . $status;
