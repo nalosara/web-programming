@@ -124,6 +124,11 @@ body, ul, li, p, a, label, input, div {
   opacity: 0;
   transition: .3s;
 }
+/*For centering the about team section*/
+.row {
+  display: flex;
+  justify-content: center;
+}
 .card.product-wap:hover .card .product-overlay {
   visibility: visible;
   opacity: 1;
