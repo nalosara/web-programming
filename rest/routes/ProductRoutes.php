@@ -25,6 +25,53 @@ Flight::route("DELETE /products/@id", function($id){
     Flight::product_service()->delete($id);
     Flight::json(['message' => "product deleted successfully"]);
 });
+
+
+
+Flight::route("GET /products_by_supplier/@supplier_id", function($supplier_id){
+    Flight::json(Flight::product_service()->get_by_suplier_id($supplier_id));
+});
+
+Flight::route("GET /products_by_supplier_price_asc/@supplier_id", function($supplier_id){
+    Flight::json(Flight::product_service()->get_by_supplier_and_price_asc($supplier_id));
+});
+
+Flight::route("GET /products_by_supplier_price_desc/@supplier_id", function($supplier_id){
+    Flight::json(Flight::product_service()->get_by_supplier_and_price_desc($supplier_id));
+});
+
+Flight::route("GET /products_by_price_asc", function(){
+    Flight::json(Flight::product_service()->get_by_price_asc());
+});
+
+Flight::route("GET /products_by_price_desc",function(){
+    Flight::json(Flight::product_service()->get_by_price_desc());
+});
+
+Flight::route("GET /products_by_category/@category_id", function($category_id){
+    Flight::json(Flight::product_service()->get_by_category_id($category_id));
+});
+
+Flight::route("GET /products_by_category_price_asc/@category_id", function($category_id){
+    Flight::json(Flight::product_service()->get_by_category_and_price_asc($category_id));
+});
+
+Flight::route("GET /products_by_category_price_desc/@category_id", function($category_id){
+    Flight::json(Flight::product_service()->get_by_category_and_price_desc($category_id));
+});
+
+Flight::route("GET /products_by_category_and_supplier/@category_id/@supplier_id", function($category_id, $supplier_id){
+    Flight::json(Flight::product_service()->get_by_category_and_supplier($category_id, $supplier_id));
+});
+
+Flight::route("GET /products_by_category_and_supplier_price_asc/@category_id/@supplier_id", function($category_id, $supplier_id){
+    Flight::json(Flight::product_service()->get_by_category_and_supplier_price_asc($category_id, $supplier_id));
+});
+
+Flight::route("GET /products_by_category_and_supplier_price_desc/@category_id/@supplier_id", function($category_id, $supplier_id){
+    Flight::json(Flight::product_service()->get_by_category_and_supplier_price_desc($category_id, $supplier_id));
+});
+
 /*
 Flight::route("GET /products/@name/@status", function($name, $status){
     echo "Hello from /products route with name = " . $name . " and status = " . $status;
