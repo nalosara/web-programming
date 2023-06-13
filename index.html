@@ -5,6 +5,7 @@
     <title>BeMyTECH</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
     <link rel="apple-touch-icon" href="bootstrap/assets/img/Be My TECH.png">
     <link rel="shortcut icon" type="image/x-icon" href="bootstrap/assets/img/Be_My_TECH-removebg-preview.png">
@@ -83,16 +84,19 @@
                             </div>
                         </div>
                     </div>
-                    <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
+                    <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal"
+                        data-bs-target="#templatemo_search">
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>
                     </a>
                     <a class="nav-icon position-relative text-decoration-none" href="#">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+                        <span
+                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
                     </a>
                     <a class="nav-icon position-relative text-decoration-none" href="#">
                         <i class="fa fa-fw fa-user text-dark mr-3"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+                        <span
+                            class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
                     </a>
                 </div>
             </div>
@@ -107,66 +111,126 @@
 
     <div id="ShopDiv" style="display:none">
         <div class="container py-5">
-        <div class="row">
-            <div class="col-lg-3">
-                <h5 class="h5 pb-4">FLITER</h5>
-                <ul class="list-unstyled templatemo-accordion">
-                    <li class="pb-3">
-                        <a class="collapsed d-flex justify-content-between h5 text-decoration-none" href="#">
-                            Categories
-                            <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
-                        </a>
-                        <ul class="collapse show list-unstyled pl-3">
-                            <li><a class="text-decoration-none" href="#">Apps</a></li>
-                            <li><a class="text-decoration-none" href="#">Appliances</a></li>
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="row-container">
+                        <h5 class="h5 pb-4" style="float:left;">FLITER</h5>
+                        <ul class="list-unstyled templatemo-accordion">
+                            <div class="row-container">
+                                <div style="float:left">
+                                    <div class="dropdown" style="margin-left: 80px; margin-bottom: 20px;">
+                                        <button class="btn btn-secondary dropdown-toggle"
+                                            style="background-color: white; color: black; border-radius:solid; border-color:white;" type="button"
+                                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Categories
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <li>
+                                                <option class="dropdown-item">
+                                                    Hearing Aids</option>
+                                            </li>
+                                            <li>
+                                                <option class="dropdown-item">
+                                                    Technology</option>
+                                            </li>
+                                            <li>
+                                                <option class="dropdown-item">
+                                                    Wheelchairs</option>
+                                            </li>
+                                            <li>
+                                                <option class="dropdown-item">
+                                                    Canes</option>
+                                            </li>
+                                    </div>
+
+                                </div>
+                                <div style="float:left">
+                                    <div class="dropdown" style="margin-left: 80px; margin-bottom: 20px;">
+                                        <button class="btn btn-secondary dropdown-toggle"
+                                            style="background-color: white; color:black; border-radius:solid; border-color:white;" type="button"
+                                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Suppliers
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <li>
+                                                <option class="dropdown-item">
+                                                    BeMyTECH</option>
+                                            </li>
+                                            <li>
+                                                <option class="dropdown-item">
+                                                    EarGo</option>
+                                            </li>
+                                            <li>
+                                                <option class="dropdown-item">
+                                                    IrisVision</option>
+                                            </li>
+                                    </div>
+                                </div>
+
+                                <div style="float:left">
+                                    <div class="dropdown" style="margin-left: 80px; margin-bottom: 20px;">
+                                        <button class="btn btn-secondary dropdown-toggle"
+                                            style="background-color: white; color:black; border-radius:solid; border-color:white;" type="button"
+                                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Price
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <li>
+                                                <option class="dropdown-item">
+                                                    High to Low</option>
+                                            </li>
+                                            <li>
+                                                <option class="dropdown-item">
+                                                    Low to High</option>
+                                            </li>
+                                    </div>
+                                </div>
+
+
+                            </div>
                         </ul>
-                    </li>
-                    <li class="pb-3">
-                        <a class="collapsed d-flex justify-content-between h5 text-decoration-none" href="#">
-                            Suppliers
-                            <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
-                        </a>
-                        <ul id="collapseTwo" class="collapse list-unstyled pl-3">
-                            <li><a class="text-decoration-none" href="#">Apps</a></li>
-                            <li><a class="text-decoration-none" href="#">Appliances</a></li>
-                        </ul>
-                    </li>
-                    
-                </ul>
-            </div>
-            <div id="productContainer"></div>
-            <div div="row">
-                <ul class="pagination pagination-lg justify-content-end">
-                    <li class="page-item disabled">
-                        <a class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="#" tabindex="-1">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link rounded-0 shadow-sm border-top-0 border-left-0 text-dark" href="#">3</a>
-                    </li>
-                </ul>
+                        <div class="col text-end mt-2" style="margin-bottom: 40px; margin-left: 80px;">
+                            <button type="submit" class="btn btn-success btn-lg px-3">View</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div id="productContainer"></div>
+
             </div>
         </div>
-    </div>
-    <!-- Start Footer -->
-    <footer class="bg-dark" id="tempaltemo_footer">
-        <div class="w-100 bg-black py-3">
-            <div class="container">
-                <div class="row pt-2">
-                    <div class="col-12">
-                        <p class="text-left text-light">
-                            Copyright &copy; 2023 BeMyTECH 
-                            | Designed by <a rel="sponsored" href="https://templatemo.com" target="_blank">BeMyTECH</a>
-                        </p>
+        <div div="row">
+            <ul class="pagination pagination-lg justify-content-end">
+                <li class="page-item disabled">
+                    <a class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="#"
+                        tabindex="-1">1</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="#">2</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link rounded-0 shadow-sm border-top-0 border-left-0 text-dark" href="#">3</a>
+                </li>
+            </ul>
+        </div>
+        <!-- Start Footer -->
+        <footer class="bg-dark" id="tempaltemo_footer">
+            <div class="w-100 bg-black py-3">
+                <div class="container">
+                    <div class="row pt-2">
+                        <div class="col-12">
+                            <p class="text-left text-light">
+                                Copyright &copy; 2023 BeMyTECH
+                                | Designed by <a rel="sponsored" href="https://templatemo.com"
+                                    target="_blank">BeMyTECH</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-    </footer>
-    <!-- End Footer -->
+        </footer>
+        <!-- End Footer -->
     </div>
 
     <div id="HomeDiv">
@@ -219,7 +283,7 @@
                         <img src="bootstrap/assets/img/logo_2.png.png" width="250" alt="About Hero">
                     </div>
                     <div class="col-md-8 text-black">
-                        
+
 
                         <p>
                             At BeMyStep, Our mission is to provide innovative and accessible technology solutions
@@ -247,8 +311,9 @@
                     <div class="row pt-2">
                         <div class="col-12">
                             <p class="text-left text-light">
-                                Copyright &copy; 2023 BeMyTECH 
-                                | Designed by <a rel="sponsored" href="https://templatemo.com" target="_blank">BeMyTECH</a>
+                                Copyright &copy; 2023 BeMyTECH
+                                | Designed by <a rel="sponsored" href="https://templatemo.com"
+                                    target="_blank">BeMyTECH</a>
                             </p>
                         </div>
                     </div>
@@ -267,14 +332,17 @@
                     <div class="col-md-8 text-white">
                         <h1>About Us</h1>
                         <p>
-                            With an application that will be connected to it, our smart device is offered as a suggested solution for those who are blind and visually impaired. 
-                            People will become more independent as a result of it because they won't constantly need assistance from others. The smart device attached to a 
+                            With an application that will be connected to it, our smart device is offered as a suggested
+                            solution for those who are blind and visually impaired.
+                            People will become more independent as a result of it because they won't constantly need
+                            assistance from others. The smart device attached to a
                             white cane and app will be able to identify obstacles and make getting around easier.
-    
+
                         </p>
                     </div>
                     <div class="col-md-4">
-                        <img src="bootstrap/assets/img/Cane_and_box_demo-removebg-preview.png" width="350" alt="About Hero">
+                        <img src="bootstrap/assets/img/Cane_and_box_demo-removebg-preview.png" width="350"
+                            alt="About Hero">
                     </div>
                 </div>
             </div>
@@ -283,7 +351,7 @@
         <div class="team align-items-center py-5">
             <div class="container">
                 <h1 style="text-align: center;">Our team</h1>
-                
+
             </div>
 
 
@@ -291,63 +359,69 @@
 
             <div class="row align-items-center py-5 justify-content-center text-center">
 
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch ms-auto" data-aos="fade-up" data-aos-delay="100">
-                  <div class="member">
-                    <div class="member-img">
-                      <img src="bootstrap/assets/img/stylish-confident-businesswoman-smiling.jpg" class="img-fluid" alt="">
-                      <div class="social">
-                        <a href=""><i class="bi bi-twitter"></i></a>
-                        <a href=""><i class="bi bi-facebook"></i></a>
-                        <a href=""><i class="bi bi-instagram"></i></a>
-                        <a href=""><i class="bi bi-linkedin"></i></a>
-                      </div>
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch ms-auto" data-aos="fade-up"
+                    data-aos-delay="100">
+                    <div class="member">
+                        <div class="member-img">
+                            <img src="bootstrap/assets/img/stylish-confident-businesswoman-smiling.jpg"
+                                class="img-fluid" alt="">
+                            <div class="social">
+                                <a href=""><i class="bi bi-twitter"></i></a>
+                                <a href=""><i class="bi bi-facebook"></i></a>
+                                <a href=""><i class="bi bi-instagram"></i></a>
+                                <a href=""><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h4>Sara Nalo</h4>
+                            <span>Chief Executive Officer</span>
+                        </div>
                     </div>
-                    <div class="member-info">
-                      <h4>Sara Nalo</h4>
-                      <span>Chief Executive Officer</span>
-                    </div>
-                  </div>
                 </div>
-      
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch ms-auto" data-aos="fade-up" data-aos-delay="200">
-                  <div class="member">
-                    <div class="member-img">
-                      <img src="bootstrap/assets/img/smiling-confident-businesswoman-posing-with-arms-folded.jpg" class="img-fluid" alt="">
-                      <div class="social">
-                        <a href=""><i class="bi bi-twitter"></i></a>
-                        <a href=""><i class="bi bi-facebook"></i></a>
-                        <a href=""><i class="bi bi-instagram"></i></a>
-                        <a href=""><i class="bi bi-linkedin"></i></a>
-                      </div>
+
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch ms-auto" data-aos="fade-up"
+                    data-aos-delay="200">
+                    <div class="member">
+                        <div class="member-img">
+                            <img src="bootstrap/assets/img/smiling-confident-businesswoman-posing-with-arms-folded.jpg"
+                                class="img-fluid" alt="">
+                            <div class="social">
+                                <a href=""><i class="bi bi-twitter"></i></a>
+                                <a href=""><i class="bi bi-facebook"></i></a>
+                                <a href=""><i class="bi bi-instagram"></i></a>
+                                <a href=""><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h4>Tijana Burazorovic</h4>
+                            <span>Product Manager</span>
+                        </div>
                     </div>
-                    <div class="member-info">
-                      <h4>Tijana Burazorovic</h4>
-                      <span>Product Manager</span>
-                    </div>
-                  </div>
                 </div>
-      
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch ms-auto" style="margin-right: 100px;" data-aos="fade-up" data-aos-delay="300">
-                  <div class="member">
-                    <div class="member-img">
-                      <img src="bootstrap/assets/img/young-beautiful-woman-pink-warm-sweater-natural-look-smiling-portrait-isolated-long-hair.jpg" class="img-fluid" alt="">
-                      <div class="social">
-                        <a href=""><i class="bi bi-twitter"></i></a>
-                        <a href=""><i class="bi bi-facebook"></i></a>
-                        <a href=""><i class="bi bi-instagram"></i></a>
-                        <a href=""><i class="bi bi-linkedin"></i></a>
-                      </div>
+
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch ms-auto" style="margin-right: 100px;"
+                    data-aos="fade-up" data-aos-delay="300">
+                    <div class="member">
+                        <div class="member-img">
+                            <img src="bootstrap/assets/img/young-beautiful-woman-pink-warm-sweater-natural-look-smiling-portrait-isolated-long-hair.jpg"
+                                class="img-fluid" alt="">
+                            <div class="social">
+                                <a href=""><i class="bi bi-twitter"></i></a>
+                                <a href=""><i class="bi bi-facebook"></i></a>
+                                <a href=""><i class="bi bi-instagram"></i></a>
+                                <a href=""><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h4>Amina Tupkovic</h4>
+                            <span>CTO</span>
+                        </div>
                     </div>
-                    <div class="member-info">
-                      <h4>Amina Tupkovic</h4>
-                      <span>CTO</span>
-                    </div>
-                  </div>
                 </div>
-      
-                
-      
-              </div>
+
+
+
+            </div>
         </div>
         <!-- Start Footer -->
         <footer class="bg-dark" id="tempaltemo_footer">
@@ -357,8 +431,9 @@
                     <div class="row pt-2">
                         <div class="col-12">
                             <p class="text-left text-light">
-                                Copyright &copy; 2023 BeMyTECH 
-                                | Designed by <a rel="sponsored" href="https://templatemo.com" target="_blank">BeMyTECH</a>
+                                Copyright &copy; 2023 BeMyTECH
+                                | Designed by <a rel="sponsored" href="https://templatemo.com"
+                                    target="_blank">BeMyTECH</a>
                             </p>
                         </div>
                     </div>
@@ -372,7 +447,8 @@
 
     <div id="ContactDiv" style="display:none">
         <!-- Modal -->
-        <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="w-100 pt-1 mb-5 text-right">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -400,61 +476,63 @@
         </div>
 
 
-    <!-- Start Contact -->
-    <div class="container py-5">
-        <div class="row py-5">
-            <form class="col-md-9 m-auto" method="post" role="form">
-                <div class="row">
-                    <div class="form-group col-md-6 mb-3">
-                        <label for="inputname">Name</label>
-                        <input type="text" class="form-control mt-1" id="name" name="name" placeholder="Name">
+        <!-- Start Contact -->
+        <div class="container py-5">
+            <div class="row py-5">
+                <form class="col-md-9 m-auto" method="post" role="form">
+                    <div class="row">
+                        <div class="form-group col-md-6 mb-3">
+                            <label for="inputname">Name</label>
+                            <input type="text" class="form-control mt-1" id="name" name="name" placeholder="Name">
+                        </div>
+                        <div class="form-group col-md-6 mb-3">
+                            <label for="inputemail">Email</label>
+                            <input type="email" class="form-control mt-1" id="email" name="email" placeholder="Email">
+                        </div>
                     </div>
-                    <div class="form-group col-md-6 mb-3">
-                        <label for="inputemail">Email</label>
-                        <input type="email" class="form-control mt-1" id="email" name="email" placeholder="Email">
+                    <div class="mb-3">
+                        <label for="inputsubject">Subject</label>
+                        <input type="text" class="form-control mt-1" id="subject" name="subject" placeholder="Subject">
                     </div>
-                </div>
-                <div class="mb-3">
-                    <label for="inputsubject">Subject</label>
-                    <input type="text" class="form-control mt-1" id="subject" name="subject" placeholder="Subject">
-                </div>
-                <div class="mb-3">
-                    <label for="inputmessage">Message</label>
-                    <textarea class="form-control mt-1" id="message" name="message" placeholder="Message" rows="8"></textarea>
-                </div>
-                <div class="row">
-                    <div class="col text-end mt-2">
-                        <button type="submit" class="btn btn-success btn-lg px-3">Submit</button>
+                    <div class="mb-3">
+                        <label for="inputmessage">Message</label>
+                        <textarea class="form-control mt-1" id="message" name="message" placeholder="Message"
+                            rows="8"></textarea>
                     </div>
-                </div>
-            </form>
+                    <div class="row">
+                        <div class="col text-end mt-2">
+                            <button type="submit" class="btn btn-success btn-lg px-3">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
-    <!-- End Contact -->
+        <!-- End Contact -->
 
 
-    <!-- Start Footer -->
-    <footer class="bg-dark" id="tempaltemo_footer">
+        <!-- Start Footer -->
+        <footer class="bg-dark" id="tempaltemo_footer">
 
-        <div class="w-100 bg-black py-3">
-            <div class="container">
-                <div class="row pt-2">
-                    <div class="col-12">
-                        <p class="text-left text-light">
-                            Copyright &copy; 2023 BeMyTECH 
-                            | Designed by <a rel="sponsored" href="https://templatemo.com" target="_blank">BeMyTECH</a>
-                        </p>
+            <div class="w-100 bg-black py-3">
+                <div class="container">
+                    <div class="row pt-2">
+                        <div class="col-12">
+                            <p class="text-left text-light">
+                                Copyright &copy; 2023 BeMyTECH
+                                | Designed by <a rel="sponsored" href="https://templatemo.com"
+                                    target="_blank">BeMyTECH</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-    </footer>
-    <!-- End Footer -->
+        </footer>
+        <!-- End Footer -->
     </div>
     <div id="ProductDiv" style="display:none">
         <br /><br /><br /><br />
-        
+
         <div id="singleProductContainer">
         </div>
     </div>
