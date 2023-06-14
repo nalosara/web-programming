@@ -44,7 +44,7 @@ var ProductService = {
                 for (var i = 0; i < data.length; i++) {
                     html+= ` 
                         <div class="col-sm-4">
-                            <div class="card mb-4 product-wap rounded-0" style="width: 480px;">
+                            <div class="card mb-4 product-wap rounded-0">
                                 <div class="card rounded-0">
                                     <img class="card-img rounded-0 img-fluid custom-img-size" src=` + data[i].image + `>
                                     <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
