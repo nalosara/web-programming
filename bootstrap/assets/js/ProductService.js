@@ -73,43 +73,43 @@ var ProductService = {
     },
     
     showProduct: function (productid) {
-        //make an ajax request to get the products
+        // Make an AJAX request to get the product
         $.ajax({
             url: 'rest/products/' + productid,
-            method: "GET",
-            contentType: "application/json",
+            method: 'GET',
+            contentType: 'application/json',
     
             success: function (data) {
                 console.log(data[0].name);
-                var html = "";
+                var html = '';
     
-                html+= `<div class="d-flex justify-content-center align-items-center h-100">
+                html += `<div class="d-flex justify-content-center align-items-center h-100">
                             <div class="card">
                                 <div class="row">
                                     <div class="col-md-5">
-                                        <img class="card-img-top" src="` + data[0].image + `" alt="` + data[0].name + `">
+                                        <img class="card-img-top" src="${data[0].image}" alt="${data[0].name}">
                                     </div>
                                     <div class="col-md-7">
                                         <div class="card-body">
-                                            <h1 class="h2">` + data[0].name + `</h1>
-                                            <p class="h3 py-2">$` + data[0].price +`</p>
+                                            <h1 class="h2">${data[0].name}</h1>
+                                            <p class="h3 py-2">$${data[0].price}</p>
                                             <ul class="list-inline">
                                                 <li class="list-inline-item">
                                                     <h6>Category:</h6>
                                                 </li>
                                                 <li class="list-inline-item">
-                                                    <p class="text-muted"><strong>` + data[0].category_id +`</strong></p>
+                                                    <p class="text-muted"><strong>${data[0].category}</strong></p>
                                                 </li>
                                             </ul>
     
                                             <h6>Description:</h6>
-                                            <p>` + data[0].description +`</p>
+                                            <p>${data[0].description}</p>
                                             <ul class="list-inline">
                                                 <li class="list-inline-item">
                                                     <h6>Brand :</h6>
                                                 </li>
                                                 <li class="list-inline-item">
-                                                    <p class="text-muted"><strong>` + data[0].supplier_id +`</strong></p>
+                                                    <p class="text-muted"><strong>${data[0].supplier}</strong></p>
                                                 </li>
                                             </ul>
     
@@ -120,11 +120,11 @@ var ProductService = {
                                                         <ul class="list-inline pb-3">
                                                             <li class="list-inline-item text-right">
                                                                 Quantity
-                                                                <input type="hidden" name="product-quanity" id="product-quanity" value="1">
+                                                                <input type="hidden" name="product-quantity" id="product-quantity-mod" value="1">
                                                             </li>
-                                                            <li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>
-                                                            <li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>
-                                                            <li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li>
+                                                            <li class="list-inline-item"><span class="btn btn-success" id="btn-minusminus">-</span></li>
+                                                            <li class="list-inline-item"><span class="badge bg-secondary" id="var-valuevalue">1</span></li>
+                                                            <li class="list-inline-item"><span class="btn btn-success" id="btn-plusplus">+</span></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -133,7 +133,7 @@ var ProductService = {
                                                         <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
                                                     </div>
                                                     <div class="col d-grid">
-                                                        <button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocard">Add To Cart</button>
+                                                        <button id="add_to_cart" class="btn btn-success btn-lg" onclick = "ProductService.addProductToCart(${data[0].id});">Add To Cart</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -145,6 +145,28 @@ var ProductService = {
     
                 $("#singleProductContainer").html(html);
                 $("#singleProductContainer").css({ "display": "block" });
+    
+                // Retrieve the elements and add event listeners
+                var quantityInput = document.getElementById("product-quantity-mod");
+                var minusButton = document.getElementById("btn-minusminus");
+                var plusButton = document.getElementById("btn-plusplus");
+                var quantityValue = document.getElementById("var-valuevalue");
+    
+                // Add event listener to the minus button
+                minusButton.addEventListener("click", function() {
+                    var currentValue = parseInt(quantityInput.value);
+                    if (currentValue > 1) {
+                        quantityInput.value = currentValue - 1;
+                        quantityValue.textContent = quantityInput.value;
+                    }
+                });
+    
+                // Add event listener to the plus button
+                plusButton.addEventListener("click", function() {
+                    var currentValue = parseInt(quantityInput.value);
+                    quantityInput.value = currentValue + 1;
+                    quantityValue.textContent = quantityInput.value;
+                });
             },
             error: function (err) {
                 console.log(err.status);
@@ -152,4 +174,34 @@ var ProductService = {
             }
         });
     },
+
+    addProductToCart: function ($product_id) {
+        event.preventDefault();
+        var data = {
+          user_id: localStorage.getItem('user_token'),            
+          product_id: $product_id,
+          quantity: document.getElementById('product-quantity-mod').value
+        };
+        
+      
+        $.ajax({
+          url: 'rest/carts',
+          method: 'POST',
+          data: JSON.stringify(data),
+          contentType: 'application/json',
+          dataType: 'json',
+          success: function (result) {
+            ProductService.getProducts(); 
+            ChangeTab.goToShopPage(); 
+            toastr.success('Product has been added to your cart successfully');
+          },
+          error: function (XMLHttpRequest, textStatus, errorThrown) {
+            toastr.error('Error! Product has not been added to your cart.');
+            ChangeTab.goToShopPage(); // Redirect to the shop page
+            ProductService.getProducts(); // Update the product list
+          }
+        });
+      }
+
+
 }

@@ -8,6 +8,18 @@ class ProductDao extends BaseDao{
         parent::__construct("products");
     }
 
+    public function get_by_id($id){
+        return $this->query("SELECT p.id as id, p.name as name, p.description as description, p.price as price," .
+        " p.category_id as category_id, p.quantity_in_stock as quantity_in_stock, p.supplier_id as supplier_id, " . 
+        "p.image as image, c.name as category, s.name as supplier ".
+        "FROM products p ".
+        "JOIN categories c ON p.category_id = c.id ".
+        "JOIN suppliers s ON s.id = p.supplier_id ".
+        "WHERE p.id=:id",
+        ['id' => $id]);
+
+    }
+
     public function get_by_category_id($category_id) {
         return $this->query("SELECT * FROM products WHERE category_id=:category_id",
         ['category_id' => $category_id]);

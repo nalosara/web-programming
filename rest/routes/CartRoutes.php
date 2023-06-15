@@ -1,4 +1,9 @@
 <?php
+
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+
+
 Flight::route("GET /carts", function(){
     Flight::json(Flight::cart_service()->get_all());
 });
@@ -12,7 +17,11 @@ Flight::route("GET /carts/@id", function($id){
 });
 
 Flight::route("POST /carts", function(){
-    $request = Flight::request()->data->getData();    
+    $request = Flight::request()->data->getData(); 
+    $user_id = $request['user_id'];
+    $decoded = (array)JWT::decode($user_id, new Key(Config::JWT_SECRET(), 'HS256'));
+    $decoded_user_id = $decoded['id'];  
+    $request['user_id'] = $decoded_user_id;
     Flight::json(['message' => "cart added successfully", 'data' => Flight::cart_service()->add($request)]);
 });
 
@@ -27,7 +36,9 @@ Flight::route("DELETE /carts/@id", function($id){
 });
 
 Flight::route("GET /carts_by_user_id/@user_id", function($user_id){
-    Flight::json(Flight::cart_service()->get_by_user_id($user_id));
+    $decoded = (array)JWT::decode($user_id, new Key(Config::JWT_SECRET(), 'HS256'));
+    $decoded_user_id = $decoded['id'];
+    Flight::json(Flight::cart_service()->get_by_user_id($decoded_user_id));
 });
 
 Flight::route("DELETE /carts_by_user_id/@user_id", function($user_id){

@@ -88,7 +88,7 @@
                         data-bs-target="#templatemo_search">
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
+                    <a class="nav-icon position-relative text-decoration-none" href="#cart" onclick="ChangeTab.goToCartPage(localStorage.getItem('user_token'));">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
                         <span
                             class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
@@ -540,6 +540,13 @@
         </div>
     </div>
 
+
+    <div id="CartDiv" style="display:none">
+
+        <div id="cartContainer">
+        </div>
+    </div>
+
 </body>
 
 <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet">
@@ -550,6 +557,7 @@
 <script src="https://unpkg.com/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="bootstrap/assets/js/ChangeTab.js"></script>
 <script src="bootstrap/assets/js/ProductService.js"></script>
+<script src="bootstrap/assets/js/CartService.js"></script>
 
 
 <!-- Edit Modal -->

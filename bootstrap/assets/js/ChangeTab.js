@@ -6,6 +6,7 @@ var ChangeTab = {
         $("#AboutDiv").css({ "display": "none" });
         $("#ContactDiv").css({ "display": "none" });
         $("#ProductDiv").css({ "display": "none" });
+        $("#CartDiv").css({ "display": "none" });
         
     },
     
@@ -15,6 +16,7 @@ var ChangeTab = {
         $("#AboutDiv").css({ "display": "none" });
         $("#ContactDiv").css({ "display": "none" });
         $("#ProductDiv").css({ "display": "none" });
+        $("#CartDiv").css({ "display": "none" });
     },
 
     goToAboutPage: function () {
@@ -23,6 +25,7 @@ var ChangeTab = {
         $("#ShopDiv").css({ "display": "none" });
         $("#ContactDiv").css({ "display": "none" });
         $("#ProductDiv").css({ "display": "none" });
+        $("#CartDiv").css({ "display": "none" });
     },
 
     goToContactPage: function () {
@@ -31,11 +34,23 @@ var ChangeTab = {
         $("#HomeDiv").css({ "display": "none" });
         $("#ShopDiv").css({ "display": "none" });
         $("#ProductDiv").css({ "display": "none" });
+        $("#CartDiv").css({ "display": "none" });
     },
 
     goToProductPage: function (productid) {
         ProductService.showProduct(productid);
         $("#ProductDiv").css({ "display": "block" });
+        $("#ContactDiv").css({ "display": "none" });
+        $("#AboutDiv").css({ "display": "none" });
+        $("#HomeDiv").css({ "display": "none" });
+        $("#ShopDiv").css({ "display": "none" });
+        $("#CartDiv").css({ "display": "none" });
+    },
+
+    goToCartPage: function (user_id) {
+        CartService.getUserProducts(user_id);
+        $("#CartDiv").css({ "display": "block" });
+        $("#ProductDiv").css({ "display": "none" });
         $("#ContactDiv").css({ "display": "none" });
         $("#AboutDiv").css({ "display": "none" });
         $("#HomeDiv").css({ "display": "none" });
