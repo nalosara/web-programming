@@ -25,8 +25,5 @@ Flight::route("DELETE /suppliers/@id", function($id){
     Flight::supplier_service()->delete($id);
     Flight::json(['message' => "supplier deleted successfully"]);
 });
-/*
-Flight::route("GET /suppliers/@name/@status", function($name, $status){
-    echo "Hello from /suppliers route with name = " . $name . " and status = " . $status;
-})*/
+
 ?>

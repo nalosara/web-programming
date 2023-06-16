@@ -71,6 +71,51 @@ var ProductService = {
         });
     
     },
+
+    getProductsWithFilters: function () {
+        //make an ajax request to get the products
+        var category = $("#dropdown-category").val();
+        var supplier = $("#dropdown-suppliers").val();
+        var order = $("#dropdown-order").val();
+        
+        $.ajax({
+            url: 'rest/products?category=' + category + '&supplier=' + supplier + '&order=' + order,
+            method: "GET",
+            contentType: "application/json",
+    
+            success: function (data) {
+                var html = "<div class='row'>";
+                // TO DO: You have to clear the previous html first!
+                for (var i = 0; i < data.length; i++) {
+                    html+= ` 
+                        <div class="col-sm-4">
+                            <div class="card mb-4 product-wap rounded-0">
+                                <div class="card rounded-0">
+                                    <img class="card-img rounded-0 img-fluid custom-img-size" src=` + data[i].image + `>
+                                    <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                                        <ul class="list-unstyled">
+                                            <li><a class="btn btn-success text-white mt-2" onclick="showEditDialog(` + data[i].id + `);"><i class="far fa-eye"></i></a></li>
+                                             <li><a class="btn btn-success text-white mt-2" onclick="ChangeTab.goToProductPage(` + data[i].id + `);"><i class="fas fa-cart-plus"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <a href="shop-single.html" class="h3 text-decoration-none">` + data[i].name + `</a>
+                                        <p class="mb-0">$` + data[i].price +`</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`
+                }
+                $("#productContainer").html(html);
+                $("#productContainer").css({ "display": "block" })
+            },
+            error: function (err) {
+                console.log(err.status);
+                console.log("We have an error");
+            }
+        });
+    
+    },
     
     showProduct: function (productid) {
         // Make an AJAX request to get the product
@@ -84,7 +129,7 @@ var ProductService = {
                 var html = '';
     
                 html += `<div class="d-flex justify-content-center align-items-center h-100">
-                            <div class="card">
+                            <div class="card" style="margin-left: 50px; margin-right: 50px; margin-bottom: 50px; margin-top: -70px;">
                                 <div class="row">
                                     <div class="col-md-5">
                                         <img class="card-img-top" src="${data[0].image}" alt="${data[0].name}">
@@ -130,10 +175,10 @@ var ProductService = {
                                                 </div>
                                                 <div class="row pb-3">
                                                     <div class="col d-grid">
-                                                        <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
+                                                        <button type="submit" style="border-color: white;" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
                                                     </div>
                                                     <div class="col d-grid">
-                                                        <button id="add_to_cart" class="btn btn-success btn-lg" onclick = "ProductService.addProductToCart(${data[0].id});">Add To Cart</button>
+                                                        <button id="add_to_cart" style="border-color: white;" class="btn btn-success btn-lg" onclick = "ProductService.addProductToCart(${data[0].id});">Add To Cart</button>
                                                     </div>
                                                 </div>
                                             </form>

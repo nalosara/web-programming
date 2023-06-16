@@ -15,7 +15,7 @@ var CartService = {
                     html+= ` 
                     <div class="row">
                         <div class="card mb-4 rounded-0">
-                            <div class="row align-items-center" style="width: auto">
+                            <div class="row align-items-center">
                                 <div class="col">
                                     <img style="width: auto" class="card-img rounded-0 img-fluid cart-img-size" src=` + data[i].product_image + `>
                                 </div>

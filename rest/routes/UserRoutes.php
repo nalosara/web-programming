@@ -77,8 +77,5 @@ Flight::route('POST /signup', function(){
 
     }
 });
-/*
-Flight::route("GET /users/@name/@status", function($name, $status){
-    echo "Hello from /users route with name = " . $name . " and status = " . $status;
-})*/
+
 ?>

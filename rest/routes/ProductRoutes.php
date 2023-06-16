@@ -1,6 +1,15 @@
 <?php
+
+
 Flight::route("GET /products", function(){
     Flight::json(Flight::product_service()->get_all());
+});
+
+Flight::route("GET /products", function(){
+    $category = Flight::query("category");
+    $supplier = Flight::query("supplier");
+    $order = Flight::query("order");
+    Flight::json(Flight::product_service()->get_all_with_filters($category, $supplier, $order));
 });
 
 Flight::route("GET /product_by_id", function(){
@@ -27,9 +36,9 @@ Flight::route("DELETE /products/@id", function($id){
 });
 
 
-
+/*
 Flight::route("GET /products_by_supplier/@supplier_id", function($supplier_id){
-    Flight::json(Flight::product_service()->get_by_suplier_id($supplier_id));
+    Flight::json(Flight::product_service()->get_by_supplier_id($supplier_id));
 });
 
 Flight::route("GET /products_by_supplier_price_asc/@supplier_id", function($supplier_id){
@@ -71,9 +80,5 @@ Flight::route("GET /products_by_category_and_supplier_price_asc/@category_id/@su
 Flight::route("GET /products_by_category_and_supplier_price_desc/@category_id/@supplier_id", function($category_id, $supplier_id){
     Flight::json(Flight::product_service()->get_by_category_and_supplier_price_desc($category_id, $supplier_id));
 });
-
-/*
-Flight::route("GET /products/@name/@status", function($name, $status){
-    echo "Hello from /products route with name = " . $name . " and status = " . $status;
-})*/
+*/
 ?>

@@ -29,7 +29,7 @@
     <!-- Start Top Nav -->
     <nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
         <div class="container text-light">
-            <div class="w-100 d-flex justify-content-between">
+            <div class="w-100 d-flex justify-content-between" style="margin-right: 20px;">
                 <div>
                     <i class="fa fa-envelope mx-2"></i>
                     <a class="navbar-sm-brand text-light text-decoration-none"
@@ -40,14 +40,12 @@
                 <div>
                     <a class="text-light" href="https://fb.com/templatemo" target="_blank" rel="sponsored"><i
                             class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
-                    <a class="text-light" href="https://www.instagram.com/" target="_blank"><i
-                            class="fab fa-instagram fa-sm fa-fw me-2"></i></a>
-                    <a class="text-light" href="https://twitter.com/" target="_blank"><i
-                            class="fab fa-twitter fa-sm fa-fw me-2"></i></a>
                     <a class="text-light" href="https://www.linkedin.com/company/bemytech/" target="_blank"><i
                             class="fab fa-linkedin fa-sm fa-fw"></i></a>
                 </div>
+
             </div>
+            
         </div>
     </nav>
 
@@ -88,7 +86,8 @@
                         data-bs-target="#templatemo_search">
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#cart" onclick="ChangeTab.goToCartPage(localStorage.getItem('user_token'));">
+                    <a class="nav-icon position-relative text-decoration-none" href="#cart"
+                        onclick="ChangeTab.goToCartPage(localStorage.getItem('user_token'));">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
                         <span
                             class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
@@ -114,86 +113,80 @@
             <div class="row">
                 <div class="col-lg-10">
                     <div class="row-container">
-                        <h5 class="h5 pb-4">FLITER</h5>
+                        <h5 class="h5 pb-4">FILTER</h5>
                         <ul class="list-unstyled templatemo-accordion">
                             <div class="row-container">
                                 <div style="float:left">
                                     <div class="dropdown" style="margin-left: 80px; margin-bottom: 20px;">
-                                        <button class="btn btn-secondary dropdown-toggle"
-                                            style="background-color: white; color: black; border-radius:solid; border-color:white;" type="button"
-                                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Categories
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                            <li>
-                                                <option class="dropdown-item" onclick="">
-                                                    Hearing Aids</option>
-                                            </li>
-                                            <li>
-                                                <option class="dropdown-item" onclick="">
-                                                    Technology</option>
-                                            </li>
-                                            <li>
-                                                <option class="dropdown-item" onclick="">
-                                                    Wheelchairs</option>
-                                            </li>
-                                            <li>
-                                                <option class="dropdown-item" onclick="">
-                                                    Canes</option>
-                                            </li>
+                                        <select class="form-select" id="dropdown-category" style="border-color:white;">
+                                            <ul class="dropdown-menu" aria-labelledby="dropdown-category">
+                                                <li>
+                                                    <option value="hearingAids">Hearing Aids</option>
+                                                </li>
+                                                <li>
+                                                    <option value="technology">Technology</option>
+                                                </li>
+                                                <li>
+                                                    <option value="wheelchairs">Wheelchairs</option>
+                                                </li>
+                                                <li>
+                                                    <option value="canes">Canes</option>
+                                                </li>
+                                                <li>
+                                                    <option value="" selected disabled>Category</option>
+                                                </li>
+                                            </ul>
+                                        </select>
                                     </div>
-
                                 </div>
                                 <div style="float:left">
                                     <div class="dropdown" style="margin-left: 80px; margin-bottom: 20px;">
-                                        <button class="btn btn-secondary dropdown-toggle"
-                                            style="background-color: white; color:black; border-radius:solid; border-color:white;" type="button"
-                                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Suppliers
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                            <li>
-                                                <option class="dropdown-item" onclick="">
-                                                    BeMyTECH</option>
-                                            </li>
-                                            <li>
-                                                <option class="dropdown-item" onclick="">
-                                                    EarGo</option>
-                                            </li>
-                                            <li>
-                                                <option class="dropdown-item" onclick="">
-                                                    IrisVision</option>
-                                            </li>
+                                        <select class="form-select" id="dropdown-supplier" style="border-color:white;">
+                                            <ul class="dropdown-menu" aria-labelledby="dropdown-supplier">
+                                                <li>
+                                                    <option value="bemytech">BeMyTECH</option>
+                                                </li>
+                                                <li>
+                                                    <option value="eargo">Eargo</option>
+                                                </li>
+                                                <li>
+                                                    <option value="irisvision">IrisVision</option>
+                                                </li>
+                                                <li>
+                                                    <option value="" selected disabled>Supplier</option>
+                                                </li>
+                                            </ul>
+                                        </select>
                                     </div>
                                 </div>
-
                                 <div style="float:left">
                                     <div class="dropdown" style="margin-left: 80px; margin-bottom: 20px;">
-                                        <button class="btn btn-secondary dropdown-toggle"
-                                            style="background-color: white; color:black; border-radius:solid; border-color:white;" type="button"
-                                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Price
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                            <li>
-                                                <option class="dropdown-item" onclick="">
-                                                    High to Low</option>
-                                            </li>
-                                            <li>
-                                                <option class="dropdown-item" onclick="">
-                                                    Low to High</option>
-                                            </li>
+                                        <select class="form-select" id="dropdown-order" style="border-color:white;">
+                                            <ul class="dropdown-menu" aria-labelledby="dropdown-order">
+                                                <li>
+                                                    <option value="hightolow">High to Low</option>
+                                                </li>
+                                                <li>
+                                                    <option value="lowtohigh">Low to High</option>
+                                                </li>
+                                                <li>
+                                                    <option value="" selected disabled>Price</option>
+                                                </li>
+                                            </ul>
+                                        </select>
                                     </div>
                                 </div>
-
-
                             </div>
                         </ul>
                         <div class="col text-end mt-2" style="margin-bottom: 40px; margin-left: 80px;">
-                            <button type="submit" style="background-color: lightgrey; font-size: small; border-color: white; color: black;" class="btn btn-secondary btn-lg px-3">View</button>
+                            <button type="submit" onclick="ProductService.getProductsWithFilters()"
+                                style="background-color: lightgrey; font-size: small; border-color: white; color: black;"
+                                class="btn btn-secondary btn-lg px-3">View</button>
                         </div>
-                        <div class="col text-end mt-2" style="margin-bottom: 40px; margin-left: 40px;">
-                            <button type="submit" style="background-color: lightgrey; font-size: small; border-color: white; color: black;" class="btn btn-secondary btn-lg px-3">Reset</button>
+                        <div class="col text-end mt-2" style="margin-bottom: 40px;">
+                            <button type="submit"
+                                style="background-color: lightgrey; font-size: small; border-color: white; color: black;"
+                                class="btn btn-secondary btn-lg px-3">Reset</button>
                         </div>
                     </div>
 
@@ -202,30 +195,15 @@
 
             </div>
         </div>
-        <div div="row">
-            <ul class="pagination pagination-lg justify-content-end">
-                <li class="page-item disabled">
-                    <a class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="#"
-                        tabindex="-1">1</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="#">2</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link rounded-0 shadow-sm border-top-0 border-left-0 text-dark" href="#">3</a>
-                </li>
-            </ul>
-        </div>
         <!-- Start Footer -->
         <footer class="bg-dark" id="tempaltemo_footer">
             <div class="w-100 bg-black py-3">
-                <div class="container">
+                <div class="container text-light">
                     <div class="row pt-2">
                         <div class="col-12">
-                            <p class="text-left text-light">
+                            <p class="text-left">
                                 Copyright &copy; 2023 BeMyTECH
-                                | Designed by <a rel="sponsored" href="https://templatemo.com"
-                                    target="_blank">BeMyTECH</a>
+                                | Designed by BeMyTECH
                             </p>
                         </div>
                     </div>
@@ -244,31 +222,21 @@
                         <h3>Welcome to BeMyTECH!</h3>
                         <p>
                             At BeMyTECH, we believe in a world where technology is inclusive and accessible to everyone.
-                            We are
-                            dedicated to designing and manufacturing innovative products that empower individuals with
-                            diverse
-                            needs,
-                            including those facing visual challenges. Our mission is to bridge the gap between people
-                            and
-                            technology,
-                            enabling seamless integration and enhanced experiences.
+                            We are dedicated to designing and manufacturing innovative products that empower individuals
+                            with
+                            diverse needs, including those facing visual challenges. Our mission is to bridge the gap
+                            between people and technology, enabling seamless integration and enhanced experiences.
                         </p>
                         <p>
                             We understand the importance of personalized support, which is why our team of experts is
                             here to guide you through the selection process and provide ongoing assistance. We are
-                            committed to delivering
-                            exceptional
-                            customer service and ensuring that your journey with BeMyTECH is a seamless and rewarding
-                            one.
+                            committed to delivering exceptional customer service and ensuring that your journey with
+                            BeMyTECH is a seamless and rewarding one.
                         </p>
                         <p>
                             Join us as we revolutionize accessibility and empower individuals to navigate the digital
-                            world
-                            confidently
-                            and independently. Explore our website, connect with us, and discover the possibilities that
-                            BeMyTECH
-                            can
-                            unlock for you.
+                            world confidently and independently. Explore our website, connect with us, and discover the
+                            possibilities that BeMyTECH can unlock for you.
                         </p>
                     </div>
                     <div class="col-md-4">
@@ -315,8 +283,7 @@
                         <div class="col-12">
                             <p class="text-left text-light">
                                 Copyright &copy; 2023 BeMyTECH
-                                | Designed by <a rel="sponsored" href="https://templatemo.com"
-                                    target="_blank">BeMyTECH</a>
+                                | Designed by BeMyTECH
                             </p>
                         </div>
                     </div>
@@ -435,8 +402,7 @@
                         <div class="col-12">
                             <p class="text-left text-light">
                                 Copyright &copy; 2023 BeMyTECH
-                                | Designed by <a rel="sponsored" href="https://templatemo.com"
-                                    target="_blank">BeMyTECH</a>
+                                | Designed by BeMyTECH
                             </p>
                         </div>
                     </div>
@@ -449,25 +415,6 @@
     </div>
 
     <div id="ContactDiv" style="display:none">
-        <!-- Modal -->
-        <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="w-100 pt-1 mb-5 text-right">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="" method="get" class="modal-content modal-body border-0 p-0">
-                    <div class="input-group mb-2">
-                        <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
-                        <button type="submit" class="input-group-text bg-success text-light">
-                            <i class="fa fa-fw fa-search text-white"></i>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-
         <!-- Start Content Page -->
         <div class="container-fluid py-5" style="background-color:#3c679090">
             <div class="col-md-6 m-auto text-center">
@@ -504,7 +451,8 @@
                     </div>
                     <div class="row">
                         <div class="col text-end mt-2">
-                            <button type="submit" class="btn btn-success btn-lg px-3">Submit</button>
+                            <button type="submit" class="btn btn-success btn-lg px-3"
+                                onclick="FormService.submitMessage()">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -522,8 +470,7 @@
                         <div class="col-12">
                             <p class="text-left text-light">
                                 Copyright &copy; 2023 BeMyTECH
-                                | Designed by <a rel="sponsored" href="https://templatemo.com"
-                                    target="_blank">BeMyTECH</a>
+                                | Designed by BeMyTECH
                             </p>
                         </div>
                     </div>
@@ -558,7 +505,28 @@
 <script src="bootstrap/assets/js/ChangeTab.js"></script>
 <script src="bootstrap/assets/js/ProductService.js"></script>
 <script src="bootstrap/assets/js/CartService.js"></script>
+<script src="bootstrap/assets/js/FormService.js"></script>
+<script src="bootstrap/assets/js/UserSevice.js"></script>
 
+
+<!-- Search Modal -->
+<!-- Modal -->
+<div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="w-100 pt-1 mb-5 text-right">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="" method="get" class="modal-content modal-body border-0 p-0">
+            <div class="input-group mb-2">
+                <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
+                <button type="submit" class="input-group-text bg-success text-light">
+                    <i class="fa fa-fw fa-search text-white"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 
 <!-- Edit Modal -->
 <!-- Modal -->

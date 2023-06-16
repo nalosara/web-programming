@@ -51,7 +51,7 @@ class BaseDao {
         $query.= ")";
         $stmt = $this->connection->prepare($query);
         $stmt->execute($entity);
-        $user['id'] = $this->connection->lastInsertId();
+        $entity['id'] = $this->connection->lastInsertId();
         return $entity;
     }
 

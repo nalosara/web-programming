@@ -25,8 +25,5 @@ Flight::route("DELETE /categories/@id", function($id){
     Flight::category_service()->delete($id);
     Flight::json(['message' => "category deleted successfully"]);
 });
-/*
-Flight::route("GET /categorys/@name/@status", function($name, $status){
-    echo "Hello from /categorys route with name = " . $name . " and status = " . $status;
-})*/
+
 ?>

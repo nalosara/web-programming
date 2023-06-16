@@ -25,7 +25,7 @@ class ProductDao extends BaseDao{
         ['category_id' => $category_id]);
     }
 
-    public function get_by_suplier_id($supplier_id) {
+    public function get_by_supplier_id($supplier_id) {
         return $this->query("SELECT * FROM products WHERE supplier_id=:supplier_id",
         ['supplier_id' => $supplier_id]);
     }

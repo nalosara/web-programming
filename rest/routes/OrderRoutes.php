@@ -25,8 +25,5 @@ Flight::route("DELETE /orders/@id", function($id){
     Flight::order_service()->delete($id);
     Flight::json(['message' => "order deleted successfully"]);
 });
-/*
-Flight::route("GET /orders/@name/@status", function($name, $status){
-    echo "Hello from /orders route with name = " . $name . " and status = " . $status;
-})*/
+
 ?>

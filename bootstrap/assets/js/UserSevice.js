@@ -63,6 +63,6 @@ var UserService = {
   
     logout: function () {
       localStorage.clear();
-      window.location.replace("login.html");
+      window.location.replace("register.html");
     },
 };
