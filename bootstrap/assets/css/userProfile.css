@@ -1,0 +1,32 @@
+.col {
+    margin-left: 60px;
+   
+}
+.align-items-center {
+    display: flex; /* Enables flexbox */
+    align-items: center; /* Centers the child elements vertically */
+  }
+
+.col h3 {
+    width: auto;
+    margin: 0;
+}
+
+.dugme.btn-success {
+    background-color: #6a86a0b5;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+    display: inline-block;
+    font-size: 16px;
+    text-decoration: none;
+    padding: 6px 20px;
+    float: right;
+    margin-right: 140px;
+}
+
+.dugme.btn-success:hover {
+    background-color: #456786b5;
+}
+

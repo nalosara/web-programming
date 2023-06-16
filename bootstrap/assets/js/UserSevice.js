@@ -96,10 +96,10 @@ var UserService = {
                     <div class="col"> 
                       <div class="row align-items-center">
                         <div class="col" style="font-size: 24px; font-weight: bold;">
-                          <p style="width: auto" class="mb-0">Hello ${data[0].name}!</p>
+                          <h3 style="width: auto" class="mb-0">Hello ${data[0].name}!</h3>
                         </div>
-                        <div class="col">
-                          <button type="button" onclick="UserService.logout()" class="btn btn-success">Logout</button>
+                        <div class="col">   
+                          <button type="button" onclick="UserService.logout()" class="dugme btn-success">Logout</button>
                         </div>
                       </div>
                       <br>
