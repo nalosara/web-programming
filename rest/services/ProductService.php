@@ -9,13 +9,13 @@ class ProductService extends BaseService {
 
     public function __construct() {
         parent::__construct(new ProductDao);
-        $categoryService = new CategoryService();
-        $supplierService = new SupplierService();
+        $this->categoryService = new CategoryService();
+        $this->supplierService = new SupplierService();
     }
 
     public function get_all_with_filters($category = null, $supplier = null, $order = null) {
-        $categoryId = $this->categoryService()->get_category_by_name($category)['id'];
-        $supplierId = $this->supplierService()->get_supplier_by_name($supplier)['id'];
+        $categoryId = $this->categoryService->get_category_by_name($category)['id'];
+        $supplierId = $this->supplierService->get_supplier_by_name($supplier)['id'];
 
         if ($category == null && $supplier == null && $order == null) {
             return $this->dao->get_all();

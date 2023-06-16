@@ -13,7 +13,9 @@ Flight::route("GET /user_by_id", function(){
 });
 
 Flight::route("GET /users/@id", function($id){
-    Flight::json(Flight::user_service()->get_by_id($id));
+    $decoded = (array)JWT::decode($id, new Key(Config::JWT_SECRET(), 'HS256'));
+    $decoded_user_id = $decoded['id'];
+    Flight::json(Flight::user_service()->get_by_id($decoded_user_id));
 });
 
 Flight::route("POST /users", function(){

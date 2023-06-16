@@ -92,7 +92,8 @@
                         <span
                             class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
+                    <a class="nav-icon position-relative text-decoration-none" href="#user"
+                        onclick="ChangeTab.goToUserPage(localStorage.getItem('user_token'));">
                         <i class="fa fa-fw fa-user text-dark mr-3"></i>
                         <span
                             class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
@@ -494,6 +495,12 @@
         </div>
     </div>
 
+    <div id="UserDiv" style="display:none">
+
+        <div id="UserContainer">
+        </div>
+    </div>
+
 </body>
 
 <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet">
@@ -528,7 +535,7 @@
     </div>
 </div>
 
-<!-- Edit Modal -->
+<!-- Edit Product Modal -->
 <!-- Modal -->
 <div class="modal fade" id="editProductModal" role="dialog">
     <div class="modal-dialog">
@@ -612,6 +619,139 @@
     }
 
 </script>
+
+<!-- Add Address Modal -->
+<!-- Modal -->
+<div class="modal fade" id="addAddressModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" id="addAddressModalContent">
+            <form id="addAddressForm">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Address</h4>
+                    <button type="button" class="close" data-bs-dismiss="modal">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input id="add_address_user_id" name="add_address_user_id" hidden />
+                        <label for="alias">Address Name(alias you can remember address by):</label>
+                        <input type="text" id="add_address_alias" name="alias" required class="form-control" />
+                    </div>
+                    <div>
+                        <label for="street">Street:</label>
+                        <input type="text" id="add_address_street" name="street" required class="form-control" />
+                    </div>
+                    <div>
+                        <label for="zip_code">ZIP Code:</label>
+                        <input type="number" id="add_address_zip_code" name="zip_code" required class="form-control" />
+                    </div>
+                    <div>
+                        <label for="country">Country:</label>
+                        <input type="text" id="add_address_country" name="country" required class="form-control" />
+                    </div>
+                    <div>
+                        <label for="city">City:</label>
+                        <input type="text" id="add_address_city" name="city" required class="form-control" />
+                    </div>
+                </div>
+                <div class="error"><span></span></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" onclick="UserService.addUserAddress()" class="btn btn-success">
+                        Add Address
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function showAddAddressDialog(user_id) {
+        $(document).ready(function () { $("#addAddressModal").modal('show'); });
+        $("#add_address_user_id").val(user_id);
+        $("#addAddressForm").show();
+    }
+
+</script>
+
+<!-- Edit Address Modal -->
+<!-- Modal -->
+<div class="modal fade" id="editAddressModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" id="editAddressModalContent">
+            <div class="spinner-border" id="editAddressModalSpinner" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <form id="editAddressForm">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Address</h4>
+                    <button type="button" class="close" data-bs-dismiss="modal">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input id="edit_address_user_id" name="edit_address_user_id" hidden />
+                        <input id="edit_address_id" name="edit_address_id" hidden />
+                        <label for="alias">Address Name(alias you can remember address by):</label>
+                        <input type="text" id="edit_address_alias" name="alias" required class="form-control" />
+                    </div>
+                    <div>
+                        <label for="street">Street:</label>
+                        <input type="text" id="edit_address_street" name="street" required class="form-control" />
+                    </div>
+                    <div>
+                        <label for="zip_code">ZIP Code:</label>
+                        <input type="number" id="edit_address_zip_code" name="zip_code" required class="form-control" />
+                    </div>
+                    <div>
+                        <label for="country">Country:</label>
+                        <input type="text" id="edit_address_country" name="country" required class="form-control" />
+                    </div>
+                    <div>
+                        <label for="city">City:</label>
+                        <input type="text" id="edit_address_city" name="city" required class="form-control" />
+                    </div>
+                </div>
+                <div class="error"><span></span></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" onclick="UserService.editUserAddress()" class="btn btn-success">
+                        Add Address
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function showEditAddresDialog(id) {
+        //$("#editProductModal").modal("show");
+        $(document).ready(function () { $("#editAddressModal").modal('show'); });
+        $("#editAddressModalSpinner").show();
+        $("#editAddressForm").hide();
+        $.get("rest/addresses/" + id, function (data) {
+            $("#edit_address_alias").val(data[0].alias);
+            $("#edit_address_street").val(data[0].street);
+            $("#edit_address_zip_code").val(data[0].zip_code);
+            $("#edit_address_country").val(data[0].country);
+            $("#edit_address_city").val(data[0].city);
+            $("#edit_address_user_id").val(data[0].user_id);
+            $("#edit_address_id").val(data[0].id);
+            $("#editAddressModalSpinner").hide();
+            $("#editAddressForm").show();
+        });
+    }
+
+</script>
+
 
 
 <script>

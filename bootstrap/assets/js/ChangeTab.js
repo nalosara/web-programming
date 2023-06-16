@@ -7,6 +7,7 @@ var ChangeTab = {
         $("#ContactDiv").css({ "display": "none" });
         $("#ProductDiv").css({ "display": "none" });
         $("#CartDiv").css({ "display": "none" });
+        $("#UserDiv").css({ "display": "none" });
         
     },
     
@@ -17,6 +18,7 @@ var ChangeTab = {
         $("#ContactDiv").css({ "display": "none" });
         $("#ProductDiv").css({ "display": "none" });
         $("#CartDiv").css({ "display": "none" });
+        $("#UserDiv").css({ "display": "none" });
     },
 
     goToAboutPage: function () {
@@ -26,6 +28,7 @@ var ChangeTab = {
         $("#ContactDiv").css({ "display": "none" });
         $("#ProductDiv").css({ "display": "none" });
         $("#CartDiv").css({ "display": "none" });
+        $("#UserDiv").css({ "display": "none" });
     },
 
     goToContactPage: function () {
@@ -35,6 +38,7 @@ var ChangeTab = {
         $("#ShopDiv").css({ "display": "none" });
         $("#ProductDiv").css({ "display": "none" });
         $("#CartDiv").css({ "display": "none" });
+        $("#UserDiv").css({ "display": "none" });
     },
 
     goToProductPage: function (productid) {
@@ -45,11 +49,24 @@ var ChangeTab = {
         $("#HomeDiv").css({ "display": "none" });
         $("#ShopDiv").css({ "display": "none" });
         $("#CartDiv").css({ "display": "none" });
+        $("#UserDiv").css({ "display": "none" });
     },
 
     goToCartPage: function (user_id) {
         CartService.getUserProducts(user_id);
         $("#CartDiv").css({ "display": "block" });
+        $("#ProductDiv").css({ "display": "none" });
+        $("#ContactDiv").css({ "display": "none" });
+        $("#AboutDiv").css({ "display": "none" });
+        $("#HomeDiv").css({ "display": "none" });
+        $("#ShopDiv").css({ "display": "none" });
+        $("#UserDiv").css({ "display": "none" });
+    },
+
+    goToUserPage: function(user_id){
+        UserService.getUserData(user_id);
+        $("#UserDiv").css({ "display": "block" });
+        $("#CartDiv").css({ "display": "none" });
         $("#ProductDiv").css({ "display": "none" });
         $("#ContactDiv").css({ "display": "none" });
         $("#AboutDiv").css({ "display": "none" });

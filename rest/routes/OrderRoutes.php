@@ -26,4 +26,8 @@ Flight::route("DELETE /orders/@id", function($id){
     Flight::json(['message' => "order deleted successfully"]);
 });
 
+Flight::route("GET /orders_by_user_id/@user_id", function($user_id){
+    Flight::json(Flight::order_service()->get_by_user_id($user_id));
+});
+
 ?>
