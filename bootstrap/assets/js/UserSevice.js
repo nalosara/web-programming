@@ -138,7 +138,7 @@ var UserService = {
       success: function (data) {
         var html = `<div class="col"> 
             <div class="col" style="font-size: 24px; font-weight: bold;">
-                Your Past Orders
+                <b>Your Past Orders</b>
             </div>
             <br>`;
         for (var i = 0; i < data.length; i++) {
@@ -147,7 +147,7 @@ var UserService = {
               <div class="card mb-4 rounded-0">
                   <div>
                       <div class="col">
-                          <p style="width: 200px" class="mb-0">Order Date: ` +
+                          <p style="width: 200px;" class="mb-0"><b>Order Date: </b> ` +
             data[i].order_date +
             `</p>
                           <p style="width: auto" class="mb-0">Products Purchased:` +
@@ -176,7 +176,7 @@ var UserService = {
       success: function (data) {
         var html = `<div class="col"> 
                     <div class="col" style="font-size: 24px; font-weight: bold;">
-                        Your Addresses
+                        <b>Your Addresses</b>
                         <button style="width: auto; float: right; margin-right: 65px; font-size: small;" type="button" onclick="showAddAddressDialog(${user_id})" class="btn btn-success">Add Address</button>
                     </div>
                   </div>
@@ -189,27 +189,27 @@ var UserService = {
               <div class="card mb-4 rounded-0">
                   <div class="row align-items-center">
                       <div class="col">
-                          <p style="width: auto" class="mb-0">Address Name: ` +
+                          <p style="width: auto" class="mb-0"><b>Address Name:</b> ` +
             data[i].alias +
             `</p>
                       </div>
                       <div class="col">
-                          <p style="width: auto" class="mb-0">Street: ` +
+                          <p style="width: auto" class="mb-0"><b>Street:</b> ` +
             data[i].street +
             `</p>
                       </div>
                       <div class="col">
-                          <p style="width: auto" class="mb-0">Zip Code: ` +
+                          <p style="width: auto" class="mb-0"><b>Zip Code:</b> ` +
             data[i].zip_code +
             `</p>
                       </div>
                       <div class="col">
-                          <p style="width: auto" class="mb-0">Country: ` +
+                          <p style="width: auto" class="mb-0"><b>Country:</b> ` +
             data[i].country +
             `</p>
                       </div>
                       <div class="col">
-                          <p style="width: auto" class="mb-0">City: ` +
+                          <p style="width: auto" class="mb-0"><b>City:</b> ` +
             data[i].city +
             `</p>
                       </div>
