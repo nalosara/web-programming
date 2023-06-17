@@ -25,6 +25,7 @@ class OrderService extends BaseService {
         $order_product = $entity;
         unset($order_product['user_id']);
         unset($order_product['order_date']);
+        unset($order_product['address_id']);
         $order_product['order_id'] = $added_order['id'];
 
         return $this->order_product_service->add($order_product);

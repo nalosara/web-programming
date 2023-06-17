@@ -755,6 +755,50 @@
 </script>
 
 
+<!-- Select Address Modal -->
+<!-- Modal -->
+<div class="modal fade" id="selectAddressModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" id="selectAddressModalContent">
+            <form id="selectAddressForm">
+                <div class="modal-header">
+                    <h4 class="modal-title">Select Address</h4>
+                    <button type="button" class="close" data-bs-dismiss="modal">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="hidden" id="selected-address-id" name="selected_address_id" value="">
+                        <input type="hidden" id="selected_product_id" name="selected_product_id" value="">
+                        <label for="select_address">Select the address you'd like your order to be shipped to</label>
+                        <select class="form-select" aria-label="Select desired address" id="select-address">
+                        </select>
+                    </div>
+                </div>
+                <div class="error"><span></span></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success" id="completePurchaseBtn">Complete Purchase</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function showSelectAddressDialog(product_id) {
+        $(document).ready(function () { $("#selectAddressModal").modal('show'); });
+        ProductService.selectAddress();
+        $("#selected_product_id").val(product_id);
+        $("#selectAddressForm").show();
+    }
+
+</script>
+
+
 
 <script>
     var nav =

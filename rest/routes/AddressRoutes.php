@@ -1,4 +1,9 @@
 <?php
+
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+
+
 Flight::route("GET /addresses", function(){
     Flight::json(Flight::address_service()->get_all());
 });
@@ -28,6 +33,12 @@ Flight::route("DELETE /addresses/@id", function($id){
 
 Flight::route("GET /addresses_by_user_id/@user_id", function($user_id){
     Flight::json(Flight::address_service()->get_address_by_user_id($user_id));
+});
+
+Flight::route("GET /addresses_by_user_token/@user_id", function($user_id){
+    $decoded = (array)JWT::decode($user_id, new Key(Config::JWT_SECRET(), 'HS256'));
+    $decoded_user_id = $decoded['id'];
+    Flight::json(Flight::address_service()->get_address_by_user_id($decoded_user_id));
 });
 /*
 Flight::route("GET /addresses/@name/@status", function($name, $status){
