@@ -42,7 +42,9 @@ Flight::route("GET /carts_by_user_id/@user_id", function($user_id){
 });
 
 Flight::route("DELETE /carts_by_user_id/@user_id", function($user_id){
-    Flight::cart_service()->delete_by_user_id($user_id);
+    $decoded = (array)JWT::decode($user_id, new Key(Config::JWT_SECRET(), 'HS256'));
+    $decoded_user_id = $decoded['id'];
+    Flight::cart_service()->delete_by_user_id($decoded_user_id);
     Flight::json(['message' => "cart deleted successfully"]);
 });
 
