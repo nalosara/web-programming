@@ -21,13 +21,13 @@ Custom Css
 
 .btn-larger {
 	padding: 15px 40px !important;
-	border:2px solid #0d6578 !important;;
+	border:2px solid #38B6FF !important;;
 	border-radius: 10px !important;;
 	text-transform: uppercase;
 	font-family: 'Dosis', sans-serif;
 	font-size: 18px;
 	font-weight: 300;
-	color: #0d6578;
+	color: #38B6FF;
 	background-color: transparent;
 	-webkit-transition: all .6s;
 	-moz-transition: all .6s;
@@ -35,10 +35,10 @@ Custom Css
 }
 
 .btn-larger:hover, .btn-larger:focus, .btn-larger:active, .btn-larger.active, .open .dropdown-toggle.btn-larger {
-	border-color: #0d6578;
+	border-color: #38B6FF;
 	color: #fff;
-	background-color: #0d6578;
-  border-radius: 0
+	background-color: #38B6FF;
+  	border-radius: 0
 }
 
 .btn-larger:active, .btn-larger.active, .open .dropdown-toggle.btn-larger {
@@ -93,12 +93,12 @@ div#form {
 #userform .nav-tabs.nav-justified > li > a {
 	text-transform: uppercase;
 	font-size: 20px;
-	color: #0d6578;
-	background-color: rgba(13, 100, 119,0.5);
+	color: #004AAD;
+	background-color: rgba(0, 74, 173, 0.5);
 }
 #userform .nav-tabs.nav-justified > .active > a, #userform .nav-tabs.nav-justified > .active > a:hover, #userform .nav-tabs.nav-justified > .active > a:focus {
 	border: 0;
-	background: #0d6578;
+	background: #004AAD;
 	color: white;
 	border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -120,7 +120,7 @@ div#form {
     border-bottom: none;
 }
 #userform .nav-tabs.nav-justified > li > a:hover {
-	background: #0d6578;
+	background: #004AAD;
 	color: #FFF;
 	border-radius: 0;
 	-webkit-transition: all .6s;
@@ -128,7 +128,7 @@ div#form {
 	transition: all .6s;
 }
 #userform .nav-tabs > li.active > a, #userform .nav-tabs > li.active > a:hover, #userform .nav-tabs > li.active > a:focus {
-	color: #0d6578;
+	color: #004AAD;
 	cursor: default;
 	background-color: transparent;
 	-webkit-transition: all .6s;
@@ -143,7 +143,7 @@ div#form {
 	transition: all .6s;
 }
 #userform .nav-tabs.nav-justified > li > a:hover {
-	background-color: #0d6578;
+	background-color: #004AAD;
 	border-color: transparent;
 	border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -190,7 +190,7 @@ div#form {
 	border: 1px solid #fff;
 }
 #userform .form-control:focus {
-	border-color: #0d6578;
+	border-color: #004AAD;
 	box-shadow: none;
 }
  #userform::-webkit-input-placeholder {
@@ -216,7 +216,7 @@ font-weight: 700;
 }
 #userform #signup .form-group label .req {
 	margin: 2px;
-	color: #0d6578;
+	color: #004AAD;
 }
 #userform #signup .form-group label.active {
 	-webkit-transform: translateY(0px);
@@ -248,7 +248,7 @@ font-weight: 700;
 }
 #userform #login .form-group label .req {
 	margin: 2px;
-	color: #0d6578;
+	color: #004AAD;
 }
 #userform #login .form-group label.active {
 	-webkit-transform: translateY(0px);

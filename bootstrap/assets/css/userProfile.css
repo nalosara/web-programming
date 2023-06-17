@@ -13,20 +13,21 @@
 }
 
 .dugme.btn-success {
-    background-color: #6a86a0b5;
+    background-color: #7995aeb5;
     color: white;
     text-align: center;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 8px;
+    border-color: white;
     display: inline-block;
-    font-size: 16px;
+    font-size: small;
     text-decoration: none;
     padding: 6px 20px;
     float: right;
-    margin-right: 140px;
+    margin-right: 65px;
 }
 
 .dugme.btn-success:hover {
-    background-color: #456786b5;
+    background-color: #7898b7b5;
 }
 
