@@ -1,4 +1,9 @@
 <?php
+
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+
+
 Flight::route("GET /orders", function(){
     Flight::json(Flight::order_service()->get_all());
 });
@@ -12,7 +17,11 @@ Flight::route("GET /orders/@id", function($id){
 });
 
 Flight::route("POST /orders", function(){
-    $request = Flight::request()->data->getData();    
+    $request = Flight::request()->data->getData();
+    $user_id = $request['user_id'];
+    $decoded = (array)JWT::decode($user_id, new Key(Config::JWT_SECRET(), 'HS256'));
+    $decoded_user_id = $decoded['id'];  
+    $request['user_id'] = $decoded_user_id;    
     Flight::json(['message' => "order added successfully", 'data' => Flight::order_service()->add($request)]);
 });
 

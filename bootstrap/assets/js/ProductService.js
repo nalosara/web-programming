@@ -175,10 +175,10 @@ var ProductService = {
                                                 </div>
                                                 <div class="row pb-3">
                                                     <div class="col d-grid">
-                                                        <button type="submit" style="border-color: white;" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
+                                                        <button id="buy_button" style="border-color: white;" class="btn btn-success btn-lg">Buy</button>
                                                     </div>
                                                     <div class="col d-grid">
-                                                        <button id="add_to_cart" style="border-color: white;" class="btn btn-success btn-lg" onclick = "ProductService.addProductToCart(${data[0].id});">Add To Cart</button>
+                                                        <button id="add_to_cart" style="border-color: white;" class="btn btn-success btn-lg">Add To Cart</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -212,6 +212,19 @@ var ProductService = {
                     quantityInput.value = currentValue + 1;
                     quantityValue.textContent = quantityInput.value;
                 });
+    
+                // Add event listener to the "Add to Cart" button
+                var addToCartButton = document.getElementById("add_to_cart");
+                addToCartButton.addEventListener("click", function(event) {
+                    event.preventDefault();
+                    ProductService.addProductToCart(data[0].id);
+                });
+
+                var buyButton = document.getElementById("buy_button");
+                buyButton.addEventListener("click", function(event) {
+                    event.preventDefault();
+                    ProductService.buyProduct(data[0].id);
+                });
             },
             error: function (err) {
                 console.log(err.status);
@@ -219,16 +232,15 @@ var ProductService = {
             }
         });
     },
-
-    addProductToCart: function ($product_id) {
-        event.preventDefault();
+    
+    addProductToCart: function (product_id) {
         var data = {
           user_id: localStorage.getItem('user_token'),            
-          product_id: $product_id,
+          product_id: product_id,
           quantity: document.getElementById('product-quantity-mod').value
         };
-        
-      
+    
+    
         $.ajax({
           url: 'rest/carts',
           method: 'POST',
@@ -246,7 +258,34 @@ var ProductService = {
             ProductService.getProducts(); // Update the product list
           }
         });
-      }
+    },
+
+    buyProduct: function(product_id){
+        var data = {
+            user_id: localStorage.getItem('user_token'),
+            product_id: product_id,
+            quantity: document.getElementById('product-quantity-mod').value,
+            order_date: new Date().toJSON().slice(0, 10)
+        };
+
+        $.ajax({
+            url: 'rest/orders',
+            method: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (result) {
+              ProductService.getProducts(); 
+              ChangeTab.goToShopPage(); 
+              toastr.success('Your purchase has been successfull!');
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+              toastr.error('Error! There was a problem with your purchase. Please try again.');
+              ChangeTab.goToShopPage(); // Redirect to the shop page
+              ProductService.getProducts(); // Update the product list
+            }
+          });
+    }
 
 
 }

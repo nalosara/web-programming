@@ -9,7 +9,7 @@ class CategoryDao extends BaseDao{
     }
 
     public function get_category_by_name($categoryName) {
-        return $this->query("SELECT * FROM categories WHERE name = " . $categoryName);
+        return $this->query("SELECT * FROM categories WHERE name = :name", ['name' => $categoryName]);
     }
 }
 
