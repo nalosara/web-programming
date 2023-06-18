@@ -34,7 +34,17 @@ var CartService = {
                             </div>
                         </div>
                     </div>`
+                };
+                if (data.length > 0) {
+                    html += `<div class="col">
+                    <button style="width: auto" class="btn btn-success">Purchase Items from Cart</button>
+                    <button type="submit" style="width: auto" onclick="CartService.emptyCart()" class="btn btn-success">Empty Cart</button>
+                </div>
+                `
                 }
+                
+                
+
                 $("#cartContainer").html(html);
                 $("#cartContainer").css({ "display": "block" })
             },
@@ -60,6 +70,25 @@ var CartService = {
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 toastr.error("Error! Item has not been deleted.");
+            },
+        });
+
+    },
+
+    emptyCart: function(){
+        let user_id = localStorage.getItem('user_token');
+
+        $.ajax({
+            url: 'rest/carts_by_user_id/' + user_id,
+            method: "DELETE",
+            contentType: "application/json",
+
+            success: function (result) {
+                toastr.success("Your cart is now empty");
+                ChangeTab.goToCartPage(localStorage.getItem('user_token'));
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                toastr.error("Error! Cart has not been emptied.");
             },
         });
 

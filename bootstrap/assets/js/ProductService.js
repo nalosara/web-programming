@@ -223,7 +223,7 @@ var ProductService = {
                 var buyButton = document.getElementById("buy_button");
                 buyButton.addEventListener("click", function(event) {
                     event.preventDefault();
-                    ProductService.buyProduct(data[0].id);
+                    showSelectAddressDialog(data[0].id);
                 });
             },
             error: function (err) {
@@ -260,32 +260,89 @@ var ProductService = {
         });
     },
 
-    buyProduct: function(product_id){
-        var data = {
-            user_id: localStorage.getItem('user_token'),
-            product_id: product_id,
-            quantity: document.getElementById('product-quantity-mod').value,
-            order_date: new Date().toJSON().slice(0, 10)
-        };
-
+    selectAddress: function() {
+        let user_id = localStorage.getItem('user_token');
+        let options = "";
+    
         $.ajax({
-            url: 'rest/orders',
-            method: 'POST',
-            data: JSON.stringify(data),
-            contentType: 'application/json',
-            dataType: 'json',
-            success: function (result) {
-              ProductService.getProducts(); 
-              ChangeTab.goToShopPage(); 
-              toastr.success('Your purchase has been successfull!');
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-              toastr.error('Error! There was a problem with your purchase. Please try again.');
-              ChangeTab.goToShopPage(); // Redirect to the shop page
-              ProductService.getProducts(); // Update the product list
+          url: "rest/addresses_by_user_token/" + user_id,
+          type: "GET",
+          success: function(data) {
+            for (let i = 0; i < data.length; i++) {
+              options += `<option value="${data[i].id}">${data[i].alias}</option>`;
             }
-          });
-    }
+            document.getElementById("select-address").innerHTML = options;
+    
+            // Update the address ID when the user selects an option
+            document.getElementById("select-address").addEventListener("change", function() {
+              const selectedAddressId = this.value;
+              document.getElementById("selected-address-id").value = selectedAddressId;
+            });
+    
+            // Check if the user has addresses
+            if (data.length === 0) {
+              document.getElementById("selectAddressForm").onsubmit = function(event) {
+                event.preventDefault(); // Prevent form submission
+                alert("You have no addresses saved. Go to the user profile and add an address you would like your purchase to be shipped to.");
+              };
+            } else {
+              // Check if the event listener is already added
+              if (!document.getElementById("completePurchaseBtn").hasEventListener) {
+                // Add event listener to the "Complete Purchase" button
+                document.getElementById("completePurchaseBtn").addEventListener("click", ProductService.completePurchase);
+    
+                // Set flag to indicate the event listener is added
+                document.getElementById("completePurchaseBtn").hasEventListener = true;
+              }
+            }
+          },
+        });
+      },
+    
+      completePurchase: function(event) {
+        event.preventDefault(); // Prevent form submission
+        const selectedAddressId = document.getElementById("select-address").value;
+        const product_id = document.getElementById("selected_product_id").value;
+        ProductService.buyProduct(selectedAddressId, product_id);
+      },
+    
+      buyProduct: function(selectedAddressId, product_id) {
+        var data = {
+          user_id: localStorage.getItem('user_token'),
+          product_id: product_id,
+          quantity: document.getElementById('product-quantity-mod').value,
+          order_date: new Date().toJSON().slice(0, 10),
+          address_id: selectedAddressId
+        };
+    
+        $.ajax({
+          url: 'rest/orders',
+          method: 'POST',
+          data: JSON.stringify(data),
+          contentType: 'application/json',
+          dataType: 'json',
+          success: function(result) {
+            ProductService.getProducts();
+            ChangeTab.goToShopPage();
+            toastr.success('Your purchase has been successful!');
+            $('#selectAddressModal').modal('hide'); // Close the modal
+    
+            // Remove the event listener after a successful purchase
+            document.getElementById("completePurchaseBtn").removeEventListener("click", ProductService.completePurchase);
+            delete document.getElementById("completePurchaseBtn").hasEventListener;
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            toastr.error('Error! There was a problem with your purchase. Please try again.');
+            ChangeTab.goToShopPage(); // Redirect to the shop page
+            ProductService.getProducts(); // Update the product list
+            $('#selectAddressModal').modal('hide'); // Close the modal
+    
+            // Remove the event listener after an error in the purchase
+            document.getElementById("completePurchaseBtn").removeEventListener("click", ProductService.completePurchase);
+            delete document.getElementById("completePurchaseBtn").hasEventListener;
+          }
+        });
+    },
 
 
 }
