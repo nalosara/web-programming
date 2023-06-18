@@ -99,7 +99,7 @@ var UserService = {
                           <h3 style="width: auto" class="mb-0">Hello ${data[0].name}!</h3>
                         </div>
                         <div class="col">   
-                          <button type="button" onclick="UserService.logout()" class="dugme btn-success">Logout</button>
+                          <button id="logoutbtn" type="button" onclick="UserService.logout()" class="btn btn-success">Logout</button>
                         </div>
                       </div>
                       <br>
@@ -166,17 +166,17 @@ var UserService = {
         success: function(data) {
           var html = `<div class="col"> 
                     <div class="col" style="font-size: 24px; font-weight: bold;">
-                        Your Addresses
+                        Your Addresses:
                     </div>
                   </div>
-                  <button style="width: auto" type="button" onclick="showAddAddressDialog(${user_id})" class="btn btn-success">Add Address</button>
+                  <button id="adresabutton" type="button" onclick="showAddAddressDialog(${user_id})" class="b btn-success">Add Address</button>
                   <br>
                   <br>
                 </div>
             </div>`;
           for (var i = 0; i < data.length; i++) {
             html += `<div class="row">
-              <div class="card mb-4 rounded-0">
+              <div id="adrese" class="card mb-4 rounded-0">
                   <div class="row align-items-center">
                       <div class="col">
                           <p style="width: auto" class="mb-0">Address Name: ` + data[i].alias + `</p>
@@ -194,8 +194,8 @@ var UserService = {
                           <p style="width: auto" class="mb-0">City: ` + data[i].city + `</p>
                       </div>
                       <div class="col">
-                        <button style="width: 200px" type="button" onclick="showEditAddresDialog(`+ data[i].id +`)" class="btn btn-success">Edit Address</button>
-                        <button style="width: 200px" type="button" onclick="UserService.deleteAddress(`+ data[i].id +`)" class="btn btn-success">Delete Address</button>
+                        <button  id="editbutton" type="button" onclick="showEditAddresDialog(`+ data[i].id +`)" class="btn btn-success">Edit</button>
+                        <button  id="deletebutton" type="button" onclick="UserService.deleteAddress(`+ data[i].id +`)" class="btn btn-success">Delete</button>
                       </div>
                   </div>
               </div>

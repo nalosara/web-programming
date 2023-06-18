@@ -12,21 +12,57 @@
     margin: 0;
 }
 
-.dugme.btn-success {
-    background-color: #6a86a0b5;
-    color: white;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 4px;
-    display: inline-block;
-    font-size: 16px;
-    text-decoration: none;
-    padding: 6px 20px;
-    float: right;
-    margin-right: 140px;
+.btn-success {
+  background-color: #6a86a0b5;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 16px;
+  text-decoration: none;
+  padding: 6px 20px;
+  float: right;
+  margin-right: 140px;
+  width: 100px;
+ 
 }
 
-.dugme.btn-success:hover {
-    background-color: #456786b5;
+.btn.btn-success:active {
+    background-color: #314252b5;
 }
+
+#adresabutton {
+  background-color: #6aa07eb5;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 10px;
+  display: inline-block;
+  font-size: 16px;
+  text-decoration: none;
+  padding: 6px 20px;
+  border: none;
+  float: left;
+  margin-left: 110px;
+  width: 10%;
+}
+
+/*.card {
+  margin-top: 10px;
+}*/
+
+#deletebutton #editbutton{
+  margin-top: auto;
+  width: 50%;
+  margin-right: 110px;
+  
+  
+}
+
+#adrese {
+  padding-left: 70px;
+ 
+}
+
 

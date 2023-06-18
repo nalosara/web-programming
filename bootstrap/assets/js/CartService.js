@@ -9,7 +9,7 @@ var CartService = {
             success: function (data) {
                 var html = `<div class="shopping-cart"> 
                 <div class="cart-title">
-                    Your Cart
+                    Your Cart:
                 </div>`;
                  for (var i = 0; i < data.length; i++) {
                     html+= ` 
