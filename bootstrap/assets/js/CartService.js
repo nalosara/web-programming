@@ -37,8 +37,8 @@ var CartService = {
                 };
                 if (data.length > 0) {
                     html += `<div class="col">
-                    <button style="width: auto; float: right; margin-left: 10px;" class="btn btn-success">Purchase Items from Cart</button>
-                    <button type="submit" style="width: auto; float: right;" onclick="CartService.emptyCart()" class="btn btn-success">Empty Cart</button>
+                    <button style="width: auto; font-size: small; float: right; margin-left: 10px;" class="btn btn-success">Purchase Items from Cart</button>
+                    <button type="submit" style="width: auto; font-size: small; float: right;" onclick="CartService.emptyCart()" class="btn btn-success">Empty Cart</button>
                 </div>
                 `
                 }
