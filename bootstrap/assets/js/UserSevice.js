@@ -150,7 +150,7 @@ var UserService = {
                           <p style="width: 200px;" class="mb-0"><b>Order Date: </b> ` +
             data[i].order_date +
             `</p>
-                          <p style="width: auto" class="mb-0">Products Purchased:` +
+                          <p style="width: auto" class="mb-0"><b>Products Purchased: </b>` +
             data[i].products_bought +
             `</p>
                       </div>
