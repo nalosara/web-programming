@@ -82,7 +82,5 @@ class ProductService extends BaseService {
     public function get_by_supplier_and_price_desc($supplier_id) {
         return $this->dao->get_by_supplier_and_price_desc($supplier_id);
     }
-
-   
 }
 ?>

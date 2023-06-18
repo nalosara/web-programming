@@ -2,8 +2,8 @@
 
 require_once  "BaseDao.class.php";
 
-class ProductDao extends BaseDao {
- 
+class ProductDao extends BaseDao{
+
     public function __construct(){
         parent::__construct("products");
     }
@@ -76,6 +76,7 @@ class ProductDao extends BaseDao {
         return $this->query("SELECT * FROM products WHERE supplier_id=:supplier_id" .
                                             " ORDER BY price DESC", ['supplier_id' => $supplier_id]);
     }
+
 
 }
 

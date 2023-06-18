@@ -24,6 +24,5 @@ class CartService extends BaseService {
         return $this->dao->delete_by_product_id($product_id);
     }
 
-
 }
 ?>
