@@ -7,14 +7,14 @@ var CartService = {
             contentType: "application/json",
     
             success: function (data) {
-                var html = `<div class="shopping-cart"> 
+                var html = `<div class="shopping-cart" style="margin-left: 50px; margin-right: 50px;"> 
                 <div class="cart-title">
-                    Your Cart
+                    <b>Your Cart</b>
                 </div>`;
                  for (var i = 0; i < data.length; i++) {
                     html+= ` 
                     <div class="row">
-                        <div class="card mb-4 rounded-0">
+                        <div class="card mb-4 rounded-0" style="margin-left: 50px; margin-right: 50px;">
                             <div class="row align-items-center">
                                 <div class="col">
                                     <img style="width: auto" class="card-img rounded-0 img-fluid cart-img-size" src=` + data[i].product_image + `>
@@ -29,7 +29,7 @@ var CartService = {
                                     <p style="width: auto" class="mb-0">Quantity: ` + data[i].quantity + `</p>
                                 </div>
                                 <div class="col">
-                                    <button type="submit" style="width: auto" onclick="CartService.deleteCartItem(${data[i].id})" class="btn btn-success">Delete</button>
+                                    <button type="submit" style="font-size: small;" onclick="CartService.deleteCartItem(${data[i].id})" class="dugme btn btn-success">Delete</button>
                                 </div>
                             </div>
                         </div>
@@ -37,8 +37,8 @@ var CartService = {
                 };
                 if (data.length > 0) {
                     html += `<div class="col">
-                    <button style="width: auto" class="btn btn-success">Purchase Items from Cart</button>
-                    <button type="submit" style="width: auto" onclick="CartService.emptyCart()" class="btn btn-success">Empty Cart</button>
+                    <button style="width: auto; float: right; margin-left: 10px;" class="btn btn-success">Purchase Items from Cart</button>
+                    <button type="submit" style="width: auto; float: right;" onclick="CartService.emptyCart()" class="btn btn-success">Empty Cart</button>
                 </div>
                 `
                 }
