@@ -31,5 +31,11 @@ class OrderService extends BaseService {
         return $this->order_product_service->add($order_product);
         
     }
+
+    public function delete_by_product_id($product_id) {
+        return $this->dao->delete_by_product_id($product_id);
+    }
+
+    
 }
 ?>

@@ -42,7 +42,7 @@ var ProductService = {
             success: function (data) {
                 var html = "<div class='row'>";
                 for (var i = 0; i < data.length; i++) {
-                    html+= ` 
+                        html+= ` 
                         <div class="col-sm-4">
                             <div class="card mb-4 product-wap rounded-0">
                                 <div class="card rounded-0">
@@ -50,7 +50,8 @@ var ProductService = {
                                     <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                         <ul class="list-unstyled">
                                             <li><a class="btn btn-success text-white mt-2" onclick="showEditDialog(` + data[i].id + `);"><i class="far fa-eye"></i></a></li>
-                                             <li><a class="btn btn-success text-white mt-2" onclick="ChangeTab.goToProductPage(` + data[i].id + `);"><i class="fas fa-cart-plus"></i></a></li>
+                                            <li><a class="btn btn-success text-white mt-2" onclick="ChangeTab.goToProductPage(` + data[i].id + `);"><i class="fas fa-cart-plus"></i></a></li>
+                                            <li><button class="btn btn-success text-white mt-2" style="background-color: #fa6666 !important;" onclick="ProductService.deleteProduct(` + data[i].id + `);"><i class="fas fa-minus"></i></button></li>
                                         </ul>
                                     </div>
                                     <div class="card-body text-center">
@@ -59,8 +60,8 @@ var ProductService = {
                                     </div>
                                 </div>
                             </div>
-                        </div>`
-                }
+                        </div>`;
+                    }
                 $("#productContainer").html(html);
                 $("#productContainer").css({ "display": "block" })
             },
@@ -344,5 +345,19 @@ var ProductService = {
         });
     },
 
-
+    deleteProduct: function (product_id) {
+        $.ajax({
+          url: "rest/products/" + product_id,
+          method: "DELETE",
+          contentType: "application/json",
+    
+          success: function (result) {
+            toastr.success("Product has been deleted successfully");
+            ProductService.getProducts();
+          },
+          error: function (XMLHttpRequest, textStatus, errorThrown) {
+            toastr.error("Error! Product has not been deleted.");
+          },
+        });
+      },
 }

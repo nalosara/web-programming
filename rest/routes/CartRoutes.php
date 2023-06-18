@@ -59,9 +59,4 @@ Flight::route("DELETE /carts_by_user_and_product/@user_id/@product_id", function
 });
 
 
-
-/*
-Flight::route("GET /carts/@name/@status", function($name, $status){
-    echo "Hello from /carts route with name = " . $name . " and status = " . $status;
-})*/
 ?>

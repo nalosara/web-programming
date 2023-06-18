@@ -26,9 +26,6 @@ class CartDao extends BaseDao{
                             " AND product_id=:product_id", ['user_id' => $user_id, 'product_id' => $product_id]);
     }
 
-    public function delete_by_product_id($product_id) {
-        return $this->query("DELETE FROM carts WHERE product_id=:product_id",['product_id' => $product_id]);
-    }
 }
 
 ?>

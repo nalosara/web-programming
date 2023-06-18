@@ -35,8 +35,12 @@ Flight::route("DELETE /products/@id", function($id){
     Flight::json(['message' => "product deleted successfully"]);
 });
 
-
 /*
+Flight::route("GET /products/check/@id", function($id){
+    Flight::json(Flight::product_service()->check_if_exists_products($id));
+});
+
+
 Flight::route("GET /products_by_supplier/@supplier_id", function($supplier_id){
     Flight::json(Flight::product_service()->get_by_supplier_id($supplier_id));
 });
