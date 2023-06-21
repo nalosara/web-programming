@@ -426,6 +426,7 @@ var ProductService = {
             contentType: "application/json",
 
             success: function (data) {
+                console.log("Success: " + data);
             var html = "<div class='row'>";
                 for (var i = 0; i < data.length; i++) {
                     html+= ` 
@@ -451,7 +452,7 @@ var ProductService = {
                 $("#productContainer").css({ "display": "block" })
             },
             error: function (err) {
-                console.log(err.status);
+                console.log(err);
                 console.log("We have an error");
             }
         });

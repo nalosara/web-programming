@@ -121,7 +121,7 @@
                             <div class="row-container">
                                 <div style="float:left" id="categoryContainer"></div>
                                 <div style="float:left" id="supplierContainer"></div>
-                                <div style="float:left">
+                                <div style="float:left" id="orderContainer">
                                     <div class="dropdown" style="margin-left: 80px; margin-bottom: 20px;">
                                         <button id="button-order" class="btn btn-success"
                                             style="border-color: white !important; background-color: white !important;">
@@ -492,20 +492,24 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
 <script src="https://unpkg.com/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="bootstrap/assets/js/ChangeTab.js"></script>
-<script src="bootstrap/assets/js/ProductService.js"></script>
-<script src="bootstrap/assets/js/CartService.js"></script>
-<script src="bootstrap/assets/js/FormService.js"></script>
-<script src="bootstrap/assets/js/UserSevice.js"></script>
-<script src="bootstrap/assets/js/FilterService.js"></script>
+<script type="text/javascript" src="bootstrap/assets/js/ChangeTab.js"></script>
+<script type="text/javascript" src="bootstrap/assets/js/ProductService.js"></script>
+<script type="text/javascript" src="bootstrap/assets/js/CartService.js"></script>
+<script type="text/javascript" src="bootstrap/assets/js/FormService.js"></script>
+<script type="text/javascript" src="bootstrap/assets/js/UserSevice.js"></script>
+<script type="text/javascript" src="bootstrap/assets/js/FilterService.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function() {
     // Bind click event to search button within the modal
     $('#templatemo_search').on('click', '.input-group-text', function(event) {
-        event.preventDefault();
         $('#templatemo_search').hide();
+        $('div.modal-backdrop').hide();
+        $('body').css("overflow", "auto");
+        event.preventDefault();
         ProductService.searchByProductName();
+        FilterService.getSupplierFilters();
+        FilterService.getCategoryFilters();
         ChangeTab.goToShopPage();
         });
     });
@@ -932,7 +936,7 @@
     // Get the reference to the button element
     var addButton = document.getElementById("addproductbutton");
     var cartButton = document.getElementById("buttonCart");
-
+ 
     // Check the value of token.auth and update the button's style accordingly
     if (decodedToken.authorization == "authorized") {
         addButton.style.display = "block"; // Show the button

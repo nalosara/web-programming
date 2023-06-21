@@ -50,7 +50,7 @@ var FilterService = {
                         </button>
                     </div>`;
                 $("#supplierContainer").html(html);
-                $("#supplierContainer").css({ "display": "block" });
+                $("#categoryContainer").css({ "display": "block" });
             },
             error: function (err) {
                 console.log(err.status);
