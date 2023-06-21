@@ -21,7 +21,7 @@ class ProductDao extends BaseDao{
     }
 
     public function get_by_product_name($name) {
-        return $this->query("SELECT * FROM products WHERE products.name LIKE '%' || :name2 || '%'", ['name2' => $name]);
+        return $this->query("SELECT * FROM products WHERE products.name LIKE CONCAT('%', :name,'%') ", ['name' => $name]);
     }
 
     public function get_by_category_id($category_id) {
