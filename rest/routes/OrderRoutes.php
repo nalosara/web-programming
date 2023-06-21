@@ -25,6 +25,11 @@ Flight::route("POST /orders", function(){
     Flight::json(['message' => "order added successfully", 'data' => Flight::order_service()->add($request)]);
 });
 
+Flight::route("POST /orders_by_cart", function(){
+    $request = Flight::request()->data->getData();   
+    Flight::json(['message' => "order added successfully", 'data' => Flight::order_service()->add_by_user_id($request)]);
+});
+
 Flight::route("PUT /orders/@id", function($id){
     $order = Flight::request()->data->getData();    
     Flight::json(['message' => "order edited successfully", 'data' => Flight::order_service()->update($order, $id)]);

@@ -224,7 +224,9 @@ var ProductService = {
                 var buyButton = document.getElementById("buy_button");
                 buyButton.addEventListener("click", function(event) {
                     event.preventDefault();
-                    showSelectAddressDialog(data[0].id);
+                    quantity = document.getElementById('product-quantity-mod').value;
+                    total_price = quantity * data[0].price;
+                    showSelectAddressDialog(data[0].id, total_price);
                 });
             },
             error: function (err) {

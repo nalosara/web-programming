@@ -15,7 +15,8 @@ class OrderDao extends BaseDao{
         "JOIN products p ON p.id = op.product_id " .
         "WHERE o.user_id = :user_id " .
         "GROUP BY o.id ".
-        "LIMIT 10;", ['user_id' => $user_id]);
+        "ORDER BY o.id DESC ".
+        "LIMIT 5;", ['user_id' => $user_id]);
     }
     
 }
