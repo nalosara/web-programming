@@ -1,10 +1,5 @@
 <?php
 
-
-Flight::route("GET /products", function(){
-    Flight::json(Flight::product_service()->get_all());
-});
-
 Flight::route("GET /products", function(){
     $category = Flight::query("category");
     $supplier = Flight::query("supplier");

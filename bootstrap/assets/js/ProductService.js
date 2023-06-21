@@ -38,6 +38,10 @@ var ProductService = {
 
         const decodedToken = decodeToken(token);
 
+        FilterService.getCategoryFilters();
+        FilterService.getSupplierFilters();
+        FilterService.getPriceFilters();
+
         //make an ajax request to get the products
         $.ajax({
             url: 'rest/products',
@@ -145,9 +149,11 @@ var ProductService = {
 
     getProductsWithFilters: function () {
         //make an ajax request to get the products
-        var category = $("#dropdown-category").value;
-        var supplier = $("#dropdown-suppliers").value;
-        var order = $("#dropdown-order").value;
+        var category = $("#dropdown-category").children("option:selected").val();
+        var supplier = $("#dropdown-supplier").children("option:selected").val();
+        var order = $("#dropdown-order").children("option:selected").val();
+
+        console.log("category: " + category + " supplier: " + supplier + " order: " + order);
         
         $.ajax({
             url: 'rest/products?category=' + category + '&supplier=' + supplier + '&order=' + order,
@@ -155,6 +161,7 @@ var ProductService = {
             contentType: "application/json",
     
             success: function (data) {
+                console.log("data: " + data.size);
                 var html = "<div class='row'>";
                 for (var i = 0; i < data.length; i++) {
                     html+= ` 
