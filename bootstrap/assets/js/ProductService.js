@@ -59,7 +59,6 @@ var ProductService = {
                                     <img class="card-img rounded-3 img-fluid custom-img-size" src=` + data[i].image + `>
                                     <div class="card-img-overlay rounded-3 product-overlay d-flex align-items-center justify-content-center">
                                         <ul class="list-unstyled">
-                                            <li><a class="btn btn-success text-white mt-2" onclick="showEditDialog(` + data[i].id + `);"><i class="far fa-eye"></i></a></li>
                                             <li><a class="btn btn-success text-white mt-2" onclick="ChangeTab.goToProductPage(` + data[i].id + `);"><i class="fas fa-cart-plus"></i></a></li>
                                         </ul>
                                     </div>
@@ -80,8 +79,7 @@ var ProductService = {
                                     <img class="card-img rounded-3 img-fluid custom-img-size" src=` + data[i].image + `>
                                     <div class="card-img-overlay rounded-3 product-overlay d-flex align-items-center justify-content-center">
                                         <ul class="list-unstyled">
-                                            <li><a class="btn btn-success text-white mt-2" onclick="showEditDialog(` + data[i].id + `);"><i class="far fa-eye"></i></a></li>
-                                            <li><a class="btn btn-success text-white mt-2" onclick="ChangeTab.goToProductPage(` + data[i].id + `);"><i class="fas fa-cart-plus"></i></a></li>
+                                            <li><a class="btn btn-success text-white mt-2" onclick="showEditDialog(` + data[i].id + `);"><i class="far fa-edit"></i></a></li>
                                             <li><a class="btn btn-success text-white mt-2 align-items-center justify-content-center" style="background-color: #ff5252 !important; width: 45px !important; height: 45px !important;" onclick="ProductService.deleteProduct(` + data[i].id + `);"><i class="fas fa-trash"></i></a></li>
                                         </ul>
                                     </div>
