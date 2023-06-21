@@ -126,8 +126,8 @@
                                         <button id="button-order" class="btn btn-success"
                                             style="border-color: white !important; background-color: white !important;">
                                             <select class="form-select" id="dropdown-order" style="border-color:white;">
-                                                <option value="hightolow">High to Low</option>
-                                                <option value="lowtohigh">Low to High</option>
+                                                <option value="desc">High to Low</option>
+                                                <option value="asc">Low to High</option>
                                                 <option value="" selected disabled>Price</option>
                                         </button>
                                         </select>
@@ -141,7 +141,7 @@
                                 class="btn btn-secondary btn-lg px-3">View</button>
                         </div>
                         <div class="col text-end mt-2" style="margin-bottom: 40px; margin-left: 20px;">
-                            <button type="submit"
+                            <button type="submit" onclick="ProductService.getProducts()"
                                 style="background-color: lightgrey; font-size: small; border-color: white; color: black;"
                                 class="btn btn-secondary btn-lg px-3">Reset</button>
                         </div>
