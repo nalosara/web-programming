@@ -33,6 +33,10 @@ var ProductService = {
     },
 
     getProducts: function () {
+        var token = localStorage.getItem("user_token");
+
+        const decodedToken = decodeToken(token);
+
         //make an ajax request to get the products
         $.ajax({
             url: 'rest/products',
@@ -41,17 +45,17 @@ var ProductService = {
     
             success: function (data) {
                 var html = "<div class='row'>";
-                for (var i = 0; i < data.length; i++) {
+                if(decodedToken.authorization == "unauthorized") {
+                    for (var i = 0; i < data.length; i++) {
                         html+= ` 
                         <div class="col-sm-4">
-                            <div class="card mb-4 product-wap rounded-0">
-                                <div class="card rounded-0">
-                                    <img class="card-img rounded-0 img-fluid custom-img-size" src=` + data[i].image + `>
-                                    <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                            <div class="card mb-4 product-wap rounded-3">
+                                <div class="card rounded-3">
+                                    <img class="card-img rounded-3 img-fluid custom-img-size" src=` + data[i].image + `>
+                                    <div class="card-img-overlay rounded-3 product-overlay d-flex align-items-center justify-content-center">
                                         <ul class="list-unstyled">
                                             <li><a class="btn btn-success text-white mt-2" onclick="showEditDialog(` + data[i].id + `);"><i class="far fa-eye"></i></a></li>
                                             <li><a class="btn btn-success text-white mt-2" onclick="ChangeTab.goToProductPage(` + data[i].id + `);"><i class="fas fa-cart-plus"></i></a></li>
-                                            <li><button class="btn btn-success text-white mt-2" style="background-color: #fa6666 !important;" onclick="ProductService.deleteProduct(` + data[i].id + `);"><i class="fas fa-minus"></i></button></li>
                                         </ul>
                                     </div>
                                     <div class="card-body text-center">
@@ -62,6 +66,30 @@ var ProductService = {
                             </div>
                         </div>`;
                     }
+                } else {
+                    for (var i = 0; i < data.length; i++) {
+                        html+= ` 
+                        <div class="col-sm-4">
+                            <div class="card mb-4 product-wap rounded-3">
+                                <div class="card rounded-3">
+                                    <img class="card-img rounded-3 img-fluid custom-img-size" src=` + data[i].image + `>
+                                    <div class="card-img-overlay rounded-3 product-overlay d-flex align-items-center justify-content-center">
+                                        <ul class="list-unstyled">
+                                            <li><a class="btn btn-success text-white mt-2" onclick="showEditDialog(` + data[i].id + `);"><i class="far fa-eye"></i></a></li>
+                                            <li><a class="btn btn-success text-white mt-2" onclick="ChangeTab.goToProductPage(` + data[i].id + `);"><i class="fas fa-cart-plus"></i></a></li>
+                                            <li><a class="btn btn-success text-white mt-2 align-items-center justify-content-center" style="background-color: #ff5252 !important; width: 45px !important; height: 45px !important;" onclick="ProductService.deleteProduct(` + data[i].id + `);"><i class="fas fa-trash"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <a href="shop-single.html" class="h3 text-decoration-none">` + data[i].name + `</a>
+                                        <p class="mb-0">$` + data[i].price +`</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+                    }
+                }
+                
                 $("#productContainer").html(html);
                 $("#productContainer").css({ "display": "block" })
             },
@@ -75,9 +103,9 @@ var ProductService = {
 
     getProductsWithFilters: function () {
         //make an ajax request to get the products
-        var category = $("#dropdown-category").val();
-        var supplier = $("#dropdown-suppliers").val();
-        var order = $("#dropdown-order").val();
+        var category = $("#dropdown-category").value;
+        var supplier = $("#dropdown-suppliers").value;
+        var order = $("#dropdown-order").value;
         
         $.ajax({
             url: 'rest/products?category=' + category + '&supplier=' + supplier + '&order=' + order,
@@ -86,14 +114,13 @@ var ProductService = {
     
             success: function (data) {
                 var html = "<div class='row'>";
-                // TO DO: You have to clear the previous html first!
                 for (var i = 0; i < data.length; i++) {
                     html+= ` 
                         <div class="col-sm-4">
-                            <div class="card mb-4 product-wap rounded-0">
-                                <div class="card rounded-0">
-                                    <img class="card-img rounded-0 img-fluid custom-img-size" src=` + data[i].image + `>
-                                    <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                            <div class="card mb-4 product-wap rounded-3">
+                                <div class="card rounded-3">
+                                    <img class="card-img rounded-3 img-fluid custom-img-size" src=` + data[i].image + `>
+                                    <div class="card-img-overlay rounded-3 product-overlay d-flex align-items-center justify-content-center">
                                         <ul class="list-unstyled">
                                             <li><a class="btn btn-success text-white mt-2" onclick="showEditDialog(` + data[i].id + `);"><i class="far fa-eye"></i></a></li>
                                              <li><a class="btn btn-success text-white mt-2" onclick="ChangeTab.goToProductPage(` + data[i].id + `);"><i class="fas fa-cart-plus"></i></a></li>
@@ -347,6 +374,48 @@ var ProductService = {
         });
     },
 
+    searchByProductName: function () {
+        //make an ajax request to search the products
+        var searchInput = document.getElementById("inputModalSearch").value;
+        
+        $.ajax({
+            url: 'rest/products_by_name/' + searchInput,
+            method: "GET",
+            contentType: "application/json",
+
+            success: function (data) {
+            var html = "<div class='row'>";
+                for (var i = 0; i < data.length; i++) {
+                    html+= ` 
+                        <div class="col-sm-4">
+                            <div class="card mb-4 product-wap rounded-3">
+                                <div class="card rounded-3">
+                                    <img class="card-img rounded-3 img-fluid custom-img-size" src=` + data[i].image + `>
+                                        <div class="card-img-overlay rounded-3 product-overlay d-flex align-items-center justify-content-center">
+                                            <ul class="list-unstyled">
+                                                <li><a class="btn btn-success text-white mt-2" onclick="showEditDialog(` + data[i].id + `);"><i class="far fa-eye"></i></a></li>
+                                                 <li><a class="btn btn-success text-white mt-2" onclick="ChangeTab.goToProductPage(` + data[i].id + `);"><i class="fas fa-cart-plus"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="card-body text-center">
+                                            <a href="shop-single.html" class="h3 text-decoration-none">` + data[i].name + `</a>
+                                            <p class="mb-0">$` + data[i].price +`</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`
+                }
+                $("#productContainer").html(html);
+                $("#productContainer").css({ "display": "block" })
+            },
+            error: function (err) {
+                console.log(err.status);
+                console.log("We have an error");
+            }
+        });
+    
+    },
+
     deleteProduct: function (product_id) {
         $.ajax({
           url: "rest/products/" + product_id,
@@ -362,4 +431,14 @@ var ProductService = {
           },
         });
       },
+}
+
+function decodeToken(token) {
+    try {
+      const decodedToken = jwt_decode(token);
+      return decodedToken;
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
 }

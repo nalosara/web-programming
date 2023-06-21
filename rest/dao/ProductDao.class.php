@@ -20,6 +20,10 @@ class ProductDao extends BaseDao{
 
     }
 
+    public function get_by_product_name($name) {
+        return $this->query("SELECT * FROM products WHERE products.name LIKE '%' || :name2 || '%'", ['name2' => $name]);
+    }
+
     public function get_by_category_id($category_id) {
         return $this->query("SELECT * FROM products WHERE category_id=:category_id",
         ['category_id' => $category_id]);

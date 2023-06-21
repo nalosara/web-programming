@@ -16,7 +16,7 @@ var CartService = {
                     total_price += data[i].product_price * data[i].quantity;
                     html+= ` 
                     <div class="row">
-                        <div class="card mb-4 rounded-0" style="margin-left: 50px; margin-right: 50px;">
+                        <div class="card mb-4 rounded-3" style="margin-left: 50px; margin-right: 50px;">
                             <div class="row align-items-center">
                                 <div class="col">
                                     <img style="width: auto" class="card-img rounded-0 img-fluid cart-img-size" src=` + data[i].product_image + `>

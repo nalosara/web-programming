@@ -40,6 +40,10 @@ class ProductService extends BaseService {
         }
     }
 
+    public function get_by_product_name($name) {
+        return $this->dao->get_by_product_name($name);
+    }
+
     public function get_by_category_id($category_id) {
         return $this->dao->get_by_category_id($category_id);
     }

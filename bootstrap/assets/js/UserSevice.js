@@ -144,7 +144,7 @@ var UserService = {
         for (var i = 0; i < data.length; i++) {
           html +=
             `<div class="row" style="margin-right: 50px;">
-              <div class="card mb-4 rounded-0">
+              <div class="card mb-4 rounded-3">
                   <div>
                       <div class="col">
                           <p style="width: 200px;" class="mb-0"><b>Order Date: </b> ` +
@@ -186,7 +186,7 @@ var UserService = {
         for (var i = 0; i < data.length; i++) {
           html +=
             `<div class="row" style="margin-left: 50px; margin-right: 50px;">
-              <div class="card mb-4 rounded-0">
+              <div class="card mb-4 rounded-3">
                   <div class="row align-items-center">
                       <div class="col">
                           <p style="width: auto" class="mb-0"><b>Address Name:</b> ` +

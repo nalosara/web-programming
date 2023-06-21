@@ -22,7 +22,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="bootstrap/assets/css/fontawesome.min.css">
-
+    
 
 </head>
 
@@ -86,12 +86,14 @@
                         data-bs-target="#templatemo_search">
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#cart"
+                    
+                    <a id="buttonCart" class="nav-icon position-relative text-decoration-none" href="#cart"
                         onclick="ChangeTab.goToCartPage(localStorage.getItem('user_token'));">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
                         <span
                             class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
                     </a>
+                    
                     <a class="nav-icon position-relative text-decoration-none" href="#user"
                         onclick="ChangeTab.goToUserPage(localStorage.getItem('user_token'));">
                         <i class="fa fa-fw fa-user text-dark mr-3"></i>
@@ -117,63 +119,17 @@
                         <h5 class="h5 pb-4">FILTER</h5>
                         <ul class="list-unstyled templatemo-accordion">
                             <div class="row-container">
+                                <div style="float:left" id="categoryContainer"></div>
+                                <div style="float:left" id="supplierContainer"></div>
                                 <div style="float:left">
                                     <div class="dropdown" style="margin-left: 80px; margin-bottom: 20px;">
-                                        <select class="form-select" id="dropdown-category" style="border-color:white;">
-                                            <ul class="dropdown-menu" aria-labelledby="dropdown-category">
-                                                <li>
-                                                    <option value="hearingAids">Hearing Aids</option>
-                                                </li>
-                                                <li>
-                                                    <option value="technology">Technology</option>
-                                                </li>
-                                                <li>
-                                                    <option value="wheelchairs">Wheelchairs</option>
-                                                </li>
-                                                <li>
-                                                    <option value="canes">Canes</option>
-                                                </li>
-                                                <li>
-                                                    <option value="" selected disabled>Category</option>
-                                                </li>
-                                            </ul>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div style="float:left">
-                                    <div class="dropdown" style="margin-left: 80px; margin-bottom: 20px;">
-                                        <select class="form-select" id="dropdown-supplier" style="border-color:white;">
-                                            <ul class="dropdown-menu" aria-labelledby="dropdown-supplier">
-                                                <li>
-                                                    <option value="bemytech">BeMyTECH</option>
-                                                </li>
-                                                <li>
-                                                    <option value="eargo">Eargo</option>
-                                                </li>
-                                                <li>
-                                                    <option value="irisvision">IrisVision</option>
-                                                </li>
-                                                <li>
-                                                    <option value="" selected disabled>Supplier</option>
-                                                </li>
-                                            </ul>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div style="float:left">
-                                    <div class="dropdown" style="margin-left: 80px; margin-bottom: 20px;">
-                                        <select class="form-select" id="dropdown-order" style="border-color:white;">
-                                            <ul class="dropdown-menu" aria-labelledby="dropdown-order">
-                                                <li>
-                                                    <option value="hightolow">High to Low</option>
-                                                </li>
-                                                <li>
-                                                    <option value="lowtohigh">Low to High</option>
-                                                </li>
-                                                <li>
-                                                    <option value="" selected disabled>Price</option>
-                                                </li>
-                                            </ul>
+                                        <button id="button-order" class="btn btn-success"
+                                            style="border-color: white !important; background-color: white !important;">
+                                            <select class="form-select" id="dropdown-order" style="border-color:white;">
+                                                <option value="hightolow">High to Low</option>
+                                                <option value="lowtohigh">Low to High</option>
+                                                <option value="" selected disabled>Price</option>
+                                        </button>
                                         </select>
                                     </div>
                                 </div>
@@ -184,15 +140,16 @@
                                 style="background-color: lightgrey; font-size: small; border-color: white; color: black;"
                                 class="btn btn-secondary btn-lg px-3">View</button>
                         </div>
-                        <div class="col text-end mt-2" style="margin-bottom: 40px;">
+                        <div class="col text-end mt-2" style="margin-bottom: 40px; margin-left: 20px;">
                             <button type="submit"
                                 style="background-color: lightgrey; font-size: small; border-color: white; color: black;"
                                 class="btn btn-secondary btn-lg px-3">Reset</button>
                         </div>
                     </div>
 
-                    <div>
-                        <button id="addproductbutton" class=" btn-success">Add product</button>
+                    <div id="buttoncontainer">
+                        <button id="addproductbutton" style="float: right; margin-right: -100px; font-size: small;"
+                            class=" btn-success">Add product</button>
                     </div>
 
                 </div>
@@ -496,7 +453,7 @@
     <div id="CartDiv" style="display:none">
 
         <div id="cartContainer"></div>
-        
+
     </div>
 
     <div id="UserDiv" style="display:none">
@@ -529,6 +486,7 @@
 <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="node_modules/jwt-decode/build/jwt-decode.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
 <script src="https://unpkg.com/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
@@ -537,7 +495,19 @@
 <script src="bootstrap/assets/js/CartService.js"></script>
 <script src="bootstrap/assets/js/FormService.js"></script>
 <script src="bootstrap/assets/js/UserSevice.js"></script>
+<script src="bootstrap/assets/js/FilterService.js"></script>
 
+<script type="text/javascript">
+    $(document).ready(function() {
+    // Bind click event to search button within the modal
+    $('#templatemo_search').on('click', '.input-group-text', function(event) {
+        event.preventDefault();
+        $('#templatemo_search').hide();
+        ProductService.searchByProductName();
+        ChangeTab.goToShopPage();
+        });
+    });
+</script>
 
 <!-- Search Modal -->
 <!-- Modal -->
@@ -549,7 +519,7 @@
         </div>
         <form action="" method="get" class="modal-content modal-body border-0 p-0">
             <div class="input-group mb-2">
-                <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
+                <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search for products...">
                 <button type="submit" class="input-group-text bg-success text-light">
                     <i class="fa fa-fw fa-search text-white"></i>
                 </button>
@@ -557,6 +527,8 @@
         </form>
     </div>
 </div>
+
+
 
 <!-- Edit Product Modal -->
 <!-- Modal -->
@@ -790,6 +762,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
+
                     <div class="form-group">
                         <input type="hidden" id="selected-address-id" name="selected_address_id" value="">
                         <input type="hidden" id="selected_product_id" name="selected_product_id" value="">
@@ -864,6 +837,24 @@
 </script>
 
 
+<!-- DECODING TOKEN TO CHECK WHETHER TO SHOW A BUTTON BASED ON AUTH -->
+<script>
+    // Assuming you have the `token` object with the `auth` property
+    var token = localStorage.getItem("user_token");
+    var decodedToken = jwt_decode(token);
+    // Get the reference to the button element
+    var addButton = document.getElementById("addproductbutton");
+    var cartButton = document.getElementById("buttonCart");
+
+    // Check the value of token.auth and update the button's style accordingly
+    if (decodedToken.authorization == "authorized") {
+        addButton.style.display = "block"; // Show the button
+        cartButton.style.display = "block";
+    } else {
+        addButton.style.display = "none"; // Hide the button
+        cartButton.style.display = "none";
+    }
+</script>
 
 <script>
     var nav =
@@ -871,7 +862,7 @@
         '<a class="nav-link" href="#home" onclick="ChangeTab.goToHomePage();" >Home</a>' +
         "</li>" +
         '<li class="nav-item">' +
-        '<a class="nav-link" href="#shop" onclick="ChangeTab.goToShopPage(); ProductService.getProducts();">Shop</a>' +
+        '<a class="nav-link" href="#shop" onclick="ChangeTab.goToShopPage(); ProductService.getProducts(); FilterService.getCategoryFilters(); FilterService.getSupplierFilters();">Shop</a>' +
         "</li>" +
         '<li class="nav-item">' +
         '<a class="nav-link" href="#about" onclick="ChangeTab.goToAboutPage();">About</a>' +
