@@ -148,12 +148,12 @@
                     </div>
 
                     <div id="buttoncontainer">
-                        <button id="addProductButton" onclick="showAddDialog(` + data[i].id + `);" style="float: left; margin-right: -100px; font-size: small;"
+                        <button id="addProductButton" onclick="showAddDialog();" style="float: left; margin-right: -100px; font-size: small;"
                             class=" btn-success">Add product</button>
                     </div>
 
                 </div>
-                <div id="productContainer"></div>
+                <div id="productContainer"></div>   
 
             </div>
         </div>
@@ -667,7 +667,7 @@
                 <div class="error"><span></span></div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" onclick="ProductService.addProduct()" class="btn btn-success">
+                    <button type="submit" class="btn btn-success">
                         Add
                     </button>
                 </div>
@@ -678,12 +678,12 @@
 
 <script type="text/javascript">
 
-    function showAddDialog(id) {
-        //$("#editProductModal").modal("show");
+  /*  function showAddDialog() {
+       
         $(document).ready(function () { $("#addProductModal").modal('show'); });
         $("#addModalSpinner").show();
         $("#addProductForm").hide();
-        $.get("rest/products/" + id, function (data) {
+        $.post("rest/products/", function (data) {
             console.log(data[0]);
             console.log(data[0].id);
             $("#add_name").val(data[0].name);
@@ -697,7 +697,51 @@
             $("#addModalSpinner").hide();
             $("#addProductForm").show();
         });
-    }
+    }*/
+
+    function showAddDialog(id) {
+   
+    $(document).ready(function () {
+    $("#addProductForm").submit(function (event) {
+        event.preventDefault(); // Prevent the default form submission
+        ProductService.addProducts(); // Call the addProducts function
+    });
+});
+
+ $(document).ready(function () {
+        $("#addProductModal").modal('show');
+    });
+    $("#addModalSpinner").show();
+    $("#addProductForm").hide();
+
+    // Prepare the data to be sent
+    var productData = {
+        name: $("#add_name").val(),
+        description: $("#add_description").val(),
+        price: $("#add_price").val(),
+        category_id: $("#add_category").val(),
+        supplier_id: $("#add_supplier").val(),
+        quantity_in_stock: $("#add_quantity_in_stock").val(),
+        image: $("#add_image").val()
+    };
+
+    // Send the data via POST request
+    $.post("rest/products/", productData)
+        .done(function (result) {
+            toastr.success("Product has been added successfully");
+            $("#addProductModal").modal("toggle");
+            ChangeTab.goToShopPage();
+            ProductService.getProducts();
+        })
+        .fail(function (error) {
+            toastr.error("Error! Product has not been added.");
+        })
+        .always(function () {
+            $("#addModalSpinner").hide();
+            $("#addProductForm").show();
+        });
+}
+
 
 </script>
 
@@ -938,7 +982,7 @@
         addButton.style.display = "block"; // Show the button
         cartButton.style.display = "block";
     } else {
-        addButton.style.display = "none"; // Hide the button
+       // addButton.style.display = "none"; // Hide the button
         cartButton.style.display = "none";
     }
 </script>

@@ -117,7 +117,7 @@ var ProductService = {
                 };
                 console.log(data);
                 $.ajax({
-                url: "rest/products/" + $("#add_product_id").val(),
+                url: "rest/products/",
                 type: "POST",
                 data: JSON.stringify(data),
                 contentType: "application/json",
