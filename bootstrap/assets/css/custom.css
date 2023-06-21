@@ -265,5 +265,16 @@ font-weight: 700;
 	margin-top: 30px
 }
 
+#teamscontainer {
+	justify-content: center;
+	width: 100%;
+	margin-left: 655px;
+	margin-top: 50px;
+}
+
+.member-img {
+	height: 200px;
+}
+
 
 

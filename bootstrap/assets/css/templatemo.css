@@ -297,7 +297,7 @@ ul {
 @media (min-width: 1200px) {}
 
 /*add product button*/
-#addproductbutton {
+#addProductButton {
 	background-color: #6a86a0b5;
 	color: white;
 	text-align: center;
@@ -312,6 +312,6 @@ ul {
 	width: 15%;
   }
 
-  #addproductbutton:active {
+  #addProductButton:active {
     background-color: rgb(47, 65, 72);
   }
