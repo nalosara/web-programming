@@ -31,6 +31,7 @@ var ProductService = {
             },
         });
     },
+    
 
     getProducts: function () {
         var token = localStorage.getItem("user_token");
@@ -100,6 +101,47 @@ var ProductService = {
         });
     
     },
+
+    addProducts: function () {
+       
+        $("#addProductForm").validate({
+            submitHandler: function (form, validator) {
+                data = {
+                name: $("#add_name").val(),
+                description: $("#add_description").val(),
+                price: $("#add_price").val(),
+                category_id: $("#add_category").val(),
+                supplier_id: $("#add_supplier").val(),
+                quantity_in_stock: $("#add_quantity_in_stock").val(),
+                image: $("#add_image").val(),
+                };
+                console.log(data);
+                $.ajax({
+                url: "rest/products/" + $("#add_product_id").val(),
+                type: "POST",
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                dataType: "json",
+                success: function (result) {
+                    toastr.success("Product has been added successfully");
+                    $("#addProductModal").modal("toggle");
+                    ChangeTab.goToShopPage();
+                    ProductService.getProducts();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    toastr.error("Error! Product has not been added.");
+                },
+                });
+            },
+        });
+        
+
+    },
+
+   
+   
+ 
+  
 
     getProductsWithFilters: function () {
         //make an ajax request to get the products

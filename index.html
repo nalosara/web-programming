@@ -148,7 +148,7 @@
                     </div>
 
                     <div id="buttoncontainer">
-                        <button id="addproductbutton" style="float: right; margin-right: -100px; font-size: small;"
+                        <button id="addProductButton" onclick="showAddDialog(` + data[i].id + `);" style="float: left; margin-right: -100px; font-size: small;"
                             class=" btn-success">Add product</button>
                     </div>
 
@@ -614,6 +614,91 @@
     }
 
 </script>
+
+<!--Add product modal -->
+<div class="modal fade" id="addProductModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" id="addProductModalContent">
+            <div class="spinner-border" id="addModalSpinner" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <form id="addProductForm">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Product</h4>
+                    <button type="button" class="close" data-bs-dismiss="modal">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input id="add_product_id" name="add_product_id" hidden />
+                        <label for="name">Name:</label>
+                        <input type="text" id="add_name" name="name" required class="form-control" />
+                    </div>
+                    <div>
+                        <label for="description">Description:</label>
+                        <input type="text" id="add_description" name="description" required class="form-control" />
+                    </div>
+                    <div>
+                        <label for="price">Price:</label>
+                        <input type="number" id="add_price" name="price" required class="form-control" />
+                    </div>
+                    <div>
+                        <label for="category">Category:</label>
+                        <input type="number" id="add_category" name="category" required class="form-control" />
+                    </div>
+                    <div>
+                        <label for="supplier">Supplier:</label>
+                        <input type="number" id="add_supplier" name="supplier" required class="form-control" />
+                    </div>
+                    <div>
+                        <label for="quantity_in_stock">Quantity in Stock:</label>
+                        <input type="number" id="add_quantity_in_stock" name="quantity_in_stock" required
+                            class="form-control" />
+                    </div>
+                    <div>
+                        <label for="image">Image URL:</label>
+                        <input type="text" id="add_image" name="image" required class="form-control" />
+                    </div>
+                </div>
+                <div class="error"><span></span></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" onclick="ProductService.addProduct()" class="btn btn-success">
+                        Add
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function showAddDialog(id) {
+        //$("#editProductModal").modal("show");
+        $(document).ready(function () { $("#addProductModal").modal('show'); });
+        $("#addModalSpinner").show();
+        $("#addProductForm").hide();
+        $.get("rest/products/" + id, function (data) {
+            console.log(data[0]);
+            console.log(data[0].id);
+            $("#add_name").val(data[0].name);
+            $("#add_description").val(data[0].description);
+            $("#add_price").val(data[0].price);
+            $("#add_category").val(data[0].category_id);
+            $("#add_supplier").val(data[0].supplier_id);
+            $("#add_quantity_in_stock").val(data[0].quantity_in_stock);
+            $("#add_image").val(data[0].image);
+            $("#add_product_id").val(data[0].id);
+            $("#addModalSpinner").hide();
+            $("#addProductForm").show();
+        });
+    }
+
+</script>
+
 
 <!-- Add Address Modal -->
 <!-- Modal -->
