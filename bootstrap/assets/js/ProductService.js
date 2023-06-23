@@ -118,22 +118,25 @@ var ProductService = {
                 image: $("#add_image").val(),
                 };
                 console.log(data);
-                $.ajax({
+                $.ajax({    
                 url: "rest/products/",
                 type: "POST",
                 data: JSON.stringify(data),
                 contentType: "application/json",
                 dataType: "json",
-                success: function (result) {
+                
+                /*success: function (result) {
                     toastr.success("Product has been added successfully");
                     $("#addProductModal").modal("toggle");
                     ChangeTab.goToShopPage();
                     ProductService.getProducts();
+                  
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     toastr.error("Error! Product has not been added.");
-                },
+                },*/
                 });
+                
             },
         });
         
