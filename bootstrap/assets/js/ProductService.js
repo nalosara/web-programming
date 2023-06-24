@@ -6,9 +6,8 @@ var ProductService = {
                 name: $("#edit_name").val(),
                 description: $("#edit_description").val(),
                 price: $("#edit_price").val(),
-                category_id: $("#edit_category").val(),
-                supplier_id: $("#edit_supplier").val(),
-                quantity_in_stock: $("#edit_quantity_in_stock").val(),
+                category_id: $("#edit_category_select").val(),
+                supplier_id: $("#edit_supplier_select").val(),
                 image: $("#edit_image").val(),
                 };
                 console.log(data);
@@ -32,7 +31,8 @@ var ProductService = {
                     ProductService.getProducts();
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    toastr.error("Error! Product has not been updated.");
+                    var response = JSON.parse(XMLHttpRequest.responseText);
+                    toastr.error(response.message);
                 },
                 });
             },
@@ -126,14 +126,13 @@ var ProductService = {
                 name: $("#add_name").val(),
                 description: $("#add_description").val(),
                 price: $("#add_price").val(),
-                category_id: $("#add_category").val(),
-                supplier_id: $("#add_supplier").val(),
-                quantity_in_stock: $("#add_quantity_in_stock").val(),
+                category_id: $("#add_category_select").val(),
+                supplier_id: $("#add_supplier_select").val(),
                 image: $("#add_image").val(),
                 };
                 console.log(data);
-                $.ajax({
-                url: "rest/products/",
+                $.ajax({    
+                url: "rest/products",
                 type: "POST",
                 beforeSend: function (xhr) {
                     console.log(localStorage.getItem("user_token"))
@@ -145,21 +144,75 @@ var ProductService = {
                 data: JSON.stringify(data),
                 contentType: "application/json",
                 dataType: "json",
+            
                 success: function (result) {
                     toastr.success("Product has been added successfully");
                     $("#addProductModal").modal("toggle");
                     ChangeTab.goToShopPage();
                     ProductService.getProducts();
+                    form.reset();
+                  
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    toastr.error("Error! Product has not been added.");
+                    var response = JSON.parse(XMLHttpRequest.responseText);
+                    toastr.error(response.message);
                 },
                 });
+                
             },
         });
         
 
     },
+
+    addSupplier: function (entity) {
+        $.ajax({
+          url: "rest/suppliers",
+          type: "POST",
+          data: JSON.stringify(entity),
+          contentType: "application/json",
+          dataType: "json",
+          success: function (result) {
+            toastr.success("Supplier has been added successfully.");
+            localStorage.setItem("user_token", result.token);
+            window.location.replace("index.html");
+          },
+          error: function (XMLHttpRequest, textStatus, errorThrown) {
+            toastr.error("Error! Supplier has not been added. ");
+          },
+        });
+      },
+
+      addSupplierButton: function () {
+        $("#addSupplierForm").validate({
+          submitHandler: function (form, validator) {
+            data = {
+              name: $("#add_name").val(),
+             
+            };
+            console.log(data);
+            $.ajax({
+              url: "rest/suppliers",
+              type: "POST",
+              data: JSON.stringify(data),
+              contentType: "application/json",
+              dataType: "json",
+              success: function (result) {
+                toastr.success("Supplier has been added successfully");
+                $("#addSupplierModal").modal("toggle");
+                ChangeTab.goToUserPage(localStorage.getItem("user_token"));
+              },
+              error: function (XMLHttpRequest, textStatus, errorThrown) {
+                var response = JSON.parse(XMLHttpRequest.responseText);
+                toastr.error(response.message);
+              },
+            });
+          },
+        });
+      },
+   
+ 
+  
 
     getProductsWithFilters: function () {
         //make an ajax request to get the products

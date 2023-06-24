@@ -12,8 +12,5 @@ class UserService extends BaseService {
         return $this->dao->get_user_by_email($email);
     }
 
-    public function get_authorization($userId) {
-        return $this->dao->get_authorization($userId);
-    }
 }
 ?>

@@ -142,6 +142,13 @@
                     <div id="buttoncontainer" style="margin-right: -100px;">
                         <button id="addProductButton" onclick="showAddDialog();" style="font-size: small; margin-bottom: 20px; float: right;"
                             class="btn btn-success">Add product</button>
+                    <div id="buttoncontainer">
+                        <button id="addProductButton" onclick="showAddDialog();" style="float: left; margin-right: -100px; font-size: small;"
+                            class=" btn-success">Add product</button>
+                            <button id="addProductButton" onclick="showAddSupplierDialog();" style=" margin-left: 110px; font-size: small;"
+                            class=" btn-success">Add Supplier</button>
+                            <button id="addProductButton" onclick="showAddCategoryDialog();"  style="margin-left: 10px; font-size: small;"
+                            class=" btn-success">Add Category</button>
                     </div>
 
                 </div>
@@ -272,7 +279,7 @@
             </div>
         </section>
 
-        <div id="teamscontainer">
+        <div id="teamscontainer" style="margin-left: 650px;">
             <h3>OUR TEAM</h3>
         </div>
         
@@ -495,16 +502,24 @@
     $(document).ready(function() {
     // Bind click event to search button within the modal
     $('#templatemo_search').on('click', '.input-group-text', function(event) {
-        $('#templatemo_search').hide();
-        $('div.modal-backdrop').hide();
-        $('body').css("overflow", "auto");
         event.preventDefault();
+
         ProductService.searchByProductName();
         FilterService.getSupplierFilters();
         FilterService.getCategoryFilters();
         ChangeTab.goToShopPage();
-        });
+        
+        // Clear the search input
+        $('#inputModalSearch').val('');
+        
+        // Close the modal
+        $('#templatemo_search').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+        $('body').css("overflow", "auto");
     });
+});
+
 </script>
 
 <script>
@@ -566,17 +581,14 @@
                         <input type="number" id="edit_price" name="price" required class="form-control" />
                     </div>
                     <div>
-                        <label for="category">Category:</label>
-                        <input type="number" id="edit_category" name="category" required class="form-control" />
+                        <label>Category:</label>
+                        <select name="edit_category_select" id="edit_category_select" class="form-control required">
+                        </select>
                     </div>
                     <div>
-                        <label for="supplier">Supplier:</label>
-                        <input type="number" id="edit_supplier" name="supplier" required class="form-control" />
-                    </div>
-                    <div>
-                        <label for="quantity_in_stock">Quantity in Stock:</label>
-                        <input type="number" id="edit_quantity_in_stock" name="quantity_in_stock" required
-                            class="form-control" />
+                        <label>Supplier:</label>
+                        <select name="edit_supplier_select" id="edit_supplier_select" class="form-control required">
+                        </select>
                     </div>
                     <div>
                         <label for="image">Image URL:</label>
@@ -598,21 +610,35 @@
 <script type="text/javascript">
 
     function showEditDialog(id) {
+        
         //$("#editProductModal").modal("show");
         $(document).ready(function () { $("#editProductModal").modal('show'); });
         $("#editModalSpinner").show();
         $("#editProductForm").hide();
         $.get("rest/products/" + id, function (data) {
+            console.log(data);
+            let categories_select = '';
+                for (let i = 0; i < data.categories.length; i++){
+                    categories_select +=`<option value="${data.categories[i].id}">${data.categories[i].name}
+                    </option>`
+                }
+            $('#edit_category_select').html(categories_select);
+
+            let suppliers_select = '';
+                for (let i = 0; i < data.suppliers.length; i++){
+                    suppliers_select += `<option value="${data.suppliers[i].id}">${data.suppliers[i].name}
+                    </option>`
+                }
+            $('#edit_supplier_select').html(suppliers_select);
             console.log(data[0]);
             console.log(data[0].id);
             $("#edit_name").val(data[0].name);
             $("#edit_description").val(data[0].description);
             $("#edit_price").val(data[0].price);
-            $("#edit_category").val(data[0].category_id);
-            $("#edit_supplier").val(data[0].supplier_id);
-            $("#edit_quantity_in_stock").val(data[0].quantity_in_stock);
             $("#edit_image").val(data[0].image);
             $("#edit_product_id").val(data[0].id);
+            $('#edit_category_select').val(data[0].category_id);
+            $('#edit_supplier_select').val(data[0].supplier_id);
             $("#editModalSpinner").hide();
             $("#editProductForm").show();
         });
@@ -650,17 +676,14 @@
                         <input type="number" id="add_price" name="price" required class="form-control" />
                     </div>
                     <div>
-                        <label for="category">Category:</label>
-                        <input type="number" id="add_category" name="category" required class="form-control" />
+                        <label>Category:</label>
+                        <select name="add_category_select" id="add_category_select" class="form-control required">
+                        </select>
                     </div>
                     <div>
-                        <label for="supplier">Supplier:</label>
-                        <input type="number" id="add_supplier" name="supplier" required class="form-control" />
-                    </div>
-                    <div>
-                        <label for="quantity_in_stock">Quantity in Stock:</label>
-                        <input type="number" id="add_quantity_in_stock" name="quantity_in_stock" required
-                            class="form-control" />
+                        <label>Supplier:</label>
+                        <select name="add_supplier_select" id="add_supplier_select" class="form-control required">
+                        </select>
                     </div>
                     <div>
                         <label for="image">Image URL:</label>
@@ -670,7 +693,7 @@
                 <div class="error"><span></span></div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success">
+                    <button type="submit" onclick="ProductService.addProducts()" class="btn btn-success">
                         Add
                     </button>
                 </div>
@@ -681,70 +704,82 @@
 
 <script type="text/javascript">
 
-  /*  function showAddDialog() {
-       
-        $(document).ready(function () { $("#addProductModal").modal('show'); });
-        $("#addModalSpinner").show();
-        $("#addProductForm").hide();
-        $.post("rest/products/", function (data) {
-            console.log(data[0]);
-            console.log(data[0].id);
-            $("#add_name").val(data[0].name);
-            $("#add_description").val(data[0].description);
-            $("#add_price").val(data[0].price);
-            $("#add_category").val(data[0].category_id);
-            $("#add_supplier").val(data[0].supplier_id);
-            $("#add_quantity_in_stock").val(data[0].quantity_in_stock);
-            $("#add_image").val(data[0].image);
-            $("#add_product_id").val(data[0].id);
-            $("#addModalSpinner").hide();
-            $("#addProductForm").show();
-        });
-    }*/
 
-    function showAddDialog(id) {
+    function showAddDialog() {
    
     $(document).ready(function () {
-    $("#addProductForm").submit(function (event) {
-        event.preventDefault(); // Prevent the default form submission
-        ProductService.addProducts(); // Call the addProducts function
-    });
-});
-
- $(document).ready(function () {
-        $("#addProductModal").modal('show');
-    });
+          $("#addProductModal").modal('show');
+      });
     $("#addModalSpinner").show();
     $("#addProductForm").hide();
+    $.get("rest/categories_and_suppliers", function (data) {
+        let categories_select = '';
+            for (let i = 0; i < data.categories.length; i++){
+                categories_select +=`<option value="${data.categories[i].id}">${data.categories[i].name}
+                </option>`
+            }
+        $('#add_category_select').html(categories_select);
 
-    // Prepare the data to be sent
-    var productData = {
-        name: $("#add_name").val(),
-        description: $("#add_description").val(),
-        price: $("#add_price").val(),
-        category_id: $("#add_category").val(),
-        supplier_id: $("#add_supplier").val(),
-        quantity_in_stock: $("#add_quantity_in_stock").val(),
-        image: $("#add_image").val()
-    };
+        let suppliers_select = '';
+            for (let i = 0; i < data.suppliers.length; i++){
+                suppliers_select += `<option value="${data.suppliers[i].id}">${data.suppliers[i].name}
+                </option>`
+            }
+        $('#add_supplier_select').html(suppliers_select);
+        $("#addModalSpinner").hide();
+        $("#addProductForm").show();
+    });
+    
+  
+  }
 
-    // Send the data via POST request
-    $.post("rest/products/", productData)
-        .done(function (result) {
-            toastr.success("Product has been added successfully");
-            $("#addProductModal").modal("toggle");
-            ChangeTab.goToShopPage();
-            ProductService.getProducts();
-        })
-        .fail(function (error) {
-            toastr.error("Error! Product has not been added.");
-        })
-        .always(function () {
-            $("#addModalSpinner").hide();
-            $("#addProductForm").show();
-        });
-}
+</script>
 
+<div class="modal fade" id="addSupplierModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" id="addSupplierModalContent">
+           
+            <form id="addSupplierForm">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Supplier</h4>
+                    <button type="button" class="close" data-bs-dismiss="modal">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input id="add_supplier_id" name="add_supplier_id" hidden />
+                        <label for="name">Name of Supplier:</label>
+                        <input type="text" id="add_name" name="name" required class="form-control" />
+                    </div>
+                    
+                </div>
+                <div class="error"><span></span></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" onclick="ProductService.addSupplierButton()" class="btn btn-success">
+                        Add
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+
+   
+   
+        function showAddSupplierDialog() {
+        $(document).ready(function () { $("#addSupplierModal").modal('show'); });
+       // $("#add_supplier_id").val();
+        $("#addSupplierForm").show();
+    }
+    
+  
+  
 
 </script>
 

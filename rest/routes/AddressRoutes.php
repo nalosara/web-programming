@@ -17,13 +17,28 @@ Flight::route("GET /addresses/@id", function($id){
 });
 
 Flight::route("POST /addresses", function(){
-    $request = Flight::request()->data->getData();    
-    Flight::json(['message' => "address added successfully", 'data' => Flight::address_service()->add($request)]);
+    $request = Flight::request()->data->getData(); 
+    $user_id = $request['user_id'];
+    $alias = $request['alias'];
+    $existing_alias = Flight::address_service()->get_address_by_user_id_and_alias($user_id, $alias);  
+    if(count($existing_alias) > 0){
+        Flight::json(["message" => "You already have address with that alias. Please choose another alias"], 404);
+    } else { 
+        Flight::json(['message' => "address added successfully", 'data' => Flight::address_service()->add($request)]);
+    }
 });
 
 Flight::route("PUT /addresses/@id", function($id){
-    $address = Flight::request()->data->getData();    
-    Flight::json(['message' => "address edited successfully", 'data' => Flight::address_service()->update($address, $id)]);
+    $address = Flight::request()->data->getData();
+    $user_id = $address['user_id'];
+    $alias = $address['alias'];
+    $existing_alias = Flight::address_service()->get_address_by_user_id_and_alias($user_id, $alias);
+    if(count($existing_alias) > 0 && $existing_alias[0]['id'] != $id){
+        Flight::json(["message" => "You already have address with that alias. Please choose another alias"], 404);
+    } else {
+        Flight::json(['message' => "address edited successfully", 'data' => Flight::address_service()->update($address, $id)]);
+    }    
+    
 });
 
 Flight::route("DELETE /addresses/@id", function($id){

@@ -8,12 +8,6 @@ Flight::route("GET /users", function(){
     Flight::json(Flight::user_service()->get_all());
 });
 
-Flight::route("GET /users_auth/@id", function(){
-    $decoded = (array)JWT::decode($id, new Key(Config::JWT_SECRET(), 'HS256'));
-    $decoded_user_id = $decoded['id'];
-    Flight::json(Flight::user_service()->get_authorization($decoded_user_id));
-});
-
 Flight::route("GET /user_by_id", function(){
     Flight::json(Flight::user_service()->get_by_id(Flight::request()->query['id']));
 });
@@ -66,6 +60,8 @@ Flight::route('POST /signup', function(){
     print_r($signup);
     if(count($user) > 0){
         Flight::json(["message" => "User with that email is already registered. Please choose a different email or log in instead."], 404);
+    } elseif(strlen($signup['password']) < 6 || !preg_match('/[A-Za-z]/', $signup['password']) || !preg_match('/\d/', $signup['password'])){
+        Flight::json(["message" => "Password should contain at least 6 characters and contain at least one letter and one number."], 404);
     }else {
         $new_user = new stdClass();
         $new_user->name = $signup['full_name'];

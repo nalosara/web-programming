@@ -268,12 +268,19 @@ font-weight: 700;
 #teamscontainer {
 	justify-content: center;
 	width: 100%;
-	margin-left: 655px;
+	margin-left: 700px;
 	margin-top: 50px;
 }
 
 .member-img {
-	height: 200px;
+	height: 250px;
+}
+
+#buttoncontainer {
+	display: flex;
+	
+	
+	
 }
 
 

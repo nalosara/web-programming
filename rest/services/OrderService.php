@@ -2,17 +2,18 @@
 
 require_once "BaseService.php";
 require_once "OrderProductService.php";
+require_once "CartService.php";
 require_once __DIR__."/../dao/OrderDao.class.php";
 
 class OrderService extends BaseService {
 
     private $order_product_service; 
-    private$cart_dao;
+    private $cart_service;
 
     public function __construct() {
         parent::__construct(new OrderDao);
         $this->order_product_service = new OrderProductService();
-        $this->cart_dao = new CartService();
+        $this->cart_service = new CartService();
     }
 
     public function get_by_user_id($user_id){
@@ -59,7 +60,7 @@ class OrderService extends BaseService {
         
         $user_id = $added_order['user_id'];
 
-        return $this->cart_dao->delete_by_user_id($user_id);
+        return $this->cart_service->delete_by_user_id($user_id);
         
     }
 }

@@ -10,7 +10,7 @@ class ProductDao extends BaseDao{
 
     public function get_by_id($id){
         return $this->query("SELECT p.id as id, p.name as name, p.description as description, p.price as price," .
-        " p.category_id as category_id, p.quantity_in_stock as quantity_in_stock, p.supplier_id as supplier_id, " . 
+        " p.category_id as category_id, p.supplier_id as supplier_id, " . 
         "p.image as image, c.name as category, s.name as supplier ".
         "FROM products p ".
         "JOIN categories c ON p.category_id = c.id ".
@@ -21,7 +21,11 @@ class ProductDao extends BaseDao{
     }
 
     public function get_by_product_name($name) {
-        return $this->query("SELECT * FROM products WHERE products.name LIKE CONCAT('%', :name,'%') ", ['name' => $name]);
+        return $this->query("SELECT * FROM products WHERE LOWER(products.name) LIKE CONCAT('%',LOWER(:name) ,'%') ", ['name' => $name]);
+    }
+
+    public function get_by_exact_product_name($name2) {
+        return $this->query("SELECT * FROM products WHERE products.name=:name2 ", ['name2' => $name2]);
     }
 
     public function get_by_category_id($category_id) {

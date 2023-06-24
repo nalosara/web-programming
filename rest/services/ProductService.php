@@ -1,12 +1,19 @@
 <?php
 
 require_once "BaseService.php";
+require_once "CategoryService.php";
+require_once "SupplierService.php";
 require_once __DIR__."/../dao/ProductDao.class.php";
 
 class ProductService extends BaseService {
 
+    private $category_service;
+    private $supplier_service;
+
     public function __construct() {
         parent::__construct(new ProductDao);
+        $this->category_service = new CategoryService();
+        $this->supplier_service = new SupplierService();
     }
 
     public function get_all_with_filters($category = null, $supplier = null, $order = null) {
@@ -37,8 +44,28 @@ class ProductService extends BaseService {
         return $this->dao->get_by_product_name($name);
     }
 
+    public function get_by_id($id) {
+        $product =  $this->dao->get_by_id($id);
+        $product['categories'] = $this->category_service->get_all();
+        $product['suppliers'] = $this->supplier_service->get_all();
+
+        return $product;
+    }
+
+    public function get_categories_and_suppliers() {
+        $product = array();
+        $product['categories'] = $this->category_service->get_all();
+        $product['suppliers'] = $this->supplier_service->get_all();
+
+        return $product;
+    }
+
     public function get_by_category_id($category_id) {
         return $this->dao->get_by_category_id($category_id);
+    }
+
+    public function get_by_exact_product_name($name) {
+        return $this->dao->get_by_exact_product_name($name);
     }
 
     public function get_by_supplier_id($supplier_id) {
