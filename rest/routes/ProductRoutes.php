@@ -25,8 +25,14 @@ Flight::route("POST /products", function(){
 });
 
 Flight::route("PUT /products/@id", function($id){
-    $product = Flight::request()->data->getData();    
-    Flight::json(['message' => "product edited successfully", 'data' => Flight::product_service()->update($product, $id)]);
+    $product = Flight::request()->data->getData();
+    $product_name = $product['name'];
+    $existing_products = Flight::product_service()->get_by_exact_product_name($product_name);
+    if(count($existing_products) > 0 && $existing_products[0]['id'] != $id){
+        Flight::json(["message" => "Product with that name already exists. Please choose another name"], 404);
+    } else {
+        Flight::json(['message' => "product edited successfully", 'data' => Flight::product_service()->update($product, $id)]);
+    };
 });
 
 Flight::route("DELETE /products/@id", function($id){

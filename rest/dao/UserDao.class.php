@@ -12,9 +12,6 @@ class UserDao extends BaseDao {
         return $this->query("SELECT * FROM users WHERE email_address = :email_address", ['email_address' => $email]);
     }
 
-    public function get_authorization($userId) {
-        return $this->query("SELECT authorization FROM users WHERE id = " . $userId);
-    }
 }
 
 ?>

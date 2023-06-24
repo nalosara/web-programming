@@ -8,12 +8,6 @@ Flight::route("GET /users", function(){
     Flight::json(Flight::user_service()->get_all());
 });
 
-Flight::route("GET /users_auth/@id", function(){
-    $decoded = (array)JWT::decode($id, new Key(Config::JWT_SECRET(), 'HS256'));
-    $decoded_user_id = $decoded['id'];
-    Flight::json(Flight::user_service()->get_authorization($decoded_user_id));
-});
-
 Flight::route("GET /user_by_id", function(){
     Flight::json(Flight::user_service()->get_by_id(Flight::request()->query['id']));
 });

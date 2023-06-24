@@ -25,7 +25,8 @@ var ProductService = {
                     ProductService.getProducts();
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    toastr.error("Error! Product has not been updated.");
+                    var response = JSON.parse(XMLHttpRequest.responseText);
+                    toastr.error(response.message);
                 },
                 });
             },
