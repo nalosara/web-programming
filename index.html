@@ -567,12 +567,14 @@
                         <input type="number" id="edit_price" name="price" required class="form-control" />
                     </div>
                     <div>
-                        <label for="category">Category:</label>
-                        <input type="number" id="edit_category" name="category" required class="form-control" />
+                        <label>Category:</label>
+                        <select name="edit_category_select" id="edit_category_select" class="form-control required">
+                        </select>
                     </div>
                     <div>
-                        <label for="supplier">Supplier:</label>
-                        <input type="number" id="edit_supplier" name="supplier" required class="form-control" />
+                        <label>Supplier:</label>
+                        <select name="edit_supplier_select" id="edit_supplier_select" class="form-control required">
+                        </select>
                     </div>
                     <div>
                         <label for="quantity_in_stock">Quantity in Stock:</label>
@@ -599,21 +601,36 @@
 <script type="text/javascript">
 
     function showEditDialog(id) {
+        
         //$("#editProductModal").modal("show");
         $(document).ready(function () { $("#editProductModal").modal('show'); });
         $("#editModalSpinner").show();
         $("#editProductForm").hide();
         $.get("rest/products/" + id, function (data) {
+            console.log(data);
+            let categories_select = '';
+                for (let i = 0; i < data.categories.length; i++){
+                    categories_select +=`<option value="${data.categories[i].id}">${data.categories[i].name}
+                    </option>`
+                }
+            $('#edit_category_select').html(categories_select);
+
+            let suppliers_select = '';
+                for (let i = 0; i < data.suppliers.length; i++){
+                    suppliers_select += `<option value="${data.suppliers[i].id}">${data.suppliers[i].name}
+                    </option>`
+                }
+            $('#edit_supplier_select').html(suppliers_select);
             console.log(data[0]);
             console.log(data[0].id);
             $("#edit_name").val(data[0].name);
             $("#edit_description").val(data[0].description);
             $("#edit_price").val(data[0].price);
-            $("#edit_category").val(data[0].category_id);
-            $("#edit_supplier").val(data[0].supplier_id);
             $("#edit_quantity_in_stock").val(data[0].quantity_in_stock);
             $("#edit_image").val(data[0].image);
             $("#edit_product_id").val(data[0].id);
+            $('#edit_category_select').val(data[0].category_id);
+            $('#edit_supplier_select').val(data[0].supplier_id);
             $("#editModalSpinner").hide();
             $("#editProductForm").show();
         });

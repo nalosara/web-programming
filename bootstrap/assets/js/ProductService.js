@@ -6,8 +6,8 @@ var ProductService = {
                 name: $("#edit_name").val(),
                 description: $("#edit_description").val(),
                 price: $("#edit_price").val(),
-                category_id: $("#edit_category").val(),
-                supplier_id: $("#edit_supplier").val(),
+                category_id: $("#edit_category_select").val(),
+                supplier_id: $("#edit_supplier_select").val(),
                 quantity_in_stock: $("#edit_quantity_in_stock").val(),
                 image: $("#edit_image").val(),
                 };
@@ -120,12 +120,12 @@ var ProductService = {
                 };
                 console.log(data);
                 $.ajax({    
-                url: "rest/products/",
+                url: "rest/products",
                 type: "POST",
                 data: JSON.stringify(data),
                 contentType: "application/json",
                 dataType: "json",
-                
+            
                 /*success: function (result) {
                     toastr.success("Product has been added successfully");
                     $("#addProductModal").modal("toggle");
