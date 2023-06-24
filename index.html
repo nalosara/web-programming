@@ -503,16 +503,24 @@
     $(document).ready(function() {
     // Bind click event to search button within the modal
     $('#templatemo_search').on('click', '.input-group-text', function(event) {
-        $('#templatemo_search').hide();
-        $('div.modal-backdrop').hide();
-        $('body').css("overflow", "auto");
         event.preventDefault();
+
         ProductService.searchByProductName();
         FilterService.getSupplierFilters();
         FilterService.getCategoryFilters();
         ChangeTab.goToShopPage();
-        });
+        
+        // Clear the search input
+        $('#inputModalSearch').val('');
+        
+        // Close the modal
+        $('#templatemo_search').modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+        $('body').css("overflow", "auto");
     });
+});
+
 </script>
 
 <!-- Search Modal -->
