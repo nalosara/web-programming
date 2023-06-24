@@ -577,11 +577,6 @@
                         </select>
                     </div>
                     <div>
-                        <label for="quantity_in_stock">Quantity in Stock:</label>
-                        <input type="number" id="edit_quantity_in_stock" name="quantity_in_stock" required
-                            class="form-control" />
-                    </div>
-                    <div>
                         <label for="image">Image URL:</label>
                         <input type="text" id="edit_image" name="image" required class="form-control" />
                     </div>
@@ -626,7 +621,6 @@
             $("#edit_name").val(data[0].name);
             $("#edit_description").val(data[0].description);
             $("#edit_price").val(data[0].price);
-            $("#edit_quantity_in_stock").val(data[0].quantity_in_stock);
             $("#edit_image").val(data[0].image);
             $("#edit_product_id").val(data[0].id);
             $('#edit_category_select').val(data[0].category_id);
@@ -668,17 +662,14 @@
                         <input type="number" id="add_price" name="price" required class="form-control" />
                     </div>
                     <div>
-                        <label for="category">Category:</label>
-                        <input type="number" id="add_category" name="category" required class="form-control" />
+                        <label>Category:</label>
+                        <select name="add_category_select" id="add_category_select" class="form-control required">
+                        </select>
                     </div>
                     <div>
-                        <label for="supplier">Supplier:</label>
-                        <input type="number" id="add_supplier" name="supplier" required class="form-control" />
-                    </div>
-                    <div>
-                        <label for="quantity_in_stock">Quantity in Stock:</label>
-                        <input type="number" id="add_quantity_in_stock" name="quantity_in_stock" required
-                            class="form-control" />
+                        <label>Supplier:</label>
+                        <select name="add_supplier_select" id="add_supplier_select" class="form-control required">
+                        </select>
                     </div>
                     <div>
                         <label for="image">Image URL:</label>
@@ -705,31 +696,27 @@
     $(document).ready(function () {
           $("#addProductModal").modal('show');
       });
-      $("#addModalSpinner").show();
-      $("#addProductForm").hide();
+    $("#addModalSpinner").show();
+    $("#addProductForm").hide();
+    $.get("rest/categories_and_suppliers", function (data) {
+        let categories_select = '';
+            for (let i = 0; i < data.categories.length; i++){
+                categories_select +=`<option value="${data.categories[i].id}">${data.categories[i].name}
+                </option>`
+            }
+        $('#add_category_select').html(categories_select);
+
+        let suppliers_select = '';
+            for (let i = 0; i < data.suppliers.length; i++){
+                suppliers_select += `<option value="${data.suppliers[i].id}">${data.suppliers[i].name}
+                </option>`
+            }
+        $('#add_supplier_select').html(suppliers_select);
+        $("#addModalSpinner").hide();
+        $("#addProductForm").show();
+    });
+    
   
-      // Prepare the data to be sent
-      var productData = {
-          name: $("#add_name").val(),
-          description: $("#add_description").val(),
-          price: $("#add_price").val(),
-          category_id: $("#add_category").val(),
-          supplier_id: $("#add_supplier").val(),
-          quantity_in_stock: $("#add_quantity_in_stock").val(),
-          image: $("#add_image").val()
-      };
-  
-      // Send the data via POST request
-      $.post("rest/products", productData)
-         
-         
-          
-          
-          .always(function () {
-              $("#addModalSpinner").hide();
-              $("#addProductForm").show();
-              
-          });
   }
 
 </script>

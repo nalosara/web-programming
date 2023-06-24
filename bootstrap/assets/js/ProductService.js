@@ -8,7 +8,6 @@ var ProductService = {
                 price: $("#edit_price").val(),
                 category_id: $("#edit_category_select").val(),
                 supplier_id: $("#edit_supplier_select").val(),
-                quantity_in_stock: $("#edit_quantity_in_stock").val(),
                 image: $("#edit_image").val(),
                 };
                 console.log(data);
@@ -113,9 +112,8 @@ var ProductService = {
                 name: $("#add_name").val(),
                 description: $("#add_description").val(),
                 price: $("#add_price").val(),
-                category_id: $("#add_category").val(),
-                supplier_id: $("#add_supplier").val(),
-                quantity_in_stock: $("#add_quantity_in_stock").val(),
+                category_id: $("#add_category_select").val(),
+                supplier_id: $("#add_supplier_select").val(),
                 image: $("#add_image").val(),
                 };
                 console.log(data);
@@ -126,7 +124,7 @@ var ProductService = {
                 contentType: "application/json",
                 dataType: "json",
             
-                /*success: function (result) {
+                success: function (result) {
                     toastr.success("Product has been added successfully");
                     $("#addProductModal").modal("toggle");
                     ChangeTab.goToShopPage();
@@ -134,8 +132,9 @@ var ProductService = {
                   
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    toastr.error("Error! Product has not been added.");
-                },*/
+                    var response = JSON.parse(XMLHttpRequest.responseText);
+                    toastr.error(response.message);
+                },
                 });
                 
             },

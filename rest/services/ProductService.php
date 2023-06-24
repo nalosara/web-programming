@@ -52,6 +52,14 @@ class ProductService extends BaseService {
         return $product;
     }
 
+    public function get_categories_and_suppliers() {
+        $product = array();
+        $product['categories'] = $this->category_service->get_all();
+        $product['suppliers'] = $this->supplier_service->get_all();
+
+        return $product;
+    }
+
     public function get_by_category_id($category_id) {
         return $this->dao->get_by_category_id($category_id);
     }
