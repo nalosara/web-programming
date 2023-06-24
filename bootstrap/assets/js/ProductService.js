@@ -129,6 +129,7 @@ var ProductService = {
                     $("#addProductModal").modal("toggle");
                     ChangeTab.goToShopPage();
                     ProductService.getProducts();
+                    form.reset();
                   
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
