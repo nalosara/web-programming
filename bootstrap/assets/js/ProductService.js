@@ -14,13 +14,6 @@ var ProductService = {
                 $.ajax({
                 url: "rest/products/" + $("#edit_product_id").val(),
                 type: "PUT",
-                beforeSend: function (xhr) {
-                    console.log(localStorage.getItem("user_token"))
-                    xhr.setRequestHeader(
-                      "Authorization",
-                      localStorage.getItem("user_token")
-                    );
-                  },
                 data: JSON.stringify(data),
                 contentType: "application/json",
                 dataType: "json",
@@ -52,14 +45,7 @@ var ProductService = {
         //make an ajax request to get the products
         $.ajax({
             url: 'rest/products',
-            type: "GET",
-            beforeSend: function (xhr) {
-                console.log(localStorage.getItem("user_token"))
-                xhr.setRequestHeader(
-                  "Authorization",
-                  localStorage.getItem("user_token")
-                );
-              },
+            method: "GET",
             contentType: "application/json",
     
             success: function (data) {
@@ -134,13 +120,6 @@ var ProductService = {
                 $.ajax({    
                 url: "rest/products",
                 type: "POST",
-                beforeSend: function (xhr) {
-                    console.log(localStorage.getItem("user_token"))
-                    xhr.setRequestHeader(
-                      "Authorization",
-                      localStorage.getItem("user_token")
-                    );
-                  },
                 data: JSON.stringify(data),
                 contentType: "application/json",
                 dataType: "json",
@@ -219,17 +198,12 @@ var ProductService = {
         var category = $("#dropdown-category").children("option:selected").val();
         var supplier = $("#dropdown-supplier").children("option:selected").val();
         var order = $("#dropdown-order").children("option:selected").val();
+
+        console.log("category: " + category + " supplier: " + supplier + " order: " + order);
         
         $.ajax({
             url: 'rest/products?category=' + category + '&supplier=' + supplier + '&order=' + order,
             method: "GET",
-            beforeSend: function (xhr) {
-                console.log(localStorage.getItem("user_token"))
-                xhr.setRequestHeader(
-                  "Authorization",
-                  localStorage.getItem("user_token")
-                );
-              },
             contentType: "application/json",
     
             success: function (data) {
@@ -271,13 +245,6 @@ var ProductService = {
         $.ajax({
             url: 'rest/products/' + productid,
             method: 'GET',
-            beforeSend: function (xhr) {
-                console.log(localStorage.getItem("user_token"))
-                xhr.setRequestHeader(
-                  "Authorization",
-                  localStorage.getItem("user_token")
-                );
-              },
             contentType: 'application/json',
     
             success: function (data) {
@@ -402,13 +369,6 @@ var ProductService = {
         $.ajax({
           url: 'rest/carts',
           method: 'POST',
-          beforeSend: function (xhr) {
-            console.log(localStorage.getItem("user_token"))
-            xhr.setRequestHeader(
-              "Authorization",
-              localStorage.getItem("user_token")
-            );
-          },
           data: JSON.stringify(data),
           contentType: 'application/json',
           dataType: 'json',
@@ -432,13 +392,6 @@ var ProductService = {
         $.ajax({
           url: "rest/addresses_by_user_token/" + user_id,
           type: "GET",
-          beforeSend: function (xhr) {
-            console.log(localStorage.getItem("user_token"))
-            xhr.setRequestHeader(
-              "Authorization",
-              localStorage.getItem("user_token")
-            );
-          },
           success: function(data) {
             for (let i = 0; i < data.length; i++) {
               options += `<option value="${data[i].id}">${data[i].alias}</option>`;
@@ -490,13 +443,6 @@ var ProductService = {
         $.ajax({
           url: 'rest/orders',
           method: 'POST',
-          beforeSend: function (xhr) {
-            console.log(localStorage.getItem("user_token"))
-            xhr.setRequestHeader(
-              "Authorization",
-              localStorage.getItem("user_token")
-            );
-          },
           data: JSON.stringify(data),
           contentType: 'application/json',
           dataType: 'json',
@@ -530,13 +476,6 @@ var ProductService = {
         $.ajax({
             url: 'rest/products_by_name/' + searchInput,
             method: "GET",
-            beforeSend: function (xhr) {
-                console.log(localStorage.getItem("user_token"))
-                xhr.setRequestHeader(
-                  "Authorization",
-                  localStorage.getItem("user_token")
-                );
-              },
             contentType: "application/json",
 
             success: function (data) {
@@ -577,13 +516,6 @@ var ProductService = {
         $.ajax({
           url: "rest/products/" + product_id,
           method: "DELETE",
-          beforeSend: function (xhr) {
-            console.log(localStorage.getItem("user_token"))
-            xhr.setRequestHeader(
-              "Authorization",
-              localStorage.getItem("user_token")
-            );
-          },
           contentType: "application/json",
     
           success: function (result) {
