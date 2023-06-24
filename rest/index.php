@@ -2,6 +2,8 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 require_once '../vendor/autoload.php';
 require_once "services/UserService.php";
@@ -41,6 +43,32 @@ Flight::map('query', function($name, $default_value = null) {
     $query_params = $query_params ? $query_params : $default_value;
     return $query_params;
 });
+
+// middleware method for login
+Flight::route('/*', function(){
+    // Exclude the login route from the middleware
+    if (Flight::request()->url === '/login' || Flight::request()->url === '/signup') {
+        return TRUE;
+    }
+
+    // Check for the Authorization header
+    $headers = getallheaders();
+    if (!$headers['Authorization']) {
+        Flight::json(["message" => "Authorization is missing"], 403);
+        return FALSE;
+    }
+
+    // Perform JWT token decoding and validation
+    try {
+        $decoded = (array) JWT::decode($headers['Authorization'], new Key(Config::JWT_SECRET(), 'HS256'));
+        Flight::set('user', $decoded);
+        return TRUE;
+    } catch (\Exception $e) {
+        Flight::json(["message" => "Authorization token is not valid"], 403);
+        return FALSE;
+    }
+});
+
 
 
 Flight::start();

@@ -74,17 +74,9 @@
                     </ul>
                 </div>
                 <div class="navbar align-self-center d-flex">
-                    <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
-                            <div class="input-group-text">
-                                <i class="fa fa-fw fa-search"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal"
+                    <a class="nav-icon d-lg-inline nav-icon position-relative text-decoration-none" href="#" data-bs-toggle="modal"
                         data-bs-target="#templatemo_search">
-                        <i class="fa fa-fw fa-search text-dark mr-2"></i>
+                        <i class="fa fa-fw fa-search text-dark mr-2" id="inputMobileSearch"></i>
                     </a>
                     
                     <a id="buttonCart" class="nav-icon position-relative text-decoration-none" href="#cart"
@@ -147,6 +139,9 @@
                         </div>
                     </div>
 
+                    <div id="buttoncontainer" style="margin-right: -100px;">
+                        <button id="addProductButton" onclick="showAddDialog();" style="font-size: small; margin-bottom: 20px; float: right;"
+                            class="btn btn-success">Add product</button>
                     <div id="buttoncontainer">
                         <button id="addProductButton" onclick="showAddDialog();" style="float: left; margin-right: -100px; font-size: small;"
                             class=" btn-success">Add product</button>
@@ -525,6 +520,13 @@
     });
 });
 
+</script>
+
+<script>
+    // Handle mobile search input click
+    document.getElementById('inputMobileSearch').addEventListener('click', function() {
+        $('#templatemo_search').modal('show');
+    });
 </script>
 
 <!-- Search Modal -->
