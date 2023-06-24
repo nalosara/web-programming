@@ -11,6 +11,12 @@ class AddressDao extends BaseDao {
         return $this->query("SELECT * FROM addresses WHERE user_id=:user_id", ['user_id' => $user_id]);
         
     }
+
+    public function get_address_by_user_id_and_alias($user_id, $alias) {
+        return $this->query("SELECT * FROM addresses WHERE user_id=:user_id AND alias=:alias", 
+        ['user_id' => $user_id, 'alias' => $alias]);
+        
+    }
 }
 
 ?>

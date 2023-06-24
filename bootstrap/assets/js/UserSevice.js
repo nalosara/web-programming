@@ -258,7 +258,8 @@ var UserService = {
             ChangeTab.goToUserPage(localStorage.getItem("user_token"));
           },
           error: function (XMLHttpRequest, textStatus, errorThrown) {
-            toastr.error("Error! Address has not been added.");
+            var response = JSON.parse(XMLHttpRequest.responseText);
+            toastr.error(response.message);
           },
         });
       },
@@ -274,6 +275,7 @@ var UserService = {
           zip_code: $("#edit_address_zip_code").val(),
           country: $("#edit_address_country").val(),
           city: $("#edit_address_city").val(),
+          user_id: $("#edit_address_user_id").val(),
         };
         $.ajax({
           url: "rest/addresses/" + $("#edit_address_id").val(),
@@ -287,7 +289,8 @@ var UserService = {
             ChangeTab.goToUserPage(localStorage.getItem("user_token"));
           },
           error: function (XMLHttpRequest, textStatus, errorThrown) {
-            toastr.error("Error! Address has not been updated.");
+            var response = JSON.parse(XMLHttpRequest.responseText);
+            toastr.error(response.message);
           },
         });
       },

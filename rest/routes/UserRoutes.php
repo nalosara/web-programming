@@ -60,6 +60,8 @@ Flight::route('POST /signup', function(){
     print_r($signup);
     if(count($user) > 0){
         Flight::json(["message" => "User with that email is already registered. Please choose a different email or log in instead."], 404);
+    } elseif(strlen($signup['password']) < 6 || !preg_match('/[A-Za-z]/', $signup['password']) || !preg_match('/\d/', $signup['password'])){
+        Flight::json(["message" => "Password should contain at least 6 characters and contain at least one letter and one number."], 404);
     }else {
         $new_user = new stdClass();
         $new_user->name = $signup['full_name'];
