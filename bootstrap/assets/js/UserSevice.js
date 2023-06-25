@@ -92,10 +92,10 @@ var UserService = {
       success: function (data) {
         var html = "";
         html += `<br>
-                    <div class="col"> 
-                      <div class="row align-items-center">
+                    <div class="row" style="margin-bottom: 20px;"> 
+                      <div class="row">
                         <div class="col" style="font-size: 24px; font-weight: bold;">
-                          <h3 style="width: auto" class="mb-0">Hello ${data[0].name}!</h3>
+                          <h4 style="width: auto" class="mb-0">Hello ${data[0].name}!</h4>
                         </div>
                         <div class="col text-end mt-2">
                         <button type="button" style="font-size: small;" class="dugme btn btn-success btn-lg px-3"
@@ -143,11 +143,11 @@ var UserService = {
             <br>`;
         for (var i = 0; i < data.length; i++) {
           html +=
-            `<div class="row" style="margin-right: 50px;">
+            `<div class="row" style="margin-right: 10px; margin-left: -45px;">
               <div class="card mb-4 rounded-3">
                   <div>
                       <div class="col">
-                          <p style="width: 200px;" class="mb-0"><b>Order Date: </b> ` +
+                          <p style="width: auto;" class="mb-0"><b>Order Date: </b> ` +
             data[i].order_date +
             `</p>
                           <p style="width: auto" class="mb-0"><b>Products Purchased: </b>` +
@@ -174,58 +174,49 @@ var UserService = {
       contentType: "application/json",
       dataType: "json",
       success: function (data) {
-        var html = `<div class="col"> 
+        var html = `<div class="row"> 
                     <div class="col" style="font-size: 24px; font-weight: bold;">
                         <b>Your Addresses</b>
                         <button style="width: auto; float: right; margin-right: 65px; font-size: small;" type="button" onclick="showAddAddressDialog(${user_id})" class="btn btn-success">Add Address</button>
                     </div>
                   </div>
                   <br>
-                </div>
-            </div>`;
+                <div class="row">
+            `;
         for (var i = 0; i < data.length; i++) {
-          html +=
-            `<div class="row" style="margin-left: 50px; margin-right: 50px;">
-              <div class="card mb-4 rounded-3">
-                  <div class="row align-items-center">
-                      <div class="col">
-                          <p style="width: auto" class="mb-0"><b>Address Name:</b> ` +
-            data[i].alias +
-            `</p>
-                      </div>
-                      <div class="col">
-                          <p style="width: auto" class="mb-0"><b>Street:</b> ` +
-            data[i].street +
-            `</p>
-                      </div>
-                      <div class="col">
-                          <p style="width: auto" class="mb-0"><b>Zip Code:</b> ` +
-            data[i].zip_code +
-            `</p>
-                      </div>
-                      <div class="col">
-                          <p style="width: auto" class="mb-0"><b>Country:</b> ` +
-            data[i].country +
-            `</p>
-                      </div>
-                      <div class="col">
-                          <p style="width: auto" class="mb-0"><b>City:</b> ` +
-            data[i].city +
-            `</p>
-                      </div>
-                      <div class="col">
-                        <button style="width: 150px; font-size: small; margin-bottom: 10px; margin-top: 10px;" type="button" onclick="showEditAddresDialog(` +
-            data[i].id +
-            `)" class="btn btn-success">Edit Address</button>
-                        <button style="width: 150px; font-size: small; margin-bottom: 10px;" type="button" onclick="UserService.deleteAddress(` +
-            data[i].id +
-            `)" class="btn btn-success">Delete Address</button>
-                      </div>
+          html += `
+                <div class="col-sm-3">
+                  <div class="card mb-4 rounded-3" style="margin-left: 10px; margin-right: 10px;">
+                    <div class="row" style="margin-top: 10px;">
+                      <p style="width: auto" class="mb-0"><b>Address Name:</b> ${data[i].alias}</p>
+                    </div>
+                    <div class="row">
+                      <p style="width: auto" class="mb-0"><b>Street:</b> ${data[i].street}</p>
+                    </div>
+                    <div class="row">
+                      <p style="width: auto" class="mb-0"><b>Zip Code:</b> ${data[i].zip_code}</p>
+                    </div>
+                    <div class="row">
+                      <p style="width: auto" class="mb-0"><b>Country:</b> ${data[i].country}</p>
+                    </div>
+                    <div class="row" style="margin-bottom: 10px;">
+                      <p style="width: auto" class="mb-0"><b>City:</b> ${data[i].city}</p>
+                    </div>
+                    <div class="row">
+                      <button style="width: 100px; font-size: small; margin-bottom: 10px; margin-right: 5px;" type="button" onclick="showEditAddresDialog(${data[i].id})" class="btn btn-success">Edit</button>
+                      <button style="width: 100px; font-size: small; margin-bottom: 10px; margin-left: 5px;" type="button" onclick="UserService.deleteAddress(${data[i].id})" class="btn btn-success">Delete</button>
+                    </div>
                   </div>
-              </div>
-          </div>`;
+                </div>
+              `;
+
+          if ((i + 1) % 4 === 0 && i !== data.length - 1) {
+            // Close the current row and start a new one every 4 cards, except for the last card
+            html += '</div><div class="row">';
+          }
         }
-        html += "</div>";
+
+        html += "</div>"; // Close the last row
         callback(html);
       },
       error: function (XMLHttpRequest, textStatus, errorThrown) {

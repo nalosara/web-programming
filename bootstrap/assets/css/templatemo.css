@@ -296,22 +296,3 @@ ul {
 /* Extra large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {}
 
-/*add product button*/
-#addProductButton {
-	background-color: #6a86a0b5;
-	color: white;
-	text-align: center;
-	cursor: pointer;
-	border-radius: 10px;
-	font-size: 16px;
-	text-decoration: none;
-	padding: 6px 20px;
-	float: left;
-	margin-bottom: 20px;
-	border: none;
-	width: 15%;
-  }
-
-  #addProductButton:active {
-    background-color: rgb(47, 65, 72);
-  }

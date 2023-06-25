@@ -6,7 +6,7 @@ var FilterService = {
             contentType: "application/json",
     
             success: function (data) {
-                var html = `<div class="dropdown" style="margin-left: 80px; margin-bottom: 20px;">
+                var html = `<div class="dropdown" style="margin-bottom: 20px;">
                 <button id="button-category" class="btn btn-success"
                     style="border-color: white !important; background-color: white !important;">
                     <select class="form-select" id="dropdown-category"
@@ -36,7 +36,7 @@ var FilterService = {
             contentType: "application/json",
     
             success: function (data) {
-                var html = `<div class="dropdown" style="margin-left: 80px; margin-bottom: 20px;">
+                var html = `<div class="dropdown" style="margin-bottom: 20px;">
                 <button id="button-category" class="btn btn-success"
                     style="border-color: white !important; background-color: white !important;">
                     <select class="form-select" id="dropdown-supplier"
@@ -65,7 +65,7 @@ var FilterService = {
             contentType: "application/json",
     
             success: function (data) {
-                var html = `<div class="dropdown" style="margin-left: 80px; margin-bottom: 20px;">
+                var html = `<div class="dropdown" style="margin-bottom: 20px;">
                 <button id="button-order" class="btn btn-success"
                     style="border-color: white !important; background-color: white !important;">
                     <select class="form-select" id="dropdown-order" style="border-color:white;">

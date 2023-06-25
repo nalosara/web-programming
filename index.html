@@ -22,7 +22,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="bootstrap/assets/css/fontawesome.min.css">
-    
+
 
 </head>
 
@@ -39,7 +39,7 @@
                     <a class="navbar-sm-brand text-light text-decoration-none" href="tel:033-333-333">033-333-333</a>
                 </div>
                 <div>
-                    <a class="text-light" href="https://fb.com/templatemo" target="_blank" rel="sponsored"><i
+                    <a class="text-light" href="https://www.facebook.com/profile.php?id=100092992320897&mibextid=LQQJ4d" target="_blank" rel="sponsored"><i
                             class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
                     <a class="text-light" href="https://www.linkedin.com/company/bemytech/" target="_blank"><i
                             class="fab fa-linkedin fa-sm fa-fw"></i></a>
@@ -86,14 +86,14 @@
                         data-bs-target="#templatemo_search">
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>
                     </a>
-                    
+
                     <a id="buttonCart" class="nav-icon position-relative text-decoration-none" href="#cart"
                         onclick="ChangeTab.goToCartPage(localStorage.getItem('user_token'));">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
                         <span
                             class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
                     </a>
-                    
+
                     <a class="nav-icon position-relative text-decoration-none" href="#user"
                         onclick="ChangeTab.goToUserPage(localStorage.getItem('user_token'));">
                         <i class="fa fa-fw fa-user text-dark mr-3"></i>
@@ -115,49 +115,44 @@
         <div class="container py-5">
             <div class="row">
                 <div class="col-lg-10">
-                    <div class="row-container">
+                    <div class="row-container justify-content-center">
                         <h5 class="h5 pb-4">FILTER</h5>
                         <ul class="list-unstyled templatemo-accordion">
-                            <div class="row-container">
-                                <div style="float:left" id="categoryContainer"></div>
-                                <div style="float:left" id="supplierContainer"></div>
-                                <div style="float:left" id="orderContainer">
-                                    <div class="dropdown" style="margin-left: 80px; margin-bottom: 20px;">
-                                        <button id="button-order" class="btn btn-success"
-                                            style="border-color: white !important; background-color: white !important;">
-                                            <select class="form-select" id="dropdown-order" style="border-color:white;">
-                                                <option value="desc">High to Low</option>
-                                                <option value="asc">Low to High</option>
-                                                <option value="" selected disabled>Price</option>
-                                        </button>
-                                        </select>
-                                    </div>
-                                </div>
+                          <div class="row">
+                            <div class="col-md-4" id="categoryContainer"></div>
+                            <div class="col-md-4" id="supplierContainer"></div>
+                            <div class="col-md-4" id="orderContainer">
+                              <div class="dropdown" style="margin-bottom: 20px;">
+                                <button id="button-order" class="btn btn-success" style="border-color: white !important; background-color: white !important;">
+                                  <select class="form-select" id="dropdown-order" style="border-color:white;">
+                                    <option value="desc">High to Low</option>
+                                    <option value="asc">Low to High</option>
+                                    <option value="" selected disabled>Price</option>
+                                  </select>
+                                </button>
+                              </div>
                             </div>
+                          </div>
                         </ul>
-                        <div class="col text-end mt-2" style="margin-bottom: 40px; margin-left: 80px;">
-                            <button type="submit" onclick="ProductService.getProductsWithFilters()"
-                                style="background-color: lightgrey; font-size: small; border-color: white; color: black;"
-                                class="btn btn-secondary btn-lg px-3">View</button>
+                        <div class="row" style="padding-bottom: 45px;">
+                          <div class="col-md-6 mt-2">
+                            <button type="submit" onclick="ProductService.getProductsWithFilters()" style="width: 70px; background-color: lightgrey; font-size: small; border-color: white; color: black;" class="btn btn-secondary btn-lg px-3">View</button>
+                          </div>
+                          <div class="col-md-6 mt-2">
+                            <button type="submit" onclick="ProductService.getProducts()" style="width: 70px; background-color: lightgrey; font-size: small; border-color: white; color: black;" class="btn btn-secondary btn-lg px-3">Reset</button>
+                          </div>
                         </div>
-                        <div class="col text-end mt-2" style="margin-bottom: 40px; margin-left: 20px;">
-                            <button type="submit" onclick="ProductService.getProducts()"
-                                style="background-color: lightgrey; font-size: small; border-color: white; color: black;"
-                                class="btn btn-secondary btn-lg px-3">Reset</button>
-                        </div>
-                    </div>
-
-                    <div id="buttoncontainer">
-                        <button id="addProductButton" onclick="showAddDialog();" style="float: left; margin-right: -100px; font-size: small;"
-                            class=" btn-success">Add product</button>
-                            <button id="addProductButton" onclick="showAddSupplierDialog();" style=" margin-left: 110px; font-size: small;"
-                            class=" btn-success">Add Supplier</button>
-                            <button id="addProductButton" onclick="showAddCategoryDialog();"  style="margin-left: 10px; font-size: small;"
-                            class=" btn-success">Add Category</button>
-                    </div>
+                      </div>
+                      
+                      <div id="buttoncontainer" style="border-color: white; margin-bottom: 20px; margin-right: 50px;" class="col justify-content-center">
+                        <button id="addProductButton" onclick="showAddDialog();" style="margin-right: 10px; font-size: small;" class="btn btn-success">Add Product</button>
+                        <button id="addSupplierButton" onclick="showAddSupplierDialog();" style="margin-right: 10px; font-size: small;" class="btn btn-success">Add Supplier</button>
+                        <button id="addCategoryButton" onclick="showAddCategoryDialog();" style="font-size: small;" class="btn btn-success">Add Category</button>
+                      </div>
+                      
 
                 </div>
-                <div id="productContainer"></div>   
+                <div id="productContainer"></div>
 
             </div>
         </div>
@@ -287,10 +282,10 @@
         <div id="teamscontainer" style="margin-left: 650px;">
             <h3>OUR TEAM</h3>
         </div>
-        
+
         <div class="team align-items-center py-5">
-            
-            
+
+
 
 
             <!--Team info-->
@@ -504,26 +499,26 @@
 <script type="text/javascript" src="bootstrap/assets/js/FilterService.js"></script>
 
 <script type="text/javascript">
-    $(document).ready(function() {
-    // Bind click event to search button within the modal
-    $('#templatemo_search').on('click', '.input-group-text', function(event) {
-        event.preventDefault();
+    $(document).ready(function () {
+        // Bind click event to search button within the modal
+        $('#templatemo_search').on('click', '.input-group-text', function (event) {
+            event.preventDefault();
 
-        ProductService.searchByProductName();
-        FilterService.getSupplierFilters();
-        FilterService.getCategoryFilters();
-        ChangeTab.goToShopPage();
-        
-        // Clear the search input
-        $('#inputModalSearch').val('');
-        
-        // Close the modal
-        $('#templatemo_search').modal('hide');
-        $('body').removeClass('modal-open');
-        $('.modal-backdrop').remove();
-        $('body').css("overflow", "auto");
+            ProductService.searchByProductName();
+            FilterService.getSupplierFilters();
+            FilterService.getCategoryFilters();
+            ChangeTab.goToShopPage();
+
+            // Clear the search input
+            $('#inputModalSearch').val('');
+
+            // Close the modal
+            $('#templatemo_search').modal('hide');
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
+            $('body').css("overflow", "auto");
+        });
     });
-});
 
 </script>
 
@@ -537,7 +532,8 @@
         </div>
         <form action="" method="get" class="modal-content modal-body border-0 p-0">
             <div class="input-group mb-2">
-                <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search for products...">
+                <input type="text" class="form-control" id="inputModalSearch" name="q"
+                    placeholder="Search for products...">
                 <button type="submit" class="input-group-text bg-success text-light">
                     <i class="fa fa-fw fa-search text-white"></i>
                 </button>
@@ -608,7 +604,7 @@
 <script type="text/javascript">
 
     function showEditDialog(id) {
-        
+
         //$("#editProductModal").modal("show");
         $(document).ready(function () { $("#editProductModal").modal('show'); });
         $("#editModalSpinner").show();
@@ -616,17 +612,17 @@
         $.get("rest/products/" + id, function (data) {
             console.log(data);
             let categories_select = '';
-                for (let i = 0; i < data.categories.length; i++){
-                    categories_select +=`<option value="${data.categories[i].id}">${data.categories[i].name}
+            for (let i = 0; i < data.categories.length; i++) {
+                categories_select += `<option value="${data.categories[i].id}">${data.categories[i].name}
                     </option>`
-                }
+            }
             $('#edit_category_select').html(categories_select);
 
             let suppliers_select = '';
-                for (let i = 0; i < data.suppliers.length; i++){
-                    suppliers_select += `<option value="${data.suppliers[i].id}">${data.suppliers[i].name}
+            for (let i = 0; i < data.suppliers.length; i++) {
+                suppliers_select += `<option value="${data.suppliers[i].id}">${data.suppliers[i].name}
                     </option>`
-                }
+            }
             $('#edit_supplier_select').html(suppliers_select);
             console.log(data[0]);
             console.log(data[0].id);
@@ -704,32 +700,32 @@
 
 
     function showAddDialog() {
-   
-    $(document).ready(function () {
-          $("#addProductModal").modal('show');
-      });
-    $("#addModalSpinner").show();
-    $("#addProductForm").hide();
-    $.get("rest/categories_and_suppliers", function (data) {
-        let categories_select = '';
-            for (let i = 0; i < data.categories.length; i++){
-                categories_select +=`<option value="${data.categories[i].id}">${data.categories[i].name}
+
+        $(document).ready(function () {
+            $("#addProductModal").modal('show');
+        });
+        $("#addModalSpinner").show();
+        $("#addProductForm").hide();
+        $.get("rest/categories_and_suppliers", function (data) {
+            let categories_select = '';
+            for (let i = 0; i < data.categories.length; i++) {
+                categories_select += `<option value="${data.categories[i].id}">${data.categories[i].name}
                 </option>`
             }
-        $('#add_category_select').html(categories_select);
+            $('#add_category_select').html(categories_select);
 
-        let suppliers_select = '';
-            for (let i = 0; i < data.suppliers.length; i++){
+            let suppliers_select = '';
+            for (let i = 0; i < data.suppliers.length; i++) {
                 suppliers_select += `<option value="${data.suppliers[i].id}">${data.suppliers[i].name}
                 </option>`
             }
-        $('#add_supplier_select').html(suppliers_select);
-        $("#addModalSpinner").hide();
-        $("#addProductForm").show();
-    });
-    
-  
-  }
+            $('#add_supplier_select').html(suppliers_select);
+            $("#addModalSpinner").hide();
+            $("#addProductForm").show();
+        });
+
+
+    }
 
 </script>
 
@@ -737,7 +733,7 @@
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content" id="addSupplierModalContent">
-           
+
             <form id="addSupplierForm">
                 <div class="modal-header">
                     <h4 class="modal-title">Add Supplier</h4>
@@ -751,7 +747,7 @@
                         <label for="name">Name of Supplier:</label>
                         <input type="text" id="add_name" name="name" required class="form-control" />
                     </div>
-                    
+
                 </div>
                 <div class="error"><span></span></div>
                 <div class="modal-footer">
@@ -768,16 +764,16 @@
 <script type="text/javascript">
 
 
-   
-   
-        function showAddSupplierDialog() {
+
+
+    function showAddSupplierDialog() {
         $(document).ready(function () { $("#addSupplierModal").modal('show'); });
-       // $("#add_supplier_id").val();
+        // $("#add_supplier_id").val();
         $("#addSupplierForm").show();
     }
-    
-  
-  
+
+
+
 
 </script>
 
@@ -938,7 +934,7 @@
                         </select>
                     </div>
                     <br>
-                    <div id="totalPriceMessage">  Your total price is: $<span id="totalPriceValue"></span></div>
+                    <div id="totalPriceMessage"> Your total price is: $<span id="totalPriceValue"></span></div>
                 </div>
                 <div class="error"><span></span></div>
                 <div class="modal-footer">
@@ -958,7 +954,7 @@
         $("#selected_product_id").val(product_id);
         $("#selectAddressForm").show();
         $("#totalPriceValue").text(total_price);
-    }   
+    }
 
 </script>
 
@@ -978,7 +974,8 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <input type="hidden" id="selected-cart-address-id" name="selected_cart_address_id" value="">
-                        <label for="select_cart_address">Select the address you'd like your order to be shipped to</label>
+                        <label for="select_cart_address">Select the address you'd like your order to be shipped
+                            to</label>
                         <select class="form-select" aria-label="Select desired address" id="select-cart-address">
                         </select>
                     </div>
@@ -999,7 +996,7 @@
         $(document).ready(function () { $("#selectCartAddressModal").modal('show'); });
         CartService.selectAddress();
         $("#selectCartAddressForm").show();
-    }   
+    }
 
 </script>
 
@@ -1011,15 +1008,21 @@
     var decodedToken = jwt_decode(token);
     // Get the reference to the button element
     var addButton = document.getElementById("addProductButton");
+    var addSuppiler = document.getElementById("addSupplierButton");
+    var addCategory = document.getElementById("addCategoryButton");
     var cartButton = document.getElementById("buttonCart");
- 
+
     // Check the value of token.auth and update the button's style accordingly
     if (decodedToken.authorization == "authorized") {
         addButton.style.display = "block"; // Show the button
         cartButton.style.display = "none";
+        addSuppiler.style.display = "block";
+        addCategory.style.display = "block";
     } else {
-       addButton.style.display = "none"; // Hide the button
+        addButton.style.display = "none"; // Hide the button
         cartButton.style.display = "block";
+        addSuppiler.style.display = "none";
+        addCategory.style.display = "none";
     }
 </script>
 

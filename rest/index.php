@@ -2,6 +2,8 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 require_once '../vendor/autoload.php';
 require_once "services/UserService.php";
@@ -41,7 +43,6 @@ Flight::map('query', function($name, $default_value = null) {
     $query_params = $query_params ? $query_params : $default_value;
     return $query_params;
 });
-
 
 Flight::start();
 ?>

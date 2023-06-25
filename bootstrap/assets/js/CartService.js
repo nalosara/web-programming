@@ -1,3 +1,12 @@
+// Create a link element for the CSS file
+var link = document.createElement('link');
+link.rel = 'stylesheet';
+link.href = 'custom.css';
+
+// Append the link element to the head of the document
+document.head.appendChild(link);
+
+
 var CartService = {
     getUserProducts: function (user_id) {
         //make an ajax request to get the products
@@ -31,19 +40,19 @@ var CartService = {
                                     <p style="width: auto" class="mb-0">Quantity: ` + data[i].quantity + `</p>
                                 </div>
                                 <div class="col">
-                                    <button type="submit" style="font-size: small;" onclick="CartService.deleteCartItem(${data[i].id})" class="dugme btn btn-success">Delete</button>
+                                    <button type="submit" style="font-size: small; margin: 10px;" onclick="CartService.deleteCartItem(${data[i].id})" class="dugme btn btn-success">Delete</button>
                                 </div>
                             </div>
                         </div>
                     </div>`
                 };
                 if (data.length > 0) {
-                    html += `<div class="col">
-                    <div class="col">
+                    html += `<div class="row" style=""float: right;>
+                    <div class="row">
                                     <p style="width: auto" class="mb-0">Total Price: $` + total_price.toFixed(2) + `</p>
                     </div>
-                    <button type="submit" style="width: auto; font-size: small; float: right; margin-left: 10px;" onclick="showSelectCartAddressDialog()" class="btn btn-success">Purchase Items from Cart</button>
-                    <button type="submit" style="width: auto; font-size: small; float: right;" onclick="CartService.emptyCart()" class="btn btn-success">Empty Cart</button>
+                    <button type="submit" style="width: auto; font-size: small; margin-left: 10px;" onclick="showSelectCartAddressDialog()" class="btn btn-success">Purchase Items from Cart</button>
+                    <button type="submit" style="width: auto; font-size: small; margin: 10px;" onclick="CartService.emptyCart()" class="btn btn-success">Empty Cart</button>
                 </div>
                 `
                 }
