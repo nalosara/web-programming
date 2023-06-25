@@ -609,32 +609,43 @@
         $(document).ready(function () { $("#editProductModal").modal('show'); });
         $("#editModalSpinner").show();
         $("#editProductForm").hide();
-        $.get("rest/products/" + id, function (data) {
-            console.log(data);
-            let categories_select = '';
-            for (let i = 0; i < data.categories.length; i++) {
-                categories_select += `<option value="${data.categories[i].id}">${data.categories[i].name}
-                    </option>`
-            }
-            $('#edit_category_select').html(categories_select);
+        $.ajax({
+            url: 'rest/products/' + id,
+            method: "GET",
+            contentType: "application/json",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(
+                  "Authorization",
+                  localStorage.getItem("user_token")
+                );
+              },
+            success: function (data){
+                console.log(data);
+                let categories_select = '';
+                for (let i = 0; i < data.categories.length; i++) {
+                    categories_select += `<option value="${data.categories[i].id}">${data.categories[i].name}
+                        </option>`
+                }
+                $('#edit_category_select').html(categories_select);
 
-            let suppliers_select = '';
-            for (let i = 0; i < data.suppliers.length; i++) {
-                suppliers_select += `<option value="${data.suppliers[i].id}">${data.suppliers[i].name}
-                    </option>`
+                let suppliers_select = '';
+                for (let i = 0; i < data.suppliers.length; i++) {
+                    suppliers_select += `<option value="${data.suppliers[i].id}">${data.suppliers[i].name}
+                        </option>`
+                }
+                $('#edit_supplier_select').html(suppliers_select);
+                console.log(data[0]);
+                console.log(data[0].id);
+                $("#edit_name").val(data[0].name);
+                $("#edit_description").val(data[0].description);
+                $("#edit_price").val(data[0].price);
+                $("#edit_image").val(data[0].image);
+                $("#edit_product_id").val(data[0].id);
+                $('#edit_category_select').val(data[0].category_id);
+                $('#edit_supplier_select').val(data[0].supplier_id);
+                $("#editModalSpinner").hide();
+                $("#editProductForm").show();
             }
-            $('#edit_supplier_select').html(suppliers_select);
-            console.log(data[0]);
-            console.log(data[0].id);
-            $("#edit_name").val(data[0].name);
-            $("#edit_description").val(data[0].description);
-            $("#edit_price").val(data[0].price);
-            $("#edit_image").val(data[0].image);
-            $("#edit_product_id").val(data[0].id);
-            $('#edit_category_select').val(data[0].category_id);
-            $('#edit_supplier_select').val(data[0].supplier_id);
-            $("#editModalSpinner").hide();
-            $("#editProductForm").show();
         });
     }
 
@@ -706,7 +717,17 @@
         });
         $("#addModalSpinner").show();
         $("#addProductForm").hide();
-        $.get("rest/categories_and_suppliers", function (data) {
+        $.ajax({
+            url: 'rest/categories_and_suppliers',
+            method: "GET",
+            contentType: "application/json",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(
+                  "Authorization",
+                  localStorage.getItem("user_token")
+                );
+              },
+            success: function (data) {
             let categories_select = '';
             for (let i = 0; i < data.categories.length; i++) {
                 categories_select += `<option value="${data.categories[i].id}">${data.categories[i].name}
@@ -722,7 +743,8 @@
             $('#add_supplier_select').html(suppliers_select);
             $("#addModalSpinner").hide();
             $("#addProductForm").show();
-        });
+        }
+    });
 
 
     }
@@ -942,7 +964,17 @@
         $(document).ready(function () { $("#editAddressModal").modal('show'); });
         $("#editAddressModalSpinner").show();
         $("#editAddressForm").hide();
-        $.get("rest/addresses/" + id, function (data) {
+        $.ajax({
+            url: 'rest/addresses/' + id,
+            method: "GET",
+            contentType: "application/json",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(
+                  "Authorization",
+                  localStorage.getItem("user_token")
+                );
+              },
+            success: function (data) {
             $("#edit_address_alias").val(data[0].alias);
             $("#edit_address_street").val(data[0].street);
             $("#edit_address_zip_code").val(data[0].zip_code);
@@ -952,7 +984,8 @@
             $("#edit_address_id").val(data[0].id);
             $("#editAddressModalSpinner").hide();
             $("#editAddressForm").show();
-        });
+        }
+    });
     }
 
 </script>
