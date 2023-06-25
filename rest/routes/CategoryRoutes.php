@@ -1,16 +1,47 @@
 <?php
+/**
+ * @OA\Get(path="/categories", tags={"categories"}, security={{"ApiKeyAuth": {}}},
+ *         summary="Return all categories from the API. ",
+ *         @OA\Response( response=200, description="List of categories.")
+ * )
+ */
 Flight::route("GET /categories", function(){
     Flight::json(Flight::category_service()->get_all());
 });
 
-Flight::route("GET /category_by_id", function(){
-    Flight::json(Flight::category_service()->get_by_id(Flight::request()->query['id']));
-});
 
+/**
+  * @OA\Get(path="/categories/{id}", tags={"categories"}, security={{"ApiKeyAuth": {}}},
+  *     @OA\Parameter(in="path", name="id", example=1, description="Category ID"),
+  *     @OA\Response(response="200", description="Fetch individual category")
+  * )
+  */
 Flight::route("GET /categories/@id", function($id){
     Flight::json(Flight::category_service()->get_by_id($id));
 });
 
+
+ /**
+* @OA\Post(
+*     path="/categories", security={{"ApiKeyAuth": {}}},
+*     description="Add category",
+*     tags={"categories"},
+*     @OA\RequestBody(description="Add new category", required=true,
+*       @OA\MediaType(mediaType="application/json",
+*    			@OA\Schema(
+*                   @OA\Property(property="name", type="string", example="Test category",	description="Category name"),
+*        )
+*     )),
+*     @OA\Response(
+*         response=200,
+*         description="Category has been added"
+*     ),
+*     @OA\Response(
+*         response=500,
+*         description="Error"
+*     )
+* )
+*/
 Flight::route("POST /categories", function(){
     $request = Flight::request()->data->getData(); 
     $category_name = $request['name'];
@@ -22,14 +53,5 @@ Flight::route("POST /categories", function(){
     };
 });
 
-Flight::route("PUT /categories/@id", function($id){
-    $category = Flight::request()->data->getData();    
-    Flight::json(['message' => "category edited successfully", 'data' => Flight::category_service()->update($category, $id)]);
-});
-
-Flight::route("DELETE /categories/@id", function($id){
-    Flight::category_service()->delete($id);
-    Flight::json(['message' => "category deleted successfully"]);
-});
 
 ?>

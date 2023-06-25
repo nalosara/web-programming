@@ -33,7 +33,6 @@ require_once 'routes/OrderRoutes.php';
 require_once 'routes/AddressRoutes.php';
 require_once 'routes/CartRoutes.php';
 require_once 'routes/FormRoutes.php';
-require_once 'routes/OrderProductRoutes.php';
 
 Flight::map('query', function($name, $default_value = null) {
     $request = Flight::request();

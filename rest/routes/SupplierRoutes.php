@@ -1,16 +1,46 @@
 <?php
+/**
+ * @OA\Get(path="/suppliers", tags={"suppliers"}, security={{"ApiKeyAuth": {}}},
+ *         summary="Return all suppliers from the API. ",
+ *         @OA\Response( response=200, description="List of suppliers.")
+ * )
+ */
 Flight::route("GET /suppliers", function(){
     Flight::json(Flight::supplier_service()->get_all());
 });
 
-Flight::route("GET /supplier_by_id", function(){
-    Flight::json(Flight::supplier_service()->get_by_id(Flight::request()->query['id']));
-});
-
+/**
+  * @OA\Get(path="/suppliers/{id}", tags={"suppliers"}, security={{"ApiKeyAuth": {}}},
+  *     @OA\Parameter(in="path", name="id", example=1, description="Supplier ID"),
+  *     @OA\Response(response="200", description="Fetch individual supplier")
+  * )
+  */
 Flight::route("GET /suppliers/@id", function($id){
     Flight::json(Flight::supplier_service()->get_by_id($id));
 });
 
+
+ /**
+* @OA\Post(
+*     path="/suppliers", security={{"ApiKeyAuth": {}}},
+*     description="Add supplier",
+*     tags={"suppliers"},
+*     @OA\RequestBody(description="Add new supplier", required=true,
+*       @OA\MediaType(mediaType="application/json",
+*    			@OA\Schema(
+*                   @OA\Property(property="name", type="string", example="Test supplier",	description="Supplier name"),
+*        )
+*     )),
+*     @OA\Response(
+*         response=200,
+*         description="Supplier has been added"
+*     ),
+*     @OA\Response(
+*         response=500,
+*         description="Error"
+*     )
+* )
+*/
 Flight::route("POST /suppliers", function(){
     $request = Flight::request()->data->getData();
     $supplier_name = $request['name'];
@@ -22,14 +52,5 @@ Flight::route("POST /suppliers", function(){
     };
 });
 
-Flight::route("PUT /suppliers/@id", function($id){
-    $supplier = Flight::request()->data->getData();    
-    Flight::json(['message' => "supplier edited successfully", 'data' => Flight::supplier_service()->update($supplier, $id)]);
-});
-
-Flight::route("DELETE /suppliers/@id", function($id){
-    Flight::supplier_service()->delete($id);
-    Flight::json(['message' => "supplier deleted successfully"]);
-});
 
 ?>
