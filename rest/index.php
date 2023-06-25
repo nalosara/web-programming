@@ -26,6 +26,28 @@ Flight::register('cart_service', "CartService");
 Flight::register('form_service', "FormService");
 Flight::register('order_product_service', "OrderProductService");
 
+//MIDDLEWARE
+Flight::route('/*', function(){
+    //perform JWT decode
+    $path = Flight::request()->url;
+  
+    if ($path == '/login' || $path == '/signup' || $path == '/docs.json') return TRUE; // exclude login route from middleware
+   
+    $headers = getallheaders();
+    if (!isset($headers['Authorization'])){
+        Flight::json(["message" => "Authorization is missing"], 403);
+        return FALSE;
+    }else{
+        try {
+        $decoded = (array)JWT::decode($headers['Authorization'], new Key(Config::JWT_SECRET(), 'HS256'));
+        Flight::set('user', $decoded);
+        return TRUE;
+        } catch (\Exception $e) {
+        Flight::json(["message" => "Authorization token is not valid"], 403);
+        return FALSE;
+        }
+    }
+});
 
 require_once 'routes/UserRoutes.php';
 require_once 'routes/ProductRoutes.php';
@@ -43,30 +65,7 @@ Flight::map('query', function($name, $default_value = null) {
     return $query_params;
 });
 
-//MIDDLEWARE
-Flight::route('/*', function(){
-  //perform JWT decode
-  $path = Flight::request()->url;
 
-  if ($path == '/login' || $path = 'signup' || $path == '/docs.json') return TRUE; // exclude login route from middleware
-
-  $headers = getallheaders();
-  if (@!$headers['Authorization']){
-    Flight::json(["message" => "Authorization missing!"], 403);
-    return FALSE;
-  }else{
-    try {
-      $decoded = (array)JWT::decode($headers['Authorization'], new Key(Config::JWT_SECRET(), 'HS256'));
-      print_r("decoded ", $decoded);
-      die();
-      Flight::set('user', $decoded);
-      return TRUE;
-    } catch (\Exception $e) {
-      Flight::json(["message" => "Authorization token is not valid"], 403);
-      return FALSE;
-    }
-  }
-});
 
 Flight::route('GET /docs.json', function(){
     $openapi = \OpenApi\scan('routes');

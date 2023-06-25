@@ -10,7 +10,13 @@ use Firebase\JWT\Key;
  * )
  */
 Flight::route("GET /users", function(){
-    Flight::json(Flight::user_service()->get_all());
+    $user = Flight::get('user');
+    if(isset($user)){
+        Flight::json(Flight::user_service()->get_all());
+    } else {
+        Flight::json(["message" => "User token doesn't exist."], 404);
+    };
+    
 });
 
 
@@ -36,7 +42,13 @@ Flight::route("GET /users", function(){
  * )
  */
 Flight::route("GET /user_by_id", function(){
-    Flight::json(Flight::user_service()->get_by_id(Flight::request()->query['id']));
+    $user = Flight::get('user');
+    if(isset($user)){
+        Flight::json(Flight::user_service()->get_by_id(Flight::request()->query['id']));
+    } else {
+        Flight::json(["message" => "User token doesn't exist."], 404);
+    };
+    
 });
 
 
@@ -47,9 +59,15 @@ Flight::route("GET /user_by_id", function(){
   * )
   */
 Flight::route("GET /users/@id", function($id){
-    $decoded = (array)JWT::decode($id, new Key(Config::JWT_SECRET(), 'HS256'));
-    $decoded_user_id = $decoded['id'];
-    Flight::json(Flight::user_service()->get_by_id($decoded_user_id));
+    $user = Flight::get('user');
+    if(isset($user)){
+        $decoded = (array)JWT::decode($id, new Key(Config::JWT_SECRET(), 'HS256'));
+        $decoded_user_id = $decoded['id'];
+        Flight::json(Flight::user_service()->get_by_id($decoded_user_id));
+    } else {
+        Flight::json(["message" => "User token doesn't exist."], 404);
+    };
+    
 });
 
 

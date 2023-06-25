@@ -10,7 +10,13 @@ use Firebase\JWT\Key;
  * )
  */
 Flight::route("GET /orders", function(){
-    Flight::json(Flight::order_service()->get_all());
+    $user = Flight::get('user');
+    if(isset($user)){
+        Flight::json(Flight::order_service()->get_all());
+    } else {
+        Flight::json(["message" => "User token doesn't exist."], 404);
+    };
+    
 });
 
 /**
@@ -20,7 +26,13 @@ Flight::route("GET /orders", function(){
   * )
   */
 Flight::route("GET /orders/@id", function($id){
-    Flight::json(Flight::order_service()->get_by_id($id));
+    $user = Flight::get('user');
+    if(isset($user)){
+        Flight::json(Flight::order_service()->get_by_id($id));
+    } else {
+        Flight::json(["message" => "User token doesn't exist."], 404);
+    };
+    
 });
 
 
@@ -50,12 +62,18 @@ Flight::route("GET /orders/@id", function($id){
 * )
 */
 Flight::route("POST /orders", function(){
-    $request = Flight::request()->data->getData();
-    $user_id = $request['user_id'];
-    $decoded = (array)JWT::decode($user_id, new Key(Config::JWT_SECRET(), 'HS256'));
-    $decoded_user_id = $decoded['id'];  
-    $request['user_id'] = $decoded_user_id;    
+    $user = Flight::get('user');
+    if(isset($user) && $user['authorization'] == "unauthorized"){
+        $request = Flight::request()->data->getData();
+        $user_id = $request['user_id'];
+        $decoded = (array)JWT::decode($user_id, new Key(Config::JWT_SECRET(), 'HS256'));
+        $decoded_user_id = $decoded['id'];  
+        $request['user_id'] = $decoded_user_id;    
     Flight::json(['message' => "order added successfully", 'data' => Flight::order_service()->add($request)]);
+    } else {
+        Flight::json(["message" => "User token doesn't exist."], 404);
+    };
+    
 });
 
 
@@ -97,8 +115,14 @@ Flight::route("POST /orders", function(){
 * )
 */
 Flight::route("POST /orders_by_cart", function(){
-    $request = Flight::request()->data->getData();   
-    Flight::json(['message' => "order added successfully", 'data' => Flight::order_service()->add_by_user_id($request)]);
+    $user = Flight::get('user');
+    if(isset($user) && $user['authorization'] == "unauthorized"){
+        $request = Flight::request()->data->getData();   
+        Flight::json(['message' => "order added successfully", 'data' => Flight::order_service()->add_by_user_id($request)]);
+    } else {
+        Flight::json(["message" => "User token doesn't exist."], 404);
+    };
+    
 });
 
 /**
@@ -108,7 +132,12 @@ Flight::route("POST /orders_by_cart", function(){
   * )
   */
 Flight::route("GET /orders_by_user_id/@user_id", function($user_id){
-    Flight::json(Flight::order_service()->get_by_user_id($user_id));
+    $user = Flight::get('user');
+    if(isset($user) && $user['authorization'] == "unauthorized"){
+        Flight::json(Flight::order_service()->get_by_user_id($user_id));
+    } else {
+        Flight::json(["message" => "User token doesn't exist."], 404);
+    };
 });
 
 ?>
