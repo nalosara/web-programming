@@ -12,8 +12,14 @@ Flight::route("GET /suppliers/@id", function($id){
 });
 
 Flight::route("POST /suppliers", function(){
-    $request = Flight::request()->data->getData();    
-    Flight::json(['message' => "supplier added successfully", 'data' => Flight::supplier_service()->add($request)]);
+    $request = Flight::request()->data->getData();
+    $supplier_name = $request['name'];
+    $existing_suppliers = Flight::supplier_service()->get_supplier_by_name($supplier_name);
+    if(count($existing_suppliers) > 0){
+        Flight::json(["message" => "Supplier with that name already exists. Please choose another name"], 404);
+    } else {    
+        Flight::json(['message' => "Supplier added successfully.", 'data' => Flight::supplier_service()->add($request)]);
+    };
 });
 
 Flight::route("PUT /suppliers/@id", function($id){

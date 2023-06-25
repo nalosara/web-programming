@@ -12,8 +12,14 @@ Flight::route("GET /categories/@id", function($id){
 });
 
 Flight::route("POST /categories", function(){
-    $request = Flight::request()->data->getData();    
-    Flight::json(['message' => "category added successfully", 'data' => Flight::category_service()->add($request)]);
+    $request = Flight::request()->data->getData(); 
+    $category_name = $request['name'];
+    $existing_categories = Flight::category_service()->get_category_by_name($category_name);
+    if(count($existing_categories) > 0){
+        Flight::json(["message" => "Category with that name already exists. Please choose another name"], 404);
+    } else {   
+        Flight::json(['message' => "Category added successfully.", 'data' => Flight::category_service()->add($request)]);
+    };
 });
 
 Flight::route("PUT /categories/@id", function($id){
