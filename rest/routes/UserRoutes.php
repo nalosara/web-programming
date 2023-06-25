@@ -3,36 +3,78 @@
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-
+/**
+ * @OA\Get(path="/users", tags={"users"}, security={{"ApiKeyAuth": {}}},
+ *         summary="Return all users from the API. ",
+ *         @OA\Response( response=200, description="List of users.")
+ * )
+ */
 Flight::route("GET /users", function(){
     Flight::json(Flight::user_service()->get_all());
 });
 
+
+
+/**
+ * @OA\Get(
+ *     path="/user_by_id", tags={"users"}, security={{"ApiKeyAuth": {}}},
+ *     @OA\Parameter(
+ *         in="query",
+ *         name="id",
+ *         description="User ID",
+ *         required=true,
+ *         @OA\Schema(
+ *             type="integer",
+ *             format="int64",
+ *             example=17
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Fetch individual user"
+ *     )
+ * )
+ */
 Flight::route("GET /user_by_id", function(){
     Flight::json(Flight::user_service()->get_by_id(Flight::request()->query['id']));
 });
 
+
+/**
+  * @OA\Get(path="/users/{id}", tags={"users"}, security={{"ApiKeyAuth": {}}},
+  *     @OA\Parameter(in="path", name="id", example="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTcsIm5hbWUiOiJ0ZXN0MiIsImF1dGhvcml6YXRpb24iOiJ1bmF1dGhvcml6ZWQifQ.vxPlB1CdBVWTwmP_cAc8EimiVVrkxkeT4cqwLviKxNk", description="User Token"),
+  *     @OA\Response(response="200", description="Fetch individual user")
+  * )
+  */
 Flight::route("GET /users/@id", function($id){
     $decoded = (array)JWT::decode($id, new Key(Config::JWT_SECRET(), 'HS256'));
     $decoded_user_id = $decoded['id'];
     Flight::json(Flight::user_service()->get_by_id($decoded_user_id));
 });
 
-Flight::route("POST /users", function(){
-    $request = Flight::request()->data->getData();    
-    Flight::json(['message' => "User added successfully", 'data' => Flight::user_service()->add($request)]);
-});
 
-Flight::route("PUT /users/@id", function($id){
-    $user = Flight::request()->data->getData();    
-    Flight::json(['message' => "User edited successfully", 'data' => Flight::user_service()->update($user, $id)]);
-});
-
-Flight::route("DELETE /users/@id", function($id){
-    Flight::user_service()->delete($id);
-    Flight::json(['message' => "User deleted successfully"]);
-});
-
+ /**
+* @OA\Post(
+*     path="/login",
+*     description="Log in user",
+*     tags={"users"},
+*     @OA\RequestBody(description="Login user", required=true,
+*       @OA\MediaType(mediaType="application/json",
+*    			@OA\Schema(
+*                   @OA\Property(property="email", type="string", example="test2@gmail.com",	description="User email"),
+*    				@OA\Property(property="password", type="string", example="test123",	description="User password"),
+*        )
+*     )),
+*     @OA\Response(
+*         response=200,
+*         description="User has been logged in"
+*     ),
+*     @OA\Response(
+*         response=500,
+*         description="Error"
+*     )
+* )
+*/
 Flight::route('POST /login', function(){
     $login = Flight::request()->data->getData();
     $user = Flight::user_service()->get_user_by_email($login['email']);
@@ -54,10 +96,34 @@ Flight::route('POST /login', function(){
   }
 });
 
+
+ /**
+* @OA\Post(
+*     path="/signup",
+*     description="Sign up user",
+*     tags={"users"},
+*     @OA\RequestBody(description="Signup user", required=true,
+*       @OA\MediaType(mediaType="application/json",
+*    			@OA\Schema(
+*                   @OA\Property(property="email", type="string", example="user2@gmail.com",	description="User email"),
+*    				@OA\Property(property="password", type="string", example="test123",	description="User password"),
+*                   @OA\Property(property="full_name", type="string", example="Test User",	description="User name"),
+*                   @OA\Property(property="phone", type="string", example="+000000",	description="User phone"),
+*        )
+*     )),
+*     @OA\Response(
+*         response=200,
+*         description="User has been signed up"
+*     ),
+*     @OA\Response(
+*         response=500,
+*         description="Error"
+*     )
+* )
+*/
 Flight::route('POST /signup', function(){
     $signup = Flight::request()->data->getData();
     $user = Flight::user_service()->get_user_by_email($signup['email']);
-    print_r($signup);
     if(count($user) > 0){
         Flight::json(["message" => "User with that email is already registered. Please choose a different email or log in instead."], 404);
     } elseif(strlen($signup['password']) < 6 || !preg_match('/[A-Za-z]/', $signup['password']) || !preg_match('/\d/', $signup['password'])){
