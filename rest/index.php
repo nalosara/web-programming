@@ -14,7 +14,6 @@ require_once "services/SupplierService.php";
 require_once "services/AddressService.php";
 require_once "services/CartService.php";
 require_once "services/FormService.php";
-require_once "services/OrderProductService.php";
 
 Flight::register('user_service', "UserService");
 Flight::register('product_service', "ProductService");
@@ -64,8 +63,6 @@ Flight::map('query', function($name, $default_value = null) {
     $query_params = $query_params ? $query_params : $default_value;
     return $query_params;
 });
-
-
 
 Flight::route('GET /docs.json', function(){
     $openapi = \OpenApi\scan('routes');

@@ -6,7 +6,12 @@
  * )
  */
 Flight::route("GET /categories", function(){
-    Flight::json(Flight::category_service()->get_all());
+    $user = Flight::get('user');
+    if(isset($user)) {
+        Flight::json(Flight::category_service()->get_all());
+    } else {
+        Flight::json(["message" => $user], 404);
+    }
 });
 
 
@@ -17,7 +22,12 @@ Flight::route("GET /categories", function(){
   * )
   */
 Flight::route("GET /categories/@id", function($id){
-    Flight::json(Flight::category_service()->get_by_id($id));
+    $user = Flight::get('user');
+    if(isset($user)) {
+        Flight::json(Flight::category_service()->get_by_id($id));
+    } else {
+        Flight::json(["message" => "User token doesn't exist!"], 404);
+    }
 });
 
 
@@ -43,14 +53,20 @@ Flight::route("GET /categories/@id", function($id){
 * )
 */
 Flight::route("POST /categories", function(){
-    $request = Flight::request()->data->getData(); 
-    $category_name = $request['name'];
-    $existing_categories = Flight::category_service()->get_category_by_name($category_name);
-    if(count($existing_categories) > 0){
-        Flight::json(["message" => "Category with that name already exists. Please choose another name"], 404);
-    } else {   
-        Flight::json(['message' => "Category added successfully.", 'data' => Flight::category_service()->add($request)]);
-    };
+    $user = Flight::get('user');
+    if(isset($user) && $user['authorization'] == 'authorized') {
+        $request = Flight::request()->data->getData(); 
+        $category_name = $request['name'];
+        $existing_categories = Flight::category_service()->get_category_by_name($category_name);
+        if(count($existing_categories) > 0){
+            Flight::json(["message" => "Category with that name already exists. Please choose another name"], 404);
+        } else {   
+            Flight::json(['message' => "Category added successfully.", 'data' => Flight::category_service()->add($request)]);
+        };
+    } else {
+        Flight::json(["message" => "User token doesn't exist!"], 404);
+    }
+    
 });
 
 
