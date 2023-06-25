@@ -189,6 +189,52 @@ var ProductService = {
           },
         });
       },
+
+      addCategory: function (entity) {
+        $.ajax({
+          url: "rest/categories",
+          type: "POST",
+          data: JSON.stringify(entity),
+          contentType: "application/json",
+          dataType: "json",
+          success: function (result) {
+            toastr.success("Category has been added successfully.");
+            localStorage.setItem("user_token", result.token);
+            window.location.replace("index.html");
+          },
+          error: function (XMLHttpRequest, textStatus, errorThrown) {
+            toastr.error("Error! Category has not been added. ");
+          },
+        });
+      },
+
+      addCategoryButton: function () {
+        $("#addCategoryForm").validate({
+          submitHandler: function (form, validator) {
+            data = {
+              name: $("#add_name").val(),
+             
+            };
+            console.log(data);
+            $.ajax({
+              url: "rest/categories",
+              type: "POST",
+              data: JSON.stringify(data),
+              contentType: "application/json",
+              dataType: "json",
+              success: function (result) {
+                toastr.success("Category has been added successfully");
+                $("#addCategoryModal").modal("toggle");
+                ChangeTab.goToUserPage(localStorage.getItem("user_token"));
+              },
+              error: function (XMLHttpRequest, textStatus, errorThrown) {
+                var response = JSON.parse(XMLHttpRequest.responseText);
+                toastr.error(response.message);
+              },
+            });
+          },
+        });
+      },
    
  
   
