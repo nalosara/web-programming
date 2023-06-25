@@ -10,7 +10,7 @@ Flight::route("GET /categories", function(){
     if(isset($user)) {
         Flight::json(Flight::category_service()->get_all());
     } else {
-        Flight::json(["message" => $user], 404);
+        Flight::json(["message" => "User token doesn't exist!"], 404);
     }
 });
 
