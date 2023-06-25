@@ -44,6 +44,31 @@ Flight::map('query', function($name, $default_value = null) {
     return $query_params;
 });
 
+//MIDDLEWARE
+Flight::route('/*', function(){
+  //perform JWT decode
+  $path = Flight::request()->url;
+
+  if ($path == '/login' || $path = 'signup' || $path == '/docs.json') return TRUE; // exclude login route from middleware
+
+  $headers = getallheaders();
+  if (@!$headers['Authorization']){
+    Flight::json(["message" => "Authorization missing!"], 403);
+    return FALSE;
+  }else{
+    try {
+      $decoded = (array)JWT::decode($headers['Authorization'], new Key(Config::JWT_SECRET(), 'HS256'));
+      print_r("decoded ", $decoded);
+      die();
+      Flight::set('user', $decoded);
+      return TRUE;
+    } catch (\Exception $e) {
+      Flight::json(["message" => "Authorization token is not valid"], 403);
+      return FALSE;
+    }
+  }
+});
+
 Flight::route('GET /docs.json', function(){
     $openapi = \OpenApi\scan('routes');
     header('Content-Type: application/json');

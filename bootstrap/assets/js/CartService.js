@@ -1,12 +1,3 @@
-// Create a link element for the CSS file
-var link = document.createElement('link');
-link.rel = 'stylesheet';
-link.href = 'custom.css';
-
-// Append the link element to the head of the document
-document.head.appendChild(link);
-
-
 var CartService = {
     getUserProducts: function (user_id) {
         //make an ajax request to get the products
@@ -14,6 +5,12 @@ var CartService = {
             url: 'rest/carts_by_user_id/' + user_id,
             method: "GET",
             contentType: "application/json",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(
+                  "Authorization",
+                  localStorage.getItem("user_token")
+                );
+              },
     
             success: function (data) {
                 var html = `<div class="shopping-cart" style="margin-left: 50px; margin-right: 50px;"> 
@@ -47,7 +44,7 @@ var CartService = {
                     </div>`
                 };
                 if (data.length > 0) {
-                    html += `<div class="row" style=""float: right;>
+                    html += `<div class="row" style="float: right;">
                     <div class="row">
                                     <p style="width: auto" class="mb-0">Total Price: $` + total_price.toFixed(2) + `</p>
                     </div>
@@ -76,8 +73,12 @@ var CartService = {
             url: 'rest/carts/' + cart_id,
             method: "DELETE",
             contentType: "application/json",
-          
-    
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(
+                  "Authorization",
+                  localStorage.getItem("user_token")
+                );
+              },
             success: function (result) {
                 toastr.success("Item has been deleted successfully");
                 ChangeTab.goToCartPage(localStorage.getItem('user_token'));
@@ -96,7 +97,12 @@ var CartService = {
             url: 'rest/carts_by_user_id/' + user_id,
             method: "DELETE",
             contentType: "application/json",
-
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(
+                  "Authorization",
+                  localStorage.getItem("user_token")
+                );
+              },
             success: function (result) {
                 toastr.success("Your cart is now empty");
                 ChangeTab.goToCartPage(localStorage.getItem('user_token'));
@@ -115,6 +121,12 @@ var CartService = {
         $.ajax({
           url: "rest/addresses_by_user_token/" + user_id,
           type: "GET",
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader(
+              "Authorization",
+              localStorage.getItem("user_token")
+            );
+          },
           success: function(data) {
             for (let i = 0; i < data.length; i++) {
               options2 += `<option value="${data[i].id}">${data[i].alias}</option>`;
@@ -155,6 +167,12 @@ var CartService = {
             url: 'rest/carts_by_user_id/' + user_id,
             method: "GET",
             contentType: "application/json",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(
+                  "Authorization",
+                  localStorage.getItem("user_token")
+                );
+              },
     
             success: function (data) {
                 const selectedAddressId = document.getElementById("select-cart-address").value;
@@ -180,6 +198,12 @@ var CartService = {
             data: JSON.stringify(data),
             contentType: 'application/json',
             dataType: 'json',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(
+                  "Authorization",
+                  localStorage.getItem("user_token")
+                );
+              },
             success: function (result) {
                 toastr.success("Your order has been complete");
                 ChangeTab.goToCartPage(localStorage.getItem('user_token'));

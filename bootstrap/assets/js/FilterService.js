@@ -4,6 +4,12 @@ var FilterService = {
             url: 'rest/categories',
             method: "GET",
             contentType: "application/json",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(
+                  "Authorization",
+                  localStorage.getItem("user_token")
+                );
+              },
     
             success: function (data) {
                 var html = `<div class="dropdown" style="margin-bottom: 20px;">
@@ -34,6 +40,12 @@ var FilterService = {
             url: 'rest/suppliers',
             method: "GET",
             contentType: "application/json",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(
+                  "Authorization",
+                  localStorage.getItem("user_token")
+                );
+              },
     
             success: function (data) {
                 var html = `<div class="dropdown" style="margin-bottom: 20px;">
@@ -63,6 +75,12 @@ var FilterService = {
             url: 'rest/categories',
             method: "GET",
             contentType: "application/json",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(
+                  "Authorization",
+                  localStorage.getItem("user_token")
+                );
+              },
     
             success: function (data) {
                 var html = `<div class="dropdown" style="margin-bottom: 20px;">

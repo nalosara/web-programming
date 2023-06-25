@@ -1074,7 +1074,9 @@
 </script>
 
 <script>
-    var nav =
+    var token = localStorage.getItem("user_token");
+    if(token){
+        var nav =
         '<li class="nav-item">' +
         '<a class="nav-link" href="#home" onclick="ChangeTab.goToHomePage();" >Home</a>' +
         "</li>" +
@@ -1087,14 +1089,18 @@
         '<li class="nav-item">' +
         '<a class="nav-link" href="#contact" onclick="ChangeTab.goToContactPage();">Contact</a>' +
         "</li>";
-    $("#tabs").html(nav);
+        $("#tabs").html(nav);
 
     var main =
         '<section id="shop"></section>' +
         '<section id="about"></section>' +
         '<section id="contact"></section>' +
         '<section id="home"></section>';
-    $("#spapp").html(main);
+        $("#spapp").html(main);
+  }else{
+    window.location.replace("register.html");
+  }
+    
 
 </script>
 

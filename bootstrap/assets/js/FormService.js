@@ -26,6 +26,12 @@ var FormService = {
       data: JSON.stringify(data),
       contentType: "application/json",
       dataType: "json",
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader(
+          "Authorization",
+          localStorage.getItem("user_token")
+        );
+      },
       success: function (result) {
         toastr.success("Message was sent successfully!");
       },

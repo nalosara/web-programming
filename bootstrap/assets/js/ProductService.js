@@ -17,6 +17,12 @@ var ProductService = {
                 data: JSON.stringify(data),
                 contentType: "application/json",
                 dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(
+                      "Authorization",
+                      localStorage.getItem("user_token")
+                    );
+                  },
                 success: function (result) {
                     toastr.success("Product has been updated successfully");
                     $("#editProductModal").modal("toggle");
@@ -47,7 +53,12 @@ var ProductService = {
             url: 'rest/products',
             method: "GET",
             contentType: "application/json",
-    
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(
+                  "Authorization",
+                  localStorage.getItem("user_token")
+                );
+              },
             success: function (data) {
                 var html = "<div class='row'>";
                 if(decodedToken.authorization == "unauthorized") {
@@ -123,7 +134,12 @@ var ProductService = {
                 data: JSON.stringify(data),
                 contentType: "application/json",
                 dataType: "json",
-            
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(
+                      "Authorization",
+                      localStorage.getItem("user_token")
+                    );
+                  },
                 success: function (result) {
                     toastr.success("Product has been added successfully");
                     $("#addProductModal").modal("toggle");
@@ -158,6 +174,12 @@ var ProductService = {
               data: JSON.stringify(data),
               contentType: "application/json",
               dataType: "json",
+              beforeSend: function (xhr) {
+                xhr.setRequestHeader(
+                  "Authorization",
+                  localStorage.getItem("user_token")
+                );
+              },
               success: function (result) {
                 toastr.success("Supplier has been added successfully");
                 $("#addSupplierModal").modal("toggle");
@@ -188,6 +210,12 @@ var ProductService = {
               data: JSON.stringify(data),
               contentType: "application/json",
               dataType: "json",
+              beforeSend: function (xhr) {
+                xhr.setRequestHeader(
+                  "Authorization",
+                  localStorage.getItem("user_token")
+                );
+              },
               success: function (result) {
                 toastr.success("Category has been added successfully");
                 $("#addCategoryModal").modal("toggle");
@@ -219,7 +247,12 @@ var ProductService = {
             url: 'rest/products?category=' + category + '&supplier=' + supplier + '&order=' + order,
             method: "GET",
             contentType: "application/json",
-    
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(
+                  "Authorization",
+                  localStorage.getItem("user_token")
+                );
+              },
             success: function (data) {
                 console.log("data: " + data.size);
                 var html = "<div class='row'>";
@@ -260,7 +293,12 @@ var ProductService = {
             url: 'rest/products/' + productid,
             method: 'GET',
             contentType: 'application/json',
-    
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(
+                  "Authorization",
+                  localStorage.getItem("user_token")
+                );
+              },
             success: function (data) {
                 console.log(data[0].name);
                 var html = '';
@@ -386,6 +424,12 @@ var ProductService = {
           data: JSON.stringify(data),
           contentType: 'application/json',
           dataType: 'json',
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader(
+              "Authorization",
+              localStorage.getItem("user_token")
+            );
+          },
           success: function (result) {
             ProductService.getProducts(); 
             ChangeTab.goToShopPage(); 
@@ -406,6 +450,12 @@ var ProductService = {
         $.ajax({
           url: "rest/addresses_by_user_token/" + user_id,
           type: "GET",
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader(
+              "Authorization",
+              localStorage.getItem("user_token")
+            );
+          },
           success: function(data) {
             for (let i = 0; i < data.length; i++) {
               options += `<option value="${data[i].id}">${data[i].alias}</option>`;
@@ -460,6 +510,12 @@ var ProductService = {
           data: JSON.stringify(data),
           contentType: 'application/json',
           dataType: 'json',
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader(
+              "Authorization",
+              localStorage.getItem("user_token")
+            );
+          },
           success: function(result) {
             ProductService.getProducts();
             ChangeTab.goToShopPage();
@@ -491,6 +547,12 @@ var ProductService = {
             url: 'rest/products_by_name/' + searchInput,
             method: "GET",
             contentType: "application/json",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(
+                  "Authorization",
+                  localStorage.getItem("user_token")
+                );
+              },
 
             success: function (data) {
                 console.log("Success: " + data);
@@ -531,6 +593,12 @@ var ProductService = {
           url: "rest/products/" + product_id,
           method: "DELETE",
           contentType: "application/json",
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader(
+              "Authorization",
+              localStorage.getItem("user_token")
+            );
+          },
     
           success: function (result) {
             toastr.success("Product has been deleted successfully");

@@ -72,6 +72,9 @@ var UserService = {
       data: JSON.stringify(entity),
       contentType: "application/json",
       dataType: "json",
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('Authorization', localStorage.getItem('user_token'));
+      },
       success: function (result) {
         toastr.success("Address has been added to your account successfully.");
         localStorage.setItem("user_token", result.token);
@@ -89,6 +92,9 @@ var UserService = {
       type: "GET",
       contentType: "application/json",
       dataType: "json",
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('Authorization', localStorage.getItem('user_token'));
+      },
       success: function (data) {
         var html = "";
         html += `<br>
@@ -135,6 +141,9 @@ var UserService = {
       type: "GET",
       contentType: "application/json",
       dataType: "json",
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('Authorization', localStorage.getItem('user_token'));
+      },
       success: function (data) {
         var html = `<div class="col"> 
             <div class="col" style="font-size: 24px; font-weight: bold;">
@@ -173,6 +182,9 @@ var UserService = {
       type: "GET",
       contentType: "application/json",
       dataType: "json",
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('Authorization', localStorage.getItem('user_token'));
+      },
       success: function (data) {
         var html = `<div class="row"> 
                     <div class="col" style="font-size: 24px; font-weight: bold;">
@@ -243,6 +255,9 @@ var UserService = {
           data: JSON.stringify(data),
           contentType: "application/json",
           dataType: "json",
+          beforeSend: function(xhr) {
+            xhr.setRequestHeader('Authorization', localStorage.getItem('user_token'));
+          },
           success: function (result) {
             toastr.success("Address has been added successfully");
             $("#addAddressModal").modal("toggle");
@@ -274,6 +289,12 @@ var UserService = {
           data: JSON.stringify(data),
           contentType: "application/json",
           dataType: "json",
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader(
+              "Authorization",
+              localStorage.getItem("user_token")
+            );
+          },
           success: function (result) {
             toastr.success("Address has been updated successfully");
             $("#editAddressModal").modal("toggle");
@@ -293,7 +314,12 @@ var UserService = {
       url: "rest/addresses/" + id,
       method: "DELETE",
       contentType: "application/json",
-
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader(
+          "Authorization",
+          localStorage.getItem("user_token")
+        );
+      },
       success: function (result) {
         toastr.success("Address has been deleted successfully");
         ChangeTab.goToUserPage(localStorage.getItem("user_token"));
