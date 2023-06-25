@@ -44,5 +44,12 @@ Flight::map('query', function($name, $default_value = null) {
     return $query_params;
 });
 
+Flight::route('GET /docs.json', function(){
+    $openapi = \OpenApi\scan('routes');
+    header('Content-Type: application/json');
+    echo $openapi->toJson();
+});
+
+
 Flight::start();
 ?>

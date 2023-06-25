@@ -144,29 +144,11 @@ var ProductService = {
 
     },
 
-    addSupplier: function (entity) {
-        $.ajax({
-          url: "rest/suppliers",
-          type: "POST",
-          data: JSON.stringify(entity),
-          contentType: "application/json",
-          dataType: "json",
-          success: function (result) {
-            toastr.success("Supplier has been added successfully.");
-            localStorage.setItem("user_token", result.token);
-            window.location.replace("index.html");
-          },
-          error: function (XMLHttpRequest, textStatus, errorThrown) {
-            toastr.error("Error! Supplier has not been added. ");
-          },
-        });
-      },
-
       addSupplierButton: function () {
         $("#addSupplierForm").validate({
           submitHandler: function (form, validator) {
             data = {
-              name: $("#add_name").val(),
+              name: $("#add_supplier").val(),
              
             };
             console.log(data);
@@ -179,7 +161,39 @@ var ProductService = {
               success: function (result) {
                 toastr.success("Supplier has been added successfully");
                 $("#addSupplierModal").modal("toggle");
-                ChangeTab.goToUserPage(localStorage.getItem("user_token"));
+                ChangeTab.goToShopPage();
+                ProductService.getProducts();
+                form.reset();
+              },
+              error: function (XMLHttpRequest, textStatus, errorThrown) {
+                var response = JSON.parse(XMLHttpRequest.responseText);
+                toastr.error(response.message);
+              },
+            });
+          },
+        });
+      },
+
+      addCategoryButton: function () {
+        $("#addCategoryForm").validate({
+          submitHandler: function (form, validator) {
+            data = {
+              name: $("#add_category").val(),
+             
+            };
+            console.log(data);
+            $.ajax({
+              url: "rest/categories",
+              type: "POST",
+              data: JSON.stringify(data),
+              contentType: "application/json",
+              dataType: "json",
+              success: function (result) {
+                toastr.success("Category has been added successfully");
+                $("#addCategoryModal").modal("toggle");
+                ChangeTab.goToShopPage();
+                ProductService.getProducts();
+                form.reset();
               },
               error: function (XMLHttpRequest, textStatus, errorThrown) {
                 var response = JSON.parse(XMLHttpRequest.responseText);

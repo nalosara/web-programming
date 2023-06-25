@@ -729,6 +729,8 @@
 
 </script>
 
+<!-- Add Supplier Modal -->
+<!-- Modal -->
 <div class="modal fade" id="addSupplierModal" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
@@ -743,9 +745,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <input id="add_supplier_id" name="add_supplier_id" hidden />
-                        <label for="name">Name of Supplier:</label>
-                        <input type="text" id="add_name" name="name" required class="form-control" />
+                        <label for="add_supplier">Name of Supplier:</label>
+                        <input type="text" id="add_supplier" name="add_supplier" required class="form-control" />
                     </div>
 
                 </div>
@@ -776,8 +777,54 @@
 
 
 </script>
+<!-- Add Category Modal -->
+<!-- Modal -->
+
+<div class="modal fade" id="addCategoryModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" id="addCategoryModalContent">
+           
+            <form id="addCategoryForm">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Category</h4>
+                    <button type="button" class="close" data-bs-dismiss="modal">
+                        &times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="add_category">Name of Category:</label>
+                        <input type="text" id="add_category" name="add_category" required class="form-control" />
+                    </div>
+                    
+                </div>
+                <div class="error"><span></span></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" onclick="ProductService.addCategoryButton()" class="btn btn-success">
+                        Add
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
 
 
+   
+   
+    function showAddCategoryDialog() {
+    $(document).ready(function () { $("#addCategoryModal").modal('show'); });
+    $("#addCategoryForm").show();
+}
+
+
+
+
+</script>
 <!-- Add Address Modal -->
 <!-- Modal -->
 <div class="modal fade" id="addAddressModal" role="dialog">
